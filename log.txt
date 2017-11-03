@@ -21,20 +21,50 @@
 [INFO] Copying 0 resource
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ spongeplugintest ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ spongeplugintest ---
-[INFO] 
-[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ spongeplugintest ---
-[INFO] Building jar: D:\workspace\spongeplugintest\target\spongeplugintest-0.0.1-SNAPSHOT.jar
-[INFO] 
-[INFO] --- maven-install-plugin:2.4:install (default-install) @ spongeplugintest ---
-[INFO] Installing D:\workspace\spongeplugintest\target\spongeplugintest-0.0.1-SNAPSHOT.jar to C:\Users\Clément\.m2\repository\io\github\clem_fern\spongeplugintest\0.0.1-SNAPSHOT\spongeplugintest-0.0.1-SNAPSHOT.jar
-[INFO] Installing D:\workspace\spongeplugintest\pom.xml to C:\Users\Clément\.m2\repository\io\github\clem_fern\spongeplugintest\0.0.1-SNAPSHOT\spongeplugintest-0.0.1-SNAPSHOT.pom
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding Cp1252, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to D:\workspace\spongeplugintest\target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[3,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[4,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[5,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[11,18] cannot find symbol
+  symbol:   class Before
+  location: class fr.mrfern.spongeplugintest.MainTest
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[16,14] cannot find symbol
+  symbol:   class After
+  location: class fr.mrfern.spongeplugintest.MainTest
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[20,14] cannot find symbol
+  symbol:   class Test
+  location: class fr.mrfern.spongeplugintest.MainTest
+[INFO] 6 errors 
+[INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
+[INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 5.375 s
-[INFO] Finished at: 2017-11-03T16:15:18+01:00
-[INFO] Final Memory: 17M/153M
+[INFO] Total time: 5.295 s
+[INFO] Finished at: 2017-11-03T19:02:16+01:00
+[INFO] Final Memory: 17M/202M
 [INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project spongeplugintest: Compilation failure: Compilation failure:
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[3,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[4,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[5,17] package org.junit does not exist
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[11,18] cannot find symbol
+[ERROR] symbol:   class Before
+[ERROR] location: class fr.mrfern.spongeplugintest.MainTest
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[16,14] cannot find symbol
+[ERROR] symbol:   class After
+[ERROR] location: class fr.mrfern.spongeplugintest.MainTest
+[ERROR] /D:/workspace/spongeplugintest/src/test/java/fr/mrfern/spongeplugintest/MainTest.java:[20,14] cannot find symbol
+[ERROR] symbol:   class Test
+[ERROR] location: class fr.mrfern.spongeplugintest.MainTest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
