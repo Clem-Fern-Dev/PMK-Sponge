@@ -16,13 +16,20 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 
+import fr.mrfern.spongeplugintest.config.PluginConfig;
+
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0")
 public class Main {
 	
 	protected static String path = "./mods/plugins/spongeplugintest/";
+	protected static PluginConfig plCondfig = PluginConfig.getInstance();
 	
 	@Inject
 	private Logger logger;
+	
+	public Logger getLogger() {
+		return this.logger;
+	}
 	
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
@@ -36,13 +43,8 @@ public class Main {
 		
 		// Création du répertoire de config de base
 		
+		plCondfig.setMain(this);
 		
-		
-		File configFolder = new File(path);
-		if(!configFolder.exists()) {
-			configFolder.mkdirs();
-			logger.info("Création de " + path );
-		}
 		
 		// Création du répertoire de config de base
 		File config = new File(path + "config.yml");
