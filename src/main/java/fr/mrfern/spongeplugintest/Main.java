@@ -32,11 +32,10 @@ public class Main {
 	
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
-		
-		Config.getInstance().setup(logger);
-		//ChunkConfig.getInstance().setup();
-		
+
 		logger.info("Plugin preInit " + defaultpath);
+		
+		Config.getInstance().setup();
 		
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 

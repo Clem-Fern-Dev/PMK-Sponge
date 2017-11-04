@@ -3,16 +3,14 @@ package fr.mrfern.spongeplugintest.config;
 import java.io.File;
 import java.io.IOException;
 
-import org.slf4j.Logger;
-
 public interface IConfig {
 
 	String extensionFile = ".json";
-	public void setup(Logger logger);
+	public void setup();
 	public void load();
 	
 	public default boolean checkFile(File file,boolean b) {
-		if(file.exists()) {
+		if(!file.exists()) {
 			if(b) {
 				//file.getParentFile().mkdirs();
 				try {

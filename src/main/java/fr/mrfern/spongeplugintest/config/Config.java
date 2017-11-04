@@ -2,28 +2,24 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 
-import org.slf4j.Logger;
-
 public class Config implements IConfig{
 
 	protected String name = "config";
 	protected String defaultpath = "./mods/plugins/spongeplugintest/";
 	
 	private boolean isSetup = false;
-	private Logger logger;
 	
 	private static Config instance = new Config();	
 	
-	public void setup(Logger logger) {
+	public void setup() {
 		
-		this.logger = logger;
-	
-		logger.info("Config setup " + this.getClass().getName());
 		File defaultFile = new File(defaultpath + name + IConfig.extensionFile);
 		
-		checkPath(defaultpath, true);
-		
+		checkPath(defaultpath, true);		
 		checkFile(defaultFile, true);
+		
+		set(defaultFile);
+		
 		setIsSetup(true);
 		
 	}
@@ -54,10 +50,6 @@ public class Config implements IConfig{
 
 	public void setIsSetup(boolean isSetup) {
 		this.isSetup = isSetup;
-	}
-
-	public Logger getLogger() {
-		return logger;
 	}
 				
 }
