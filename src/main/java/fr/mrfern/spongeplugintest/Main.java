@@ -22,7 +22,6 @@ import fr.mrfern.spongeplugintest.config.PluginConfig;
 public class Main {
 	
 	protected static String path = "./mods/plugins/spongeplugintest/";
-	protected static PluginConfig plCondfig = PluginConfig.getInstance();
 	
 	@Inject
 	private Logger logger;
@@ -34,6 +33,10 @@ public class Main {
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
 		
+		PluginConfig.setMain(this);
+		
+		PluginConfig.addConfig("config.conf", path);
+		
 		logger.info("Plugin preInit " + path);
 		
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
@@ -42,8 +45,6 @@ public class Main {
 		 */		
 		
 		// Création du répertoire de config de base
-		
-		plCondfig.setMain(this);
 		
 		
 		// Création du répertoire de config de base

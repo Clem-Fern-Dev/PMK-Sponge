@@ -2,6 +2,7 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 
@@ -14,22 +15,38 @@ public abstract class PluginConfig {
 	private static Logger logger;
 	private static HashMap<String, String> fileList = new HashMap<>();
 	
-	private static PluginConfig instance = new PluginConfig() {};
-	
-	public void addConfig(String name, String path) {
-		fileList.put(name, path);
+	public static void addConfig(String name, String path) {
+		fileList.put(name, path);			// Ajout d'un fichier de config à la map
 	}
 	
 	public void setup() {
 		
+		if(!fileList.isEmpty()) {
+			
+			logger.info("List des models de fichier de configuration non vide");
+			
+			for (Map.Entry<String, String> entry : fileList.entrySet()) {
+				String name = entry.getKey(), path = entry.getValue();
+				
+				logger.info("Vérification : "+ path + entry.getKey());
+				baseConfig_Exist( name , path , true);				
+			}
+			
+		}else {
+			logger.info("List des models de fichier de configuration vide");
+		}		
 	}
 	
-	public boolean baseConfig_Exist(String name, String path) {
+	private boolean baseConfig_Exist(String name, String path,boolean b) {
 		
-		File configFolder = new File(path);
-		if(!configFolder.exists()) {
-			configFolder.mkdirs();
-			logger.info("Création de " + path );
+		// Test path
+		File configFile = new File(path + name);
+		
+		if(!configFile.exists()) {
+			configFile.mkdirs();
+			logger.warn("Création de " + path + name);
+		}else {
+			logger.info(path + name + " existe déjà");
 		}
 		
 		return true;
@@ -42,10 +59,6 @@ public abstract class PluginConfig {
 	
 	public static void setLogger(Logger logger) {
 		PluginConfig.logger = logger;
-	}
-	
-	public static PluginConfig getInstance() {
-		return instance;
 	}
 
 	public static HashMap<String, String> getFileList() {
