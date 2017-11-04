@@ -1,7 +1,5 @@
 package fr.mrfern.spongeplugintest;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
@@ -16,12 +14,13 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 
-import fr.mrfern.spongeplugintest.config.ConfigManager;
 
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0")
 public class Main {
 	
-	protected static String path = "./mods/plugins/spongeplugintest/";
+	protected static String defaultpath = "./mods/plugins/spongeplugintest/";
+	protected static String playerpath = "./mods/plugins/spongeplugintest/player";
+	protected static String chunkpath = "./mods/plugins/spongeplugintest/chunk";
 	
 	@Inject
 	private Logger logger;
@@ -33,11 +32,9 @@ public class Main {
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
 		
-		ConfigManager.setMain(this);
 		
-		ConfigManager.addConfig("config.conf", path);
 		
-		logger.info("Plugin preInit " + path);
+		logger.info("Plugin preInit " + defaultpath);
 		
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
@@ -48,12 +45,12 @@ public class Main {
 		
 		
 		// Création du répertoire de config de base
-		File config = new File(path + "config.yml");
+		/*File config = new File(path + "config.yml");
 		if(!config.exists()) {
 			config.mkdirs();
 			logger.info("Création de " + path );
 		}
-			
+		*/	
 	}
 	
 	@Listener
