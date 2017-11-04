@@ -29,7 +29,7 @@ public abstract class PluginConfig {
 				String name = entry.getKey(), path = entry.getValue();
 				
 				logger.info("Vérification : "+ path + entry.getKey());
-				baseConfig_Exist( name , path , true);				
+				baseConfig_Exist( name , path , true);
 			}
 			
 		}else {
