@@ -18,7 +18,7 @@ public class Config implements IConfig{
 		checkPath(defaultpath, true);		
 		checkFile(defaultFile, true);
 		
-		set(defaultFile);
+		set(defaultFile); 
 		
 		setIsSetup(true);
 		
