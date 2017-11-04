@@ -16,7 +16,7 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 
-import fr.mrfern.spongeplugintest.config.PluginConfig;
+import fr.mrfern.spongeplugintest.config.ConfigManager;
 
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0")
 public class Main {
@@ -33,9 +33,9 @@ public class Main {
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
 		
-		PluginConfig.setMain(this);
+		ConfigManager.setMain(this);
 		
-		PluginConfig.addConfig("config.conf", path);
+		ConfigManager.addConfig("config.conf", path);
 		
 		logger.info("Plugin preInit " + path);
 		

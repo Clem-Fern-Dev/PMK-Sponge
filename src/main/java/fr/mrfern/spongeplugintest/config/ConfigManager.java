@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import fr.mrfern.spongeplugintest.Main;
 
-public abstract class PluginConfig {
+public abstract class ConfigManager {
 	
 	@SuppressWarnings("unused")
 	private static Main main;
@@ -53,12 +53,12 @@ public abstract class PluginConfig {
 	}
 
 	public static void setMain(Main main) {
-		PluginConfig.main = main;
+		ConfigManager.main = main;
 		setLogger(main.getLogger());
 	}
 	
 	public static void setLogger(Logger logger) {
-		PluginConfig.logger = logger;
+		ConfigManager.logger = logger;
 	}
 
 	public static HashMap<String, String> getFileList() {
@@ -66,7 +66,7 @@ public abstract class PluginConfig {
 	}
 	
 	public static void setFileList(HashMap<String, String> fileList) {
-		PluginConfig.fileList = fileList;
+		ConfigManager.fileList = fileList;
 	}
 
 }
