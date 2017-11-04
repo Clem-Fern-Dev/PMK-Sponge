@@ -1,5 +1,11 @@
 package fr.mrfern.spongeplugintest.config;
 
-public abstract class ChunkConfig implements IConfig{
+public class ChunkConfig {
+
+	private static ChunkConfig instance = new ChunkConfig();
+	
+	public static ChunkConfig getInstance() {
+		return instance ;
+	}
 
 }
