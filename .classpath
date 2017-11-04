@@ -33,5 +33,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="D:/devellopement plugin/bukkit-cauldron-forge-sponge-spigot.jar/sponge/spongeapi-7.0.0-20171101.163142-49-shaded.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
