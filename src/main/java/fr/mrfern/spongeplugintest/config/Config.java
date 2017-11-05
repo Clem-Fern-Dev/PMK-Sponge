@@ -163,10 +163,11 @@ public class Config implements IConfig{
 		return loaderRootNode.getNode(pluginName,gAuthNode,"force-op-user").getBoolean();
 	}
 	
+	// Config
+	
 	public List<? extends ConfigurationNode> getGAuthUserList() {
 		// Récuperation de la liste des utilisateur utilisant la double auth
 		return loaderRootNode.getNode(pluginName,gAuthNode,"user-UUID-list").getChildrenList();
 	}
-
-	
+		
 }
