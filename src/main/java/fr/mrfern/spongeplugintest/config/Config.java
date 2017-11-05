@@ -2,7 +2,6 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Documented;
 import java.util.Arrays;
 
 import fr.mrfern.spongeplugintest.Main;
@@ -93,6 +92,10 @@ public class Config implements IConfig{
 
 	public ConfigurationLoader<CommentedConfigurationNode> getCfgLoader() {
 		return cfgLoader;
+	}
+	
+	public String getBddHost() {
+		return loaderRootNode.getNode(pluginName,"bdd","host").getString();
 	}
 	
 	
