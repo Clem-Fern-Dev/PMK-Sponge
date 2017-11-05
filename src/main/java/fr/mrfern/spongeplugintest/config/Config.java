@@ -1,15 +1,6 @@
 package fr.mrfern.spongeplugintest.config;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-
-import com.google.gson.stream.JsonReader;
 
 public class Config implements IConfig{
 
