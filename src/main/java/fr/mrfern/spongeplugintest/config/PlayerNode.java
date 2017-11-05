@@ -33,152 +33,127 @@ public class PlayerNode implements ConfigurationNode{
 
 	@Override
 	public Object getKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getKey();
 	}
 
 	@Override
 	public Object[] getPath() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getPath();
 	}
 
 	@Override
 	public ConfigurationNode getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getParent();
 	}
 
 	@Override
 	public ConfigurationOptions getOptions() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getOptions();
 	}
 
 	@Override
 	public Object getValue(Object def) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(def);
 	}
 
 	@Override
 	public Object getValue(Supplier<Object> defSupplier) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(defSupplier);
 	}
 
 	@Override
 	public <T> T getValue(Function<Object, T> transformer, T def) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(transformer,def);
 	}
 
 	@Override
 	public <T> T getValue(Function<Object, T> transformer, Supplier<T> defSupplier) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(transformer,defSupplier);
 	}
 
 	@Override
 	public <T> List<T> getList(Function<Object, T> transformer) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getList(transformer);
 	}
 
 	@Override
 	public <T> List<T> getList(Function<Object, T> transformer, List<T> def) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getList(transformer,def);
 	}
 
 	@Override
 	public <T> List<T> getList(Function<Object, T> transformer, Supplier<List<T>> defSupplier) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getList(transformer,defSupplier);
 	}
 
 	@Override
 	public <T> List<T> getList(TypeToken<T> type, List<T> def) throws ObjectMappingException {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getList(type, def);
 	}
 
 	@Override
 	public <T> List<T> getList(TypeToken<T> type, Supplier<List<T>> defSupplier) throws ObjectMappingException {
 		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getList(type, defSupplier);
 	}
 
 	@Override
 	public ConfigurationNode setValue(Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.setValue(value);
 	}
 
 	@Override
 	public <T> T getValue(TypeToken<T> type, T def) throws ObjectMappingException {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(type, def);
 	}
 
 	@Override
 	public <T> T getValue(TypeToken<T> type, Supplier<T> defSupplier) throws ObjectMappingException {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getValue(type, defSupplier);
 	}
 
 	@Override
 	public ConfigurationNode mergeValuesFrom(ConfigurationNode other) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.mergeValuesFrom(other);
 	}
 
 	@Override
 	public boolean hasListChildren() {
-		// TODO Auto-generated method stub
-		return false;
+		return cfgNode.hasListChildren();
 	}
 
 	@Override
 	public boolean hasMapChildren() {
-		// TODO Auto-generated method stub
-		return false;
+		return cfgNode.hasMapChildren();
 	}
 
 	@Override
 	public List<? extends ConfigurationNode> getChildrenList() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getChildrenList();
 	}
 
 	@Override
 	public Map<Object, ? extends ConfigurationNode> getChildrenMap() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getChildrenMap();
 	}
 
 	@Override
 	public boolean removeChild(Object key) {
-		// TODO Auto-generated method stub
-		return false;
+		return removeChild(key);
 	}
 
 	@Override
 	public ConfigurationNode getAppendedNode() {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getAppendedNode();
 	}
 
 	@Override
 	public ConfigurationNode getNode(Object... path) {
-		// TODO Auto-generated method stub
-		return null;
+		return cfgNode.getNode(path);
 	}
 
 	@Override
 	public boolean isVirtual() {
-		// TODO Auto-generated method stub
-		return false;
+		return cfgNode.isVirtual();
 	}
-
 }
