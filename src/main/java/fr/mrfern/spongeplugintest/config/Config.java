@@ -127,36 +127,44 @@ public class Config implements IConfig{
 	// Bdd
 	
 	public String getBddHost() {
+		// Adresse de connexion à la bdd
 		return loaderRootNode.getNode(pluginName,bddNode,"host").getString();
 	}
 	
 	public int getBddPort() {
+		// Port de connexion à la bdd
 		return loaderRootNode.getNode(pluginName,bddNode,"port").getInt();
 	}
 	
 	public String getBddUser() {
+		// Récupération de l'utilisateur de connection à la bdd
 		return loaderRootNode.getNode(pluginName,bddNode,"user").getString();
 	}
 	
 	public String getBddMdp() {
+		// Récupération du mot de passe de la bdd
 		return loaderRootNode.getNode(pluginName,bddNode,"mdp").getString();
 	}
 	
 	public boolean getBddBackUpState() {
+		// Récupération de la valeur d'activation ou non des backups
 		return loaderRootNode.getNode(pluginName,bddNode,"backup-config").getBoolean();
 	}
 	
 	// google-authentificator	
 	
 	public boolean getGAuthState() {
+		// Récupération de la valeur boolean si la double auth est acitve ou non
 		return loaderRootNode.getNode(pluginName,gAuthNode,"enable").getBoolean();
 	}
 	
 	public boolean getGAuthForceUseToOpUser() {
+		// Récuperation de la valeur boolean si les op sont obligé d'utilisé la double auth
 		return loaderRootNode.getNode(pluginName,gAuthNode,"force-op-user").getBoolean();
 	}
 	
 	public List<? extends ConfigurationNode> getGAuthUserList() {
+		// Récuperation de la liste des utilisateur utilisant la double auth
 		return loaderRootNode.getNode(pluginName,gAuthNode,"user-UUID-list").getChildrenList();
 	}
 
