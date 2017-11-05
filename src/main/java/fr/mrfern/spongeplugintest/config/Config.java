@@ -142,11 +142,14 @@ public class Config implements IConfig{
 	}
 	
 	public boolean getBddBackUpState() {
-		return loaderRootNode.getNode(pluginName,"bdd","backup-config").getBoolean();
+		return loaderRootNode.getNode(pluginName,bddNode,"backup-config").getBoolean();
 	}
 	
 	// google-authentificator	
 	
+	public boolean getGAuthState() {
+		return loaderRootNode.getNode(pluginName,gAuthNode,"enable").getBoolean();
+	}
 
 	
 }
