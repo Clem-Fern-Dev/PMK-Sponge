@@ -49,7 +49,6 @@ public interface IConfig {
 		if(!filepath.exists()) {
 			if(b) {
 				filepath.mkdirs();
-				setFile(filepath);
 				return true;
 			}
 			return false;
@@ -60,17 +59,9 @@ public interface IConfig {
 	
 	public boolean isActive();
 	
-	public default void setFile(File file) {
-		set(file);
-	}
-	
-	public default void setFilePath(String filePath) {
-		set(new File(filePath));
-	}
-	
-	public void set(File file);
-	
 	public boolean isSetup();
 	public void setIsSetup(boolean isSetup);
+
+	void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode);
 	
 }

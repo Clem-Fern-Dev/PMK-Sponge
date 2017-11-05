@@ -1,6 +1,7 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
+import java.io.IOException;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -24,15 +25,17 @@ public class Config implements IConfig{
 		defaultFileConfig = new File(defaultpath + name + IConfig.extensionFile);
 		
 		checkPath(defaultpath, true);		
-		checkFile(defaultFileConfig, true);
+		if(checkFile(defaultFileConfig, true)) {
+			cfgLoader = builderConfigLoader(defaultFileConfig);
+			loaderRootNode = loadConfigNode(cfgLoader);
+			
+			set(cfgLoader,loaderRootNode); 
+		}else {
+			cfgLoader = builderConfigLoader(defaultFileConfig);
+			loaderRootNode = loadConfigNode(cfgLoader);
+		}
 		
-		cfgLoader = builderConfigLoader(defaultFileConfig);
-		loaderRootNode = loadConfigNode(cfgLoader);
-		
-		set(defaultFileConfig); 
-		
-		
-		
+				
 		setIsSetup(true);		
 	}
 	
@@ -42,8 +45,15 @@ public class Config implements IConfig{
 	}
 
 	@Override
-	public void set(File file) {
-		
+	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
+		loaderRootNode.setValue("This is a test");
+		loaderRootNode.getNode("test","test").setValue(false);
+		try {
+			cfgLoader.save(loaderRootNode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static Config getInstance() {
@@ -64,5 +74,7 @@ public class Config implements IConfig{
 
 	public ConfigurationLoader<CommentedConfigurationNode> getCfgLoader() {
 		return cfgLoader;
-	}			
+	}
+	
+	
 }
