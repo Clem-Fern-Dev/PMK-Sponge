@@ -54,7 +54,7 @@ public class Config implements IConfig{
 				
 		loaderRootNode.getNode(pluginName,"bdd","backup-config").setValue(false);
 		loaderRootNode.getNode(pluginName,"bdd","host").setValue("none");
-		loaderRootNode.getNode(pluginName,"bdd","port").setValue("none");
+		loaderRootNode.getNode(pluginName,"bdd","port").setValue(0);
 		loaderRootNode.getNode(pluginName,"bdd","user").setValue("none");
 		loaderRootNode.getNode(pluginName,"bdd","mdp").setValue("none");
 		
@@ -98,5 +98,8 @@ public class Config implements IConfig{
 		return loaderRootNode.getNode(pluginName,"bdd","host").getString();
 	}
 	
+	public int getBddPort() {
+		return loaderRootNode.getNode(pluginName,"bdd","port").getInt();
+	}
 	
 }
