@@ -3,11 +3,18 @@ package fr.mrfern.spongeplugintest.config;
 import java.io.File;
 import java.io.IOException;
 
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
+
 public interface IConfig {
 
 	String extensionFile = ".json";
+	
 	public void setup();
-	public void load();
+	
+	public ConfigurationLoader<CommentedConfigurationNode> builderConfigLoader(File file);
+	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfig);
 	
 	public default boolean checkFile(File file,boolean b) {
 		if(!file.exists()) {
