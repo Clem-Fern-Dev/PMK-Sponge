@@ -3,6 +3,7 @@ package fr.mrfern.spongeplugintest.config;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -83,7 +84,7 @@ public class Config implements IConfig{
 		loaderRootNode.getNode(pluginName,"bdd","user").setValue("none");
 		loaderRootNode.getNode(pluginName,"bdd","mdp").setValue("none");
 		
-		loaderRootNode.getNode(pluginName,"config","extension-list").setValue(Arrays.asList("none", Arrays.asList("test","test")));
+		loaderRootNode.getNode(pluginName,"config","extension-list").setValue(Arrays.asList(""));
 		
 		loaderRootNode.getNode(pluginName,"google-authentificator","enable").setValue(false);
 		loaderRootNode.getNode(pluginName,"google-authentificator","force-op-user").setValue(false);
@@ -153,6 +154,10 @@ public class Config implements IConfig{
 	
 	public boolean getGAuthForceUseToOpUser() {
 		return loaderRootNode.getNode(pluginName,gAuthNode,"force-op-user").getBoolean();
+	}
+	
+	public List<? extends ConfigurationNode> getGAuthUserList() {
+		return loaderRootNode.getNode(pluginName,gAuthNode,"user-UUID-list").getChildrenList();
 	}
 
 	
