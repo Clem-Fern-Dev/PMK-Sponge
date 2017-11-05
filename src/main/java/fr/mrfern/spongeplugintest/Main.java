@@ -16,12 +16,17 @@ import com.google.inject.Inject;
 import fr.mrfern.spongeplugintest.config.Config;
 
 
-@Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0")
+@Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0.0")
 public class Main {
 	
-	protected static String defaultpath = "./mods/plugins/spongeplugintest/";
-	protected static String playerpath = "./mods/plugins/spongeplugintest/player";
-	protected static String chunkpath = "./mods/plugins/spongeplugintest/chunk";
+	protected static String pluginName = "spongeplugintest";
+	
+	protected static String defaultpath = "./mods/plugins/"+ pluginName +"/";
+	protected static String playerpath = "./mods/plugins/"+ pluginName +"/player";
+	protected static String chunkpath = "./mods/plugins/"+ pluginName +"/chunk";
+	
+	
+	public static String getPluginName() {		return pluginName;	}
 	
 	@Inject
 	private Logger logger;

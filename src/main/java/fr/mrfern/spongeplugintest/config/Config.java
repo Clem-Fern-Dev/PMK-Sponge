@@ -2,7 +2,10 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Documented;
+import java.util.Arrays;
 
+import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -19,8 +22,11 @@ public class Config implements IConfig{
 	private File defaultFileConfig;
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
+	private String pluginName;
 	
 	public void setup() {
+		
+		pluginName = Main.getPluginName();
 		
 		defaultFileConfig = new File(defaultpath + name + IConfig.extensionFile);
 		
@@ -46,8 +52,21 @@ public class Config implements IConfig{
 
 	@Override
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
-		loaderRootNode.setValue("This is a test");
-		loaderRootNode.getNode("test","test").setValue(false);
+				
+		loaderRootNode.getNode(pluginName,"bdd","backup-config").setValue(false);
+		loaderRootNode.getNode(pluginName,"bdd","host").setValue("none");
+		loaderRootNode.getNode(pluginName,"bdd","port").setValue("none");
+		loaderRootNode.getNode(pluginName,"bdd","user").setValue("none");
+		loaderRootNode.getNode(pluginName,"bdd","mdp").setValue("none");
+		
+		loaderRootNode.getNode(pluginName,"config","extension-list").setValue(Arrays.asList("none", Arrays.asList("test","test")));
+		
+		loaderRootNode.getNode(pluginName,"google-authentificator","enable").setValue(false);
+		loaderRootNode.getNode(pluginName,"google-authentificator","force-op-user").setValue(false);
+		loaderRootNode.getNode(pluginName,"google-authentificator", "user-UUID-list").setValue(Arrays.asList(""));
+		
+		
+		
 		try {
 			cfgLoader.save(loaderRootNode);
 		} catch (IOException e) {
