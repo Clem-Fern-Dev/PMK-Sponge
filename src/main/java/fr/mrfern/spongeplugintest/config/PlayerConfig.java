@@ -107,11 +107,15 @@ public class PlayerConfig implements IConfig{
 		return null;
 	}
 	
-	public ConfigurationNode getPlayerConfigNode(UUID uuid) {
+	public PlayerNode getPlayerConfigNode(UUID uuid) {
 		if(playerConfigExist(uuid)) {			
 			File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
 			ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
-			return loadConfigNode(loader);	//load file / return loader
+			
+			PlayerNode plyNode = new PlayerNode();	//load file / return loader
+			plyNode.setCfgNode(loader);
+			return plyNode;
+			
 		}
 		return null;
 	}
