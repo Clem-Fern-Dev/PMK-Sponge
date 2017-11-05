@@ -102,4 +102,8 @@ public class Config implements IConfig{
 		return loaderRootNode.getNode(pluginName,"bdd","port").getInt();
 	}
 	
+	public String getBddUser() {
+		return loaderRootNode.getNode(pluginName,"bdd","user").getString();
+	}
+	
 }
