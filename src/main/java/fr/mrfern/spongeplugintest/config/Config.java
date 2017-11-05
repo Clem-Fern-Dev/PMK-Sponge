@@ -14,6 +14,9 @@ public class Config implements IConfig{
 
 	protected String name = "config";
 	protected String defaultpath = "./mods/plugins/spongeplugintest/";
+	protected String gAuthNode = "google-authentificator";
+	protected String bddNode = "bdd";
+	protected String configNode = "config";
 	
 	private boolean isSetup = false;
 	
@@ -117,30 +120,33 @@ public class Config implements IConfig{
 	}
 	
 	/* Methods de récuperation rapide des veleurs de nodes
-	 * Ajouté
-	 *
+	 * A ajouté pour chaque Node
 	 */
 	
+	// Bdd
+	
 	public String getBddHost() {
-		return loaderRootNode.getNode(pluginName,"bdd","host").getString();
+		return loaderRootNode.getNode(pluginName,bddNode,"host").getString();
 	}
 	
 	public int getBddPort() {
-		return loaderRootNode.getNode(pluginName,"bdd","port").getInt();
+		return loaderRootNode.getNode(pluginName,bddNode,"port").getInt();
 	}
 	
 	public String getBddUser() {
-		return loaderRootNode.getNode(pluginName,"bdd","user").getString();
+		return loaderRootNode.getNode(pluginName,bddNode,"user").getString();
 	}
 	
 	public String getBddMdp() {
-		return loaderRootNode.getNode(pluginName,"bdd","mdp").getString();
+		return loaderRootNode.getNode(pluginName,bddNode,"mdp").getString();
 	}
 	
 	public boolean getBddBackUpState() {
 		return loaderRootNode.getNode(pluginName,"bdd","backup-config").getBoolean();
 	}
 	
+	// google-authentificator	
 	
+
 	
 }
