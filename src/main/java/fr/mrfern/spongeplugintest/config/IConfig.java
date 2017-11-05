@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public interface IConfig {
@@ -13,8 +14,17 @@ public interface IConfig {
 	
 	public void setup();
 	
-	public ConfigurationLoader<CommentedConfigurationNode> builderConfigLoader(File file);
-	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfig);
+	public default ConfigurationLoader<CommentedConfigurationNode> builderConfigLoader(File file) {
+		return HoconConfigurationLoader.builder().setFile(file).build();		
+	}
+	public default ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
+		try {
+		    return cfgConfigBuilderResult.load();
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
 	
 	public default boolean checkFile(File file,boolean b) {
 		if(!file.exists()) {

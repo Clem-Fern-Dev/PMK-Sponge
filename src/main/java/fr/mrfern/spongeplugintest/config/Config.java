@@ -1,11 +1,9 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
-import java.io.IOException;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class Config implements IConfig{
@@ -18,6 +16,7 @@ public class Config implements IConfig{
 	private static Config instance = new Config();	
 	
 	private File defaultFileConfig;
+	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
 	
 	public void setup() {
@@ -27,28 +26,15 @@ public class Config implements IConfig{
 		checkPath(defaultpath, true);		
 		checkFile(defaultFileConfig, true);
 		
+		cfgLoader = builderConfigLoader(defaultFileConfig);
+		loaderRootNode = loadConfigNode(cfgLoader);
+		
 		set(defaultFileConfig); 
 		
 		setIsSetup(true);
 		
 	}
 	
-	@Override
-	public ConfigurationLoader<CommentedConfigurationNode> builderConfigLoader(File file) {
-		return HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();		
-	}
-	
-
-	@Override
-	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgLoader) {
-		try {
-		    return cfgLoader.load();
-		} catch(IOException e) {
-			e.printStackTrace();
-			return null;
-		}		
-	}
-
 	@Override
 	public boolean isActive() {
 		return true;
@@ -73,5 +59,9 @@ public class Config implements IConfig{
 
 	public ConfigurationNode getLoaderRootNode() {
 		return loaderRootNode;
-	}				
+	}
+
+	public ConfigurationLoader<CommentedConfigurationNode> getCfgLoader() {
+		return cfgLoader;
+	}			
 }
