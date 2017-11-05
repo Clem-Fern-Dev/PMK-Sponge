@@ -150,6 +150,10 @@ public class Config implements IConfig{
 	public boolean getGAuthState() {
 		return loaderRootNode.getNode(pluginName,gAuthNode,"enable").getBoolean();
 	}
+	
+	public boolean getGAuthForceUseToOpUser() {
+		return loaderRootNode.getNode(pluginName,gAuthNode,"force-op-user").getBoolean();
+	}
 
 	
 }
