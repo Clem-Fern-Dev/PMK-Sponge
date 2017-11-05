@@ -110,4 +110,8 @@ public class Config implements IConfig{
 		return loaderRootNode.getNode(pluginName,"bdd","mdp").getString();
 	}
 	
+	public boolean getBddBackUpState() {
+		return loaderRootNode.getNode(pluginName,"bdd","backup-config").getBoolean();
+	}
+	
 }
