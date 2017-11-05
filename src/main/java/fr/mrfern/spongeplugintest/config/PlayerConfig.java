@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
+
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -43,16 +45,6 @@ public class PlayerConfig implements IConfig{
 			}
 				
 			set(cfgLoader,loaderRootNode); 
-		}else {
-				
-			cfgLoader = HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();
-			try {
-				    loaderRootNode = cfgLoader.load();
-			} catch(IOException e) {
-					e.printStackTrace();
-			}
-			
-			setIsSetup(true);
 		}			
 				
 	}
@@ -97,6 +89,23 @@ public class PlayerConfig implements IConfig{
 	@Override
 	public boolean isActive() {
 		return true;
+	}
+	
+	public boolean createPlayerConfig(UUID uuid) {
+		if(getPlayerConfigFile(uuid) != null) {
+			// création du fichier
+			File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file
+			
+			try {
+				FileUtils.copyFile(defaultFileConfig, file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return true;
+		}
+		return false;
 	}
 	
 	public File getPlayerConfigFile(UUID uuid) {

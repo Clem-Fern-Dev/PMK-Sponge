@@ -14,6 +14,7 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 import fr.mrfern.spongeplugintest.config.Config;
+import fr.mrfern.spongeplugintest.config.PlayerConfig;
 
 
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0.0")
@@ -41,6 +42,7 @@ public class Main {
 		logger.info("Plugin preInit " + defaultpath);
 		
 		Config.getInstance().setup();
+		PlayerConfig.getInstance().setup();
 		
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
