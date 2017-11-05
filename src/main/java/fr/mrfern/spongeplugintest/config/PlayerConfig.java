@@ -2,6 +2,7 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -52,11 +53,12 @@ public class PlayerConfig implements IConfig{
 	@Override
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
 				
-		loaderRootNode.getNode(pluginName,"bdd","backup-config").setValue(false);
-		loaderRootNode.getNode(pluginName,"bdd","host").setValue("none");
-		loaderRootNode.getNode(pluginName,"bdd","port").setValue(0);
-		loaderRootNode.getNode(pluginName,"bdd","user").setValue("none");
-		loaderRootNode.getNode(pluginName,"bdd","mdp").setValue("none");
+		loaderRootNode.getNode(name,"UUID").setValue("none");
+		loaderRootNode.getNode(name,"ban").setValue("none");
+		loaderRootNode.getNode(name,"config").setValue("test");
+		loaderRootNode.getNode(name,"config","langage").setValue("fr");
+		loaderRootNode.getNode(name,"bdd","user").setValue("none");
+		loaderRootNode.getNode(name,"bdd","mdp").setValue("none");
 		
 		try {
 			cfgLoader.save(loaderRootNode);
