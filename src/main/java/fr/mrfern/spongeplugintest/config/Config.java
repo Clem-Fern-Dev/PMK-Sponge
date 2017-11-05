@@ -67,7 +67,7 @@ public class Config implements IConfig{
 	@Deprecated
 	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
 		new Exception(this.getClass().getName() + "Fichier de config unique, impossible d'en builder un autre");
-		return IConfig.super.loadConfigNode(cfgConfigBuilderResult);
+		return null;
 	}
 	
 	@Override
