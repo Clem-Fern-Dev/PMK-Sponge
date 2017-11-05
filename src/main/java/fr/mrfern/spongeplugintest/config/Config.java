@@ -31,8 +31,9 @@ public class Config implements IConfig{
 		
 		set(defaultFileConfig); 
 		
-		setIsSetup(true);
 		
+		
+		setIsSetup(true);		
 	}
 	
 	@Override
