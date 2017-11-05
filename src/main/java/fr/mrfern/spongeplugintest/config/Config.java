@@ -7,6 +7,7 @@ import java.util.Arrays;
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class Config implements IConfig{
@@ -31,17 +32,38 @@ public class Config implements IConfig{
 		
 		checkPath(defaultpath, true);		
 		if(checkFile(defaultFileConfig, true)) {
-			cfgLoader = builderConfigLoader(defaultFileConfig);
-			loaderRootNode = loadConfigNode(cfgLoader);
+			cfgLoader = HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();
+			try {
+			    loaderRootNode = cfgLoader.load();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 			
 			set(cfgLoader,loaderRootNode); 
 		}else {
-			cfgLoader = builderConfigLoader(defaultFileConfig);
-			loaderRootNode = loadConfigNode(cfgLoader);
+			
+			cfgLoader = HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();
+			try {
+			    loaderRootNode = cfgLoader.load();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 				
 		setIsSetup(true);		
+	}
+	
+	@Deprecated
+	public ConfigurationLoader<CommentedConfigurationNode> builderConfigLoader(File file) {
+		new Exception(this.getClass().getName() + "Fichier de config unique, impossible d'en builder un autre");
+		return null;
+	}
+	
+	@Deprecated
+	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
+		new Exception(this.getClass().getName() + "Fichier de config unique, impossible d'en builder un autre");
+		return IConfig.super.loadConfigNode(cfgConfigBuilderResult);
 	}
 	
 	@Override
@@ -94,6 +116,11 @@ public class Config implements IConfig{
 		return cfgLoader;
 	}
 	
+	/* Methods de récuperation rapide des veleurs de nodes
+	 * Ajouté
+	 *
+	 */
+	
 	public String getBddHost() {
 		return loaderRootNode.getNode(pluginName,"bdd","host").getString();
 	}
@@ -113,5 +140,7 @@ public class Config implements IConfig{
 	public boolean getBddBackUpState() {
 		return loaderRootNode.getNode(pluginName,"bdd","backup-config").getBoolean();
 	}
+	
+	
 	
 }
