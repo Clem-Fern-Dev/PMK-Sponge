@@ -38,7 +38,7 @@ public class Main {
 	
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
-
+		
 		logger.info("Plugin preInit " + defaultpath);
 		
 		Config.getInstance().setup();
