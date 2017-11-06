@@ -44,6 +44,9 @@ public class Main {
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();
 		
+		
+		
+		
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
 		 * sont disponibles.
