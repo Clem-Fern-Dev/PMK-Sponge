@@ -1,4 +1,4 @@
-package fr.efkabe.spongeplugintest.command;
+package fr.mrfern.spongeplugintest.command;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
