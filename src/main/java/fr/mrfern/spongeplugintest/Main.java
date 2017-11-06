@@ -15,7 +15,7 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 
-import fr.mrfern.spongeplugintest.command.HelloWorldCommand;
+import fr.mrfern.spongeplugintest.command.*;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
 
@@ -111,7 +111,7 @@ public class Main {
 				.arguments(
 						GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
 						GenericArguments.remainingJoinedStrings(Text.of("message")))
-				.executor(new fr.mrfern.spongeplugintest.command.MessageCommand())
+				.executor(new MessageCommand())
 				.build();
 		
 		Sponge.getCommandManager().register(this, myCommandSpec, "helloworld");
