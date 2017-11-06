@@ -59,7 +59,7 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"config","langage").setValue("fr");
 		loaderRootNode.getNode(name,"bdd","user").setValue("none");
 		loaderRootNode.getNode(name,"bdd","mdp").setValue("none");
-		
+		 
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
