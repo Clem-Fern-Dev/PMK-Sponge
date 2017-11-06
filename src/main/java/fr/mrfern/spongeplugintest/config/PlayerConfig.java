@@ -60,7 +60,7 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"bdd","user").setValue("none");
 		loaderRootNode.getNode(name,"bdd","mdp").setValue("none");
 		
-		try {
+		try { 
 			cfgLoader.save(loaderRootNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
