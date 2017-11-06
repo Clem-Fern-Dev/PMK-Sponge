@@ -18,7 +18,6 @@ import com.google.inject.Inject;
 import fr.mrfern.spongeplugintest.command.HelloWorldCommand;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
-import io.github.efkabe.essential.MessageCommand;
 
 
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0.0")
@@ -97,6 +96,7 @@ public class Main {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@Listener
 	public void onStartServer(GameStartingServerEvent event) {
 		
@@ -111,7 +111,7 @@ public class Main {
 				.arguments(
 						GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
 						GenericArguments.remainingJoinedStrings(Text.of("message")))
-				.executor(new MessageCommand())
+				.executor(new fr.mrfern.spongeplugintest.command.MessageCommand())
 				.build();
 		
 		Sponge.getCommandManager().register(this, myCommandSpec, "helloworld");
