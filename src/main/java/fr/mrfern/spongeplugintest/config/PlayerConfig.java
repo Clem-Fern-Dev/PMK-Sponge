@@ -15,7 +15,8 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class PlayerConfig implements IConfig{
 
 	protected String name = "player";
-	protected String defaultPath = "./mods/plugins/spongeplugintest/";
+	private String pluginName = Main.getPluginName();
+	protected String defaultPath = "./mods/plugins/"+ pluginName + "/";
 	protected String playerPath = defaultPath + "player/";
 	
 	private boolean isSetup = false;
@@ -25,11 +26,8 @@ public class PlayerConfig implements IConfig{
 	private File defaultFileConfig;
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
-	private String pluginName;
 	
 	public void setup() {
-		
-		pluginName = Main.getPluginName();
 		
 		defaultFileConfig = new File(playerPath + name + IConfig.extensionFile);
 		

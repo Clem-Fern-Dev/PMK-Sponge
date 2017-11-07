@@ -12,7 +12,8 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class ChunkConfig implements IConfig{
 
 	protected String name = "chunk";
-	protected String defaultPath = "./mods/plugins/spongeplugintest/";
+	private String pluginName = Main.getPluginName();
+	protected String defaultPath = "./mods/plugins/"+ pluginName + "/";
 	protected String chunkPath = defaultPath + "chunk/";
 	
 	private boolean isSetup = false;
@@ -22,11 +23,9 @@ public class ChunkConfig implements IConfig{
 	private File defaultFileConfig;
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
-	private String pluginName;
+	
 	
 	public void setup() {
-		
-		pluginName = Main.getPluginName();
 		
 		defaultFileConfig = new File(chunkPath + name + IConfig.extensionFile);
 		
@@ -104,14 +103,14 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	public File getChunkConfigFile(String world, int posX , int posZ) {
-		if(playerConfigExist(world,posX,posZ)) {	// check si un fichier du nom de l'UUID existe
+		if(ChunkConfigExist(world,posX,posZ)) {	// check si un fichier du nom de l'UUID existe
 			//return new File(pluginName + playerPath + uuid.toString() + extensionFile);		// Return la file du nom de l'UUID
 		}
 		return null;
 	}
 	
 	public ChunkNode getChukConfigNode(String world, int posX , int posZ) {
-		if(playerConfigExist(world,posX,posZ)) {			
+		if(ChunkConfigExist(world,posX,posZ)) {			
 			//File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
 			//ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
@@ -124,7 +123,7 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	@SuppressWarnings("unused")
-	public boolean playerConfigExist(String world, int posX , int posZ) {
+	public boolean ChunkConfigExist(String world, int posX , int posZ) {
 		//File playerFile = new File(pluginName + playerPath + uuid.toString() + extensionFile);	// Instancie new file
 		if(/*playerFile.exists()*/true){	// check si file exist
 			return true;
