@@ -2,6 +2,7 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -50,9 +51,26 @@ public class PlayerConfig implements IConfig{
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
 				
 		loaderRootNode.getNode(name,"UUID").setValue("none");
-		loaderRootNode.getNode(name,"ban").setValue("none");
-		loaderRootNode.getNode(name,"config").setValue("test");
-		loaderRootNode.getNode(name,"config","langage").setValue("fr");
+		loaderRootNode.getNode(name,"name").setValue("none");
+		
+		loaderRootNode.getNode(name,"forum","profile-link").setValue("none");
+		loaderRootNode.getNode(name,"forum","name").setValue("none");
+		loaderRootNode.getNode(name,"forum","isBan").setValue(false);
+		
+		
+		loaderRootNode.getNode(name,"grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","prim-grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","sub-grade").setValue("none");
+		
+		loaderRootNode.getNode(name,"ban","enable").setValue(false);
+		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
+		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
+		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
+				
+		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=\"\"/./raison=\"pas de raison\"/"));
+	
+		loaderRootNode.getNode(name,"config","langage").setValue("default");
+		
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
