@@ -29,6 +29,10 @@ public class ChunkConfig implements IConfig{
 		
 		defaultFileConfig = new File(chunkPath + name + IConfig.extensionFile);
 		
+		/*
+		 * Création de dossier pour chaque monde
+		 */
+		
 		checkPath(chunkPath, true);		
 		if(checkFile(defaultFileConfig, true)) {
 			cfgLoader = HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();
