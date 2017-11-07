@@ -30,8 +30,7 @@ public class PlayerConfig implements IConfig{
 	public void setup() {
 		
 		defaultFileConfig = new File(playerPath + name + IConfig.extensionFile);
-		
-		
+				
 			
 		checkPath(playerPath, true);		
 		if(checkFile(defaultFileConfig, true)) {
