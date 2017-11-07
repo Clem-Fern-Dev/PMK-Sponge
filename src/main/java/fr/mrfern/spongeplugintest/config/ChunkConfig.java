@@ -110,12 +110,12 @@ public class ChunkConfig implements IConfig{
 		return null;
 	}
 	
-	public PlayerNode getChukConfigNode(String world, int posX , int posZ) {
+	public ChunkNode getChukConfigNode(String world, int posX , int posZ) {
 		if(playerConfigExist(world,posX,posZ)) {			
 			//File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
 			//ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
-			PlayerNode plyNode = new PlayerNode();	//load file / return loader
+			ChunkNode plyNode = new ChunkNode();	//load file / return loader
 			//plyNode.setCfgNode(loader);
 			return plyNode;
 			
