@@ -138,9 +138,6 @@ public class ChunkConfig implements IConfig{
 		        addinvite_prim: true
 		        addinvite_temp: true
 		*/
-		loaderRootNode.getNode(name,"chunk-group-perm","user").setValue(0);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite").setValue(0);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite").setValue(0);
 		
 		try {  
 			cfgLoader.save(loaderRootNode); 
