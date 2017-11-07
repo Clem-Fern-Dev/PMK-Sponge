@@ -56,9 +56,6 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"ban").setValue("none");
 		loaderRootNode.getNode(name,"config").setValue("test");
 		loaderRootNode.getNode(name,"config","langage").setValue("fr");
-		loaderRootNode.getNode(name,"bdd","user").setValue("none");
-		loaderRootNode.getNode(name,"bdd","mdp").setValue("none");
-    
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
