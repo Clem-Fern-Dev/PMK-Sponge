@@ -2,6 +2,7 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -29,33 +30,123 @@ public class ChunkConfig implements IConfig{
 		
 		defaultFileConfig = new File(chunkPath + name + IConfig.extensionFile);
 		
+		checkPath(chunkPath, true);	
+		
 		/*
 		 * Création de dossier pour chaque monde
 		 */
 		
-		checkPath(chunkPath, true);		
+		// Récupération des mondes à faire
+		
 		if(checkFile(defaultFileConfig, true)) {
 			cfgLoader = HoconConfigurationLoader.builder().setFile(defaultFileConfig).build();
 			try {
 				loaderRootNode = cfgLoader.load();
+				set(cfgLoader,loaderRootNode); 
 			} catch(IOException e) {
 				e.printStackTrace();
-			}
-				
-			set(cfgLoader,loaderRootNode); 
+			}		
+
 		}			
 				
 	}
 
 	@Override
-	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
+	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {		
+		
+		loaderRootNode.getNode(name,"chunk-info","posX").setValue(0);
+		loaderRootNode.getNode(name,"chunk-info","posZ").setValue(0);		
+		
+		loaderRootNode.getNode(name,"chunk-config","blocked").setValue(false);
+		loaderRootNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue("none");
+		loaderRootNode.getNode(name,"chunk-config","author-of-blocked","name").setValue("none");
+		loaderRootNode.getNode(name,"chunk-config","author-of-blocked","grade").setValue("none");
+		loaderRootNode.getNode(name,"chunk-config","blocked","raison").setValue("none");
+		loaderRootNode.getNode(name,"chunk-config","blocked","timer","enable").setValue(false);
+		loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","days").setValue(0);
+		loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","hour").setValue(0);
+		loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","minute").setValue(0);		
+		
+		loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");
+		loaderRootNode.getNode(name,"chunk-player-claim","claim-by").setValue("none");
+		loaderRootNode.getNode(name,"chunk-player-perm","group-overpass").setValue(Arrays.asList("none"));
+		loaderRootNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(Arrays.asList("none"));
+		loaderRootNode.getNode(name,"chunk-player-perm","user").setValue(Arrays.asList("none"));
+		loaderRootNode.getNode(name,"chunk-player-perm","perm-invite").setValue(Arrays.asList("none"));
+		loaderRootNode.getNode(name,"chunk-player-perm","temp-invite").setValue(Arrays.asList("none"));
+		
+		// co_owner
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","block").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","vault").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","door").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","button").setValue(true);
+		
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","unclaim").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","add-co-owner").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","adduser").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","addinvite-prim").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","addinvite-temp").setValue(true);
+		
+		
+		// user
+		loaderRootNode.getNode(name,"chunk-group-perm","user","block").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","vault").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","door").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","button").setValue(true);
+		
+		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","unclaim").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","add-co-owner").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","adduser").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","addinvite-prim").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","addinvite-temp").setValue(true);
+		
+		// perm_invite
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","block").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","vault").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","door").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","button").setValue(true);
 				
-		/*
-		loaderRootNode.getNode(name,"UUID").setValue("none");
-		loaderRootNode.getNode(name,"ban").setValue("none");
-		loaderRootNode.getNode(name,"config").setValue("test");
-		loaderRootNode.getNode(name,"config","langage").setValue("fr");
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","unclaim").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","add-co-owner").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","adduser").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","addinvite-prim").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","addinvite-temp").setValue(true);
+				
+		// temp_invite
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","block").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","vault").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","door").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","button").setValue(true);
+				
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","unclaim").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","add-co-owner").setValue(false);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","adduser").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","addinvite-prim").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","addinvite-temp").setValue(true);
+		
+		
+		/*perm:
+		    co_owner:
+		      block: true
+		      vault: true
+		      door: true
+		      button: true
+		      commandChunk:
+		        unclaim: false
+		        addco_owner: false
+		        adduser: true
+		        addinvite_prim: true
+		        addinvite_temp: true
+		      commandUser:
+		        changeperm:
+		            - users
+		            - perm_invite
+		            - temp_invite
 		*/
+		loaderRootNode.getNode(name,"chunk-group-perm","user").setValue(0);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite").setValue(0);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite").setValue(0);
+		
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
