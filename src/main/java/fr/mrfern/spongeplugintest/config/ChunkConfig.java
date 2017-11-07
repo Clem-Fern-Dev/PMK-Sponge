@@ -47,10 +47,12 @@ public class ChunkConfig implements IConfig{
 	@Override
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
 				
+		/*
 		loaderRootNode.getNode(name,"UUID").setValue("none");
 		loaderRootNode.getNode(name,"ban").setValue("none");
 		loaderRootNode.getNode(name,"config").setValue("test");
 		loaderRootNode.getNode(name,"config","langage").setValue("fr");
+		*/
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
