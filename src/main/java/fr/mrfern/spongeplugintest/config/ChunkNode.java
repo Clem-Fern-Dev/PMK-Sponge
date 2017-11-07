@@ -155,4 +155,9 @@ private ConfigurationNode cfgNode;
 	public boolean isVirtual() {
 		return cfgNode.isVirtual();
 	}
+	
+	/*
+	 * Ajout des getters et setter simplifiés
+	 */
+	
 }
