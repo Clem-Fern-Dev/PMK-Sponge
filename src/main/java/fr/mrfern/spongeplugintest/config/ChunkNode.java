@@ -166,8 +166,10 @@ public class ChunkNode implements ConfigurationNode {
 	 * Ajout des getters et setter simplifiés
 	 */
 	
-	// Chunk info
-	
+	/*
+	 *  Chunk info
+	 */
+	// Getter
 	public int getLocationX() {
 		return cfgNode.getNode(name,"chunk-info","posX").getInt();
 	}
@@ -187,7 +189,27 @@ public class ChunkNode implements ConfigurationNode {
 	private String getWorldName() {
 		return cfgNode.getNode(name,"chunk-info","world").getString();
 	}
+	// Setter
+	public void setLocationX(int x) {
+		cfgNode.getNode(name,"chunk-info","posX").setValue(x);
+	}
 	
+	public void setLocationZ(int z) {
+		cfgNode.getNode(name,"chunk-info","posZ").setValue(z);
+	}
 	
+	public void setLocation(Location<World> location){		
+		 setLocationX(location.getBlockX());
+		 setLocationZ(location.getBlockX());
+		 setWorld(location.getExtent());
+	}
+
+	private void setWorld(World world) {
+		setWorldName(world.getName());
+	}
+
+	private void setWorldName(String worldname) {
+		cfgNode.getNode(name,"chunk-info","world").getString();
+	}
 	
 }
