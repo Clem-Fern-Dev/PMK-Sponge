@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
+import org.yaml.snakeyaml.emitter.EmitterException;
 
 import com.google.common.reflect.TypeToken;
 
@@ -223,18 +224,90 @@ public class ChunkNode implements ConfigurationNode {
 	}
 	
 	public UUID getUUIDofBlocker() {
-		new UUID(0, 0);
 		return UUID.fromString(cfgNode.getNode(name,"chunk-config","author-of-blocked","UUID").getString());
 	}
-	/*
 	
-	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue("none");
-	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","name").setValue("none");
-	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","grade").setValue("none");
-	loaderRootNode.getNode(name,"chunk-config","blocked","raison").setValue("none");
-	loaderRootNode.getNode(name,"chunk-config","blocked","timer","enable").setValue(false);
-	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","days").setValue(0);
-	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","hour").setValue(0);
-	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","minute").setValue(0);		
-	*/
+	public String getNameofBlocker() {
+		return cfgNode.getNode(name,"chunk-config","author-of-blocked","name").getString();
+	}
+	
+	public String getGradeofBlocker() {
+		return cfgNode.getNode(name,"chunk-config","author-of-blocked","grade").getString();
+	}
+	
+	public String getBlockedRaison() {
+		return cfgNode.getNode(name,"chunk-config","blocked","raison").getString();
+	}
+	
+	public boolean getBlockerTimed() {
+		return cfgNode.getNode(name,"chunk-config","blocked","timer").getBoolean();
+	}
+	
+	public int getBlockedTimeDay() {
+		return cfgNode.getNode(name,"chunk-config","blocked","timer","time","days").getInt();
+	}
+	
+	public int getBlockedTimeHour() {
+		return cfgNode.getNode(name,"chunk-config","blocked","timer","time","hour").getInt();
+	}
+	
+	public int getBlockedTimeMinute() {
+		return cfgNode.getNode(name,"chunk-config","blocked","timer","time","minute").getInt();
+	}
+	
+	// Setter
+	
+	public void setIsBloked(boolean b) {
+		cfgNode.getNode(name,"chunk-config","blocked").setValue(b);
+	}
+	
+	public void setBlocker() {
+		
+	}
+	
+	public void setUUIDofBlocker(UUID uuid) {
+		cfgNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue(uuid.toString());
+	}
+	
+	public String setNameofBlocker() {
+		return cfgNode.getNode(name,"chunk-config","author-of-blocked","name").getString();
+	}
+	
+	public void setGradeofBlocker(String gradeName) {
+		cfgNode.getNode(name,"chunk-config","author-of-blocked","grade").setValue(gradeName);
+	}
+	
+	public void setBlockedRaison(String raison) {
+		cfgNode.getNode(name,"chunk-config","blocked","raison").setValue(raison);
+	}
+	
+	public void setBlockerTimed(boolean b) {
+		cfgNode.getNode(name,"chunk-config","blocked","timer").setValue(b);
+	}
+	
+	public void setBlockedTimeDay(int day) {
+		if(day < 0) {
+			throw new EmitterException("day non compris entre 0 et infini");
+		}else {
+			cfgNode.getNode(name,"chunk-config","blocked","timer","time","days").setValue(day);
+		}
+	}
+	
+	public void setBlockedTimeHour(int hour) {
+		if(hour > 60 | hour < 0) {
+			throw new EmitterException("hour non compris entre 0 et 60");
+		}else {
+			cfgNode.getNode(name,"chunk-config","blocked","timer","time","hour").setValue(hour);
+		}		
+	}
+	
+	public void setBlockedTimeMinute(int minute) {
+		if(minute > 60 | minute < 0) {
+			throw new EmitterException("minute non compris entre 0 et 60");
+		}else {
+			cfgNode.getNode(name,"chunk-config","blocked","timer","time","minute").setValue(minute);
+		}
+	}
+	
+	
 }
