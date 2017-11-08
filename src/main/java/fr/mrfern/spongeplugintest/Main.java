@@ -13,6 +13,8 @@ import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
+
+import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
 
@@ -38,11 +40,12 @@ public class Main {
 	
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
-
+		
 		logger.info("Plugin preInit " + defaultpath);
 		
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();
+		ChunkConfig.getInstance().setup();
 	
     
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
