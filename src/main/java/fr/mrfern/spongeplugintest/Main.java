@@ -2,6 +2,7 @@ package fr.mrfern.spongeplugintest;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
@@ -14,6 +15,7 @@ import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
 
+import fr.mrfern.spongeplugintest.command.*;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
@@ -96,14 +98,23 @@ public class Main {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@Listener
 	public void onStartServer(GameStartingServerEvent event) {
 		
 		CommandSpec myCommandSpec = CommandSpec.builder()
 			    .description(Text.of("Hello World Command"))
-			    .permission("myplugin.command.helloworld")
+			    .permission("spongeplugintest.command.helloworld")
 			    .executor(new HelloWorldCommand())
 			    .build();
+		CommandSpec messageCommandSpec = CommandSpec.builder()
+				.description(Text.of("Message command"))
+				.permission("spongeplugintest.command.message")
+				.arguments(
+						GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
+						GenericArguments.remainingJoinedStrings(Text.of("message")))
+				.executor(new MessageCommand())
+				.build();
 		
 		Sponge.getCommandManager().register(this, myCommandSpec, "helloworld");
 	}
