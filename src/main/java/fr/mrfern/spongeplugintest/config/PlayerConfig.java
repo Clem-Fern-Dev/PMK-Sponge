@@ -53,6 +53,8 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"UUID").setValue("none");
 		loaderRootNode.getNode(name,"name").setValue("none");
 		
+		loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));
+		
 		loaderRootNode.getNode(name,"forum","profile-link").setValue("none");
 		loaderRootNode.getNode(name,"forum","name").setValue("none");
 		loaderRootNode.getNode(name,"forum","isBan").setValue(false);
