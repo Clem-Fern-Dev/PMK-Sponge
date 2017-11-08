@@ -261,10 +261,6 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-config","blocked").setValue(b);
 	}
 	
-	public void setBlocker() {
-		
-	}
-	
 	public void setUUIDofBlocker(UUID uuid) {
 		cfgNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue(uuid.toString());
 	}
