@@ -312,7 +312,6 @@ public class ChunkNode implements ConfigurationNode {
 	/*
 	 * perm config
 	 */
-	// getter
 	
 	public String getGroupName(ChunkGroupTypes group) {
 		if(ChunkGroupTypes.Co_Owner.equals(group)) {
@@ -329,6 +328,7 @@ public class ChunkNode implements ConfigurationNode {
 		
 	}
 	
+	// getter	
 	public boolean getPermBlock(ChunkGroupTypes group) {
 		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"block").getBoolean();	
 	}
@@ -370,4 +370,44 @@ public class ChunkNode implements ConfigurationNode {
 	}
 	
 	// setter
+	
+	public void setPermBlock(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"block").setValue(b);	
+	}
+	
+	public void setPermVault(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"vault").setValue(b);	
+	}
+	
+	public void setPermDoor(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"door").setValue(b);	
+	}
+	
+	public void setPermButton(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"button").setValue(b);	
+	}
+	
+	public void setPermPromoteUser(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"promote-user").setValue(b);	
+	}
+	
+	public void setCommandsPermUnClaim(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","unclaim").setValue(b);	
+	}
+	
+	public void setCommandsPermAddCoOwner(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","add-co-owner").setValue(b);	
+	}
+	
+	public void setCommandsPermAddUser(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","adduser").setValue(b);	
+	}
+	
+	public void setCommandsPermAddPrimInvite(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-prim").setValue(b);	
+	}
+	
+	public void setCommandsPermAddTempInvite(ChunkGroupTypes group, boolean b) {
+		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-temp").setValue(b);	
+	}
 }
