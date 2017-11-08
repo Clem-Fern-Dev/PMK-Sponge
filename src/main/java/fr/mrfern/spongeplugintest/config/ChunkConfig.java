@@ -80,6 +80,7 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","vault").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","door").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","button").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","promote-user").setValue(false);
 		
 		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","unclaim").setValue(false);
 		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","add-co-owner").setValue(false);
@@ -93,6 +94,7 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-group-perm","user","vault").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","user","door").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","user","button").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","user","promote-user").setValue(false);
 		
 		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","unclaim").setValue(false);
 		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","add-co-owner").setValue(false);
@@ -105,6 +107,7 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","vault").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","door").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","button").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","promote-user").setValue(false);
 				
 		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","unclaim").setValue(false);
 		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","add-co-owner").setValue(false);
@@ -117,6 +120,7 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","vault").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","door").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","button").setValue(true);
+		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","promote-user").setValue(false);
 				
 		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","unclaim").setValue(false);
 		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","add-co-owner").setValue(false);
