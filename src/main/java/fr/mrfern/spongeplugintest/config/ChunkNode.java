@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
+
 import com.google.common.reflect.TypeToken;
 
 import ninja.leaping.configurate.ConfigurationNode;
@@ -15,7 +19,9 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 
 public class ChunkNode implements ConfigurationNode {
-private ConfigurationNode cfgNode;
+	
+	private ConfigurationNode cfgNode;
+	protected String name = "chunk";
 	
 	public ConfigurationNode getCfgNode() {
 		return cfgNode;
@@ -159,5 +165,27 @@ private ConfigurationNode cfgNode;
 	/*
 	 * Ajout des getters et setter simplifiés
 	 */
+	
+	// Chunk info
+	
+	public int getLocationX() {
+		return cfgNode.getNode(name,"chunk-info","posX").getInt();
+	}
+	
+	public int getLocationZ() {
+		return cfgNode.getNode(name,"chunk-info","posZ").getInt();
+	}
+	
+	public Location<World> getLocation(){		
+		return new Location<World>(getWorld(), getLocationX(),0, getLocationZ());
+	}
+
+	private  World getWorld() {
+		return Sponge.getServer().getWorld(getWorldName()).get();
+	}
+
+	private String getWorldName() {
+		return cfgNode.getNode(name,"chunk-info","world").getString();
+	}
 	
 }
