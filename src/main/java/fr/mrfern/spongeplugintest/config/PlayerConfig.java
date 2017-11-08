@@ -2,7 +2,6 @@ package fr.mrfern.spongeplugintest.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
