@@ -15,7 +15,8 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class PlayerConfig implements IConfig{
 
 	protected String name = "player";
-	protected String defaultPath = "./mods/plugins/spongeplugintest/";
+	private String pluginName = Main.getPluginName();
+	protected String defaultPath = "./mods/plugins/"+ pluginName + "/";
 	protected String playerPath = defaultPath + "player/";
 	
 	private boolean isSetup = false;
@@ -25,15 +26,11 @@ public class PlayerConfig implements IConfig{
 	private File defaultFileConfig;
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
-	private String pluginName;
 	
 	public void setup() {
 		
-		pluginName = Main.getPluginName();
-		
 		defaultFileConfig = new File(playerPath + name + IConfig.extensionFile);
-		
-		
+				
 			
 		checkPath(playerPath, true);		
 		if(checkFile(defaultFileConfig, true)) {
@@ -53,12 +50,28 @@ public class PlayerConfig implements IConfig{
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {
 				
 		loaderRootNode.getNode(name,"UUID").setValue("none");
-		loaderRootNode.getNode(name,"ban").setValue("none");
-		loaderRootNode.getNode(name,"config").setValue("test");
-		loaderRootNode.getNode(name,"config","langage").setValue("fr");
-		loaderRootNode.getNode(name,"bdd","user").setValue("none");
-		loaderRootNode.getNode(name,"bdd","mdp").setValue("none");
-    
+		loaderRootNode.getNode(name,"name").setValue("none");
+		
+		loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));
+		
+		loaderRootNode.getNode(name,"forum","profile-link").setValue("none");
+		loaderRootNode.getNode(name,"forum","name").setValue("none");
+		loaderRootNode.getNode(name,"forum","isBan").setValue(false);
+		
+		
+		loaderRootNode.getNode(name,"grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","prim-grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","sub-grade").setValue("none");
+		
+		loaderRootNode.getNode(name,"ban","enable").setValue(false);
+		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
+		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
+		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
+				
+		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=\"\"/./raison=\"pas de raison\"/"));
+	
+		loaderRootNode.getNode(name,"config","langage").setValue("default");
+		
 		try {  
 			cfgLoader.save(loaderRootNode); 
 		} catch (IOException e) {
