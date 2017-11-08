@@ -108,22 +108,7 @@ public class Main {
 		CommandManager cmdManager = Sponge.getCommandManager();
 		// Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
 		ChunkCommand.commands(cmdManager).setupCommands();
-		
-		CommandSpec myCommandSpec = CommandSpec.builder()
-			    .description(Text.of("Hello World Command"))
-			    .permission("spongeplugintest.command.helloworld")
-			    .executor(new HelloWorldCommand())
-			    .build();
-		CommandSpec messageCommandSpec = CommandSpec.builder()
-				.description(Text.of("Message command"))
-				.permission("spongeplugintest.command.message")
-				.arguments(
-						GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-						GenericArguments.remainingJoinedStrings(Text.of("message")))
-				.executor(new MessageCommand())
-				.build();
-		
-		Sponge.getCommandManager().register(this, myCommandSpec, "helloworld");
+		BasicCommandManager.commands(cmdManager).setupCommands();
 	}
 }
 
