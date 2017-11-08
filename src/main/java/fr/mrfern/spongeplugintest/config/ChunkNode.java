@@ -3,6 +3,7 @@ package fr.mrfern.spongeplugintest.config;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -212,4 +213,28 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-info","world").getString();
 	}
 	
+	/*
+	 * ChunkConfig
+	 */
+	//getter
+	
+	public boolean isBloked() {
+		return cfgNode.getNode(name,"chunk-config","blocked").getBoolean();
+	}
+	
+	public UUID getUUIDofBlocker() {
+		new UUID(0, 0);
+		return UUID.fromString(cfgNode.getNode(name,"chunk-config","author-of-blocked","UUID").getString());
+	}
+	/*
+	
+	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue("none");
+	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","name").setValue("none");
+	loaderRootNode.getNode(name,"chunk-config","author-of-blocked","grade").setValue("none");
+	loaderRootNode.getNode(name,"chunk-config","blocked","raison").setValue("none");
+	loaderRootNode.getNode(name,"chunk-config","blocked","timer","enable").setValue(false);
+	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","days").setValue(0);
+	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","hour").setValue(0);
+	loaderRootNode.getNode(name,"chunk-config","blocked","timer","time","minute").setValue(0);		
+	*/
 }
