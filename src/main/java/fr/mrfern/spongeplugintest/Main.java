@@ -3,8 +3,6 @@ package fr.mrfern.spongeplugintest;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
-import org.spongepowered.api.command.args.GenericArguments;
-import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
@@ -12,12 +10,10 @@ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-
 import com.google.inject.Inject;
 
 import fr.mrfern.spongeplugintest.chunk.ChunkCommand;
-import fr.mrfern.spongeplugintest.command.*;
+import fr.mrfern.spongeplugintest.command.BasicCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
@@ -31,9 +27,7 @@ public class Main {
 	protected static String defaultpath = "./mods/plugins/"+ pluginName +"/";
 	protected static String playerpath = "./mods/plugins/"+ pluginName +"/player";
 	protected static String chunkpath = "./mods/plugins/"+ pluginName +"/chunk";
-	protected Main main = this;
 	
-	public Main getMain() {		return main;	}
 	public static String getPluginName() {		return pluginName;	}
 	
 	@Inject
@@ -100,15 +94,14 @@ public class Main {
 		
 	}
 	
-	@SuppressWarnings("unused")
 	@Listener
 	public void onStartServer(GameStartingServerEvent event) {
 		
 		// Tu crée ton commands manager
 		CommandManager cmdManager = Sponge.getCommandManager();
 		// Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
-		ChunkCommand.commands(cmdManager).setupCommands();
-		BasicCommandManager.commands(cmdManager).setupCommands();
+		ChunkCommand.commands(this,cmdManager).setupCommands();
+		BasicCommandManager.commands(this,cmdManager).setupCommands();
 	}
 }
 
