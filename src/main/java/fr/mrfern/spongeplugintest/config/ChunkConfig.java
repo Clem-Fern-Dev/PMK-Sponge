@@ -220,10 +220,9 @@ public class ChunkConfig implements IConfig{
 		return null;
 	}
 	
-	@SuppressWarnings("unused")
 	public boolean ChunkConfigExist(String world, int posX , int posZ) {
-		//File playerFile = new File(pluginName + playerPath + uuid.toString() + extensionFile);	// Instancie new file
-		if(/*playerFile.exists()*/true){	// check si file exist
+		File chunkFile = new File(pluginName + chunkPath + posX + "_" + posZ + extensionFile);	// Instancie new file
+		if(checkFile(chunkFile, false)){	// check si file exist
 			return true;
 		}
 		return false;
