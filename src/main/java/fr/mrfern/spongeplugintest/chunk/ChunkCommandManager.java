@@ -26,8 +26,8 @@ public class ChunkCommandManager {
 	public void setupCommands() {
 		
 		CommandSpec myCommandSpec = CommandSpec.builder()
-			    .description(Text.of("Hello World Command"))
-			    .permission("spongeplugintest.command.helloworld")
+			    .description(Text.of("ChunkInfo commande"))
+			    .permission("spongeplugintest.chunk.commands.info")
 			    .executor(new ChunkCommand())
 			    .build();
 		
