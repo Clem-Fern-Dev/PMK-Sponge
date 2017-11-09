@@ -13,6 +13,7 @@ import org.spongepowered.api.plugin.Plugin;
 import com.google.inject.Inject;
 
 import fr.mrfern.spongeplugintest.chunk.ChunkCommand;
+import fr.mrfern.spongeplugintest.chunk.ChunkCommandManager;
 import fr.mrfern.spongeplugintest.command.BasicCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
@@ -100,7 +101,7 @@ public class Main {
 		// Tu crée ton commands manager
 		CommandManager cmdManager = Sponge.getCommandManager();
 		// Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
-		ChunkCommand.commands(this,cmdManager).setupCommands();
+		ChunkCommandManager.commands(this,cmdManager).setupCommands();
 		BasicCommandManager.commands(this,cmdManager).setupCommands();
 	}
 }
