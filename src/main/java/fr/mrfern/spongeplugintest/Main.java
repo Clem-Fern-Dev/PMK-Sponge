@@ -31,8 +31,9 @@ public class Main {
 	protected static String defaultpath = "./mods/plugins/"+ pluginName +"/";
 	protected static String playerpath = "./mods/plugins/"+ pluginName +"/player";
 	protected static String chunkpath = "./mods/plugins/"+ pluginName +"/chunk";
+	protected Main main = this;
 	
-	
+	public Main getMain() {		return main;	}
 	public static String getPluginName() {		return pluginName;	}
 	
 	@Inject
@@ -73,7 +74,6 @@ public class Main {
 	public void onInit(GameInitializationEvent event) {
 		
 		logger.info("Plugin Init");
-				
 		/*L’événement GameInitializationEvent est levé. Durant cet état, le plugin devrait avoir finit tout ce qu’il avait à faire afin de fonctionner. 
 		 * Les gestionnaires d’événements sont traités à ce moment là.
 		 */
