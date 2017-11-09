@@ -207,13 +207,13 @@ public class ChunkConfig implements IConfig{
 		return null;
 	}
 	
-	public ChunkNode getChukConfigNode(String world, int posX , int posZ) {
+	public ChunkNode getChunkConfigNode(String world, int posX , int posZ) {
 		if(ChunkConfigExist(world,posX,posZ)) {			
-			//File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
-			//ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
+			File file = new File(pluginName + chunkPath + posX + "_" + posZ + extensionFile); 	// Instancie new file		
+			ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
 			ChunkNode plyNode = new ChunkNode();	//load file / return loader
-			//plyNode.setCfgNode(loader);
+			plyNode.setCfgNode(loader);
 			return plyNode;
 			
 		}
