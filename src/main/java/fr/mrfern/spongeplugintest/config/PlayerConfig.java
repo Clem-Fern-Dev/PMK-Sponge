@@ -28,6 +28,12 @@ public class PlayerConfig implements IConfig{
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
 	
+	@Deprecated
+	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
+		// TODO Auto-generated method stub
+		return IConfig.super.loadConfigNode(cfgConfigBuilderResult);
+	}
+	
 	public void setup() {
 		
 		defaultFileConfig = new File(playerPath + name + IConfig.extensionFile);
