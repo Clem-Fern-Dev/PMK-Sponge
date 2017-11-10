@@ -62,7 +62,8 @@ public class ChunkConfig implements IConfig{
 	public void set(ConfigurationLoader<CommentedConfigurationNode> cfgLoader, ConfigurationNode loaderRootNode) {		
 		
 		loaderRootNode.getNode(name,"chunk-info","posX").setValue(0);
-		loaderRootNode.getNode(name,"chunk-info","posZ").setValue(0);		
+		loaderRootNode.getNode(name,"chunk-info","posZ").setValue(0);	
+		loaderRootNode.getNode(name,"chunk-info","world").setValue("none");
 		
 		loaderRootNode.getNode(name,"chunk-config","blocked").setValue(false);
 		loaderRootNode.getNode(name,"chunk-config","author-of-blocked","UUID").setValue("none");
