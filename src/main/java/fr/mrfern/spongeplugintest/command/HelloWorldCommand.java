@@ -13,7 +13,7 @@ public class HelloWorldCommand implements CommandExecutor {
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		Player ply = (Player) src;
-		ply.sendMessage(Text.of("test"));
+		ply.sendMessage(Text.of("Bonjour"));
 		return CommandResult.success();
 	}
 
