@@ -1,6 +1,7 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -406,4 +407,87 @@ public class ChunkNode implements ConfigurationNode {
 	public void setCommandsPermAddTempInvite(ChunkGroupTypes group, boolean b) {
 		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-temp").setValue(b);	
 	}
+	
+	/*
+	 * Chunk info
+	 */
+	
+	// getter
+	
+	public String getNameDiscoverer() {
+		return cfgNode.getNode(name,"chunk-player-info","discover-by").getString();
+	}
+	
+	public String getClaimedBy() {
+		return cfgNode.getNode(name,"chunk-player-claim","claim-by").getString();
+	}
+	
+	@Deprecated
+	public List<String> getGroupOverpassList(){
+		return null;
+	}
+	
+	@Deprecated
+	public List<String> getCoOwnerList(){
+		return null;
+	}
+	
+	@Deprecated
+	public List<String> getUserList(){
+		return null;
+	}
+	
+	@Deprecated
+	public List<String> getPermInviteList(){
+		return null;
+	}
+	
+	@Deprecated
+	public List<String> getTempInviteList(){
+		return null;
+	}	
+	
+	// setter
+	
+	public void setNameDiscoverer(String discovererName) {
+		cfgNode.getNode(name,"chunk-player-info","discover-by").setValue(discovererName);
+	}
+	
+	public void setClaimedBy(String claimerName) {
+		cfgNode.getNode(name,"chunk-player-claim","claim-by").setValue(claimerName);
+	}
+	
+	@Deprecated
+	public void setGroupOverpassList(){
+		//
+	}
+	
+	@Deprecated
+	public void setCoOwnerList(){
+		//
+	}
+	
+	@Deprecated
+	public void setUserList(){
+		//
+	}
+	
+	@Deprecated
+	public void setPermInviteList(){
+		//
+	}
+	
+	@Deprecated
+	public void setTempInviteList(){
+		//
+	}
+	/*
+	loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");
+	loaderRootNode.getNode(name,"chunk-player-claim","claim-by").setValue("none");
+	loaderRootNode.getNode(name,"chunk-player-perm","group-overpass").setValue(Arrays.asList("none"));
+	loaderRootNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(Arrays.asList("none"));
+	loaderRootNode.getNode(name,"chunk-player-perm","user").setValue(Arrays.asList("none"));
+	loaderRootNode.getNode(name,"chunk-player-perm","perm-invite").setValue(Arrays.asList("none"));
+	loaderRootNode.getNode(name,"chunk-player-perm","temp-invite").setValue(Arrays.asList("none"));
+	*/
 }
