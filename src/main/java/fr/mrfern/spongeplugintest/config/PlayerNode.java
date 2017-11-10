@@ -241,4 +241,76 @@ public class PlayerNode implements ConfigurationNode{
 	public String getLangage() {
 		return cfgNode.getNode(name,"config","langage").getString();
 	}	
+	
+	// setter
+	
+	public void setPlayerUUIDString(String uuid) {
+		cfgNode.getNode(name,"UUID").setValue(uuid);
+	}
+	
+	public void setPlayerUUID(UUID uuid) {
+		UUID.fromString(cfgNode.getNode(name,"UUID").setValue(uuid).toString());
+	}
+	
+	public void setPlayerName(String playerName) {
+		cfgNode.getNode(name,"name").setValue(playerName);
+	}
+	
+	/*public List<String> getChunkOwned(){
+		return cfgNode.getNode(name,"chunkOwner").getLi
+	}
+	loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
+	
+	public void setForumProfileURL(URL url) {
+		cfgNode.getNode(name,"forum","profile-link").setValue(url.getPath());
+	}
+	
+	public void setForumProfile(String url) {
+		cfgNode.getNode(name,"forum","profile-link").setValue(url);
+	}
+	
+	public void setForumName(String forumName) {
+		cfgNode.getNode(name,"forum","name").setValue(forumName);
+	}
+	
+	public void setForumProfileIsBan(boolean b) {
+		cfgNode.getNode(name,"forum","isBan").setValue(b);
+	}
+	
+	public void setPrimGroup(String groupName) {
+		cfgNode.getNode(name,"grade","prim-grade").setValue(groupName);
+	}
+	
+	public void setSubGroup(List<String> banlist){
+		// list
+	}
+	
+	public void setPlayerIsBanned(boolean b) {
+		cfgNode.getNode(name,"ban","enable").setValue(b);
+	}
+	
+	public void setPlayerBanAuthorUUID(UUID uuid) {
+		cfgNode.getNode(name,"ban","author","UUID").setValue(uuid.toString());
+	}
+	
+	public void setPlayerBanAuthorUUIDString(String uuid) {
+		cfgNode.getNode(name,"ban","author","UUID").setValue(uuid);
+	}
+	
+	public void setPlayerBanAuthorName(String authorName) {
+		cfgNode.getNode(name,"ban","author","name").setValue(authorName);
+	}
+	
+	public void setPlayerBanAuthorGrade(String gradeName) {
+		cfgNode.getNode(name,"ban","author","grade").setValue(gradeName);
+	}
+	
+	public void setPlayerBanList(){
+		// list
+	}
+	
+	public void setLangage(String lang) {
+		cfgNode.getNode(name,"config","langage").setValue(lang);
+	}
+	
 }
