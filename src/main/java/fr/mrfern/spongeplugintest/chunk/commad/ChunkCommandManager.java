@@ -1,4 +1,4 @@
-package fr.mrfern.spongeplugintest.chunk;
+package fr.mrfern.spongeplugintest.chunk.commad;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
