@@ -195,6 +195,7 @@ public class ChunkConfig implements IConfig{
 				ChunkNode chunkNode = getChunkConfigNode(world, posX, posZ);
 				chunkNode.setLocationZ(posZ);
 				chunkNode.setLocationX(posX);
+				chunkNode.save();
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
