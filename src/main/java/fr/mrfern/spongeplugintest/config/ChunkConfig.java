@@ -191,6 +191,11 @@ public class ChunkConfig implements IConfig{
 			
 			try {
 				FileUtils.copyFile(defaultFileConfig, file);
+				
+				ChunkNode chunkNode = getChunkConfigNode(world, posX, posZ);
+				chunkNode.setLocationZ(posZ);
+				chunkNode.setLocationX(posX);
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
