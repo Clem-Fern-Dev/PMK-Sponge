@@ -34,10 +34,10 @@ public class ChunkCommand implements CommandExecutor {
 			    	claimORnot = "a été claim par " + Color.NAVY + chunkNode.getClaimedBy();
 			    }
 			    
-			    player.sendMessage(Text.of(Color.BLUE + "[ ChunkInfo X:" + 
-			    							Color.MAGENTA + chunkNode.getLocationX() + 
-			    							Color.BLUE + " / Z:" + 
-			    							Color.MAGENTA + chunkNode.getLocationZ() + Color.BLUE + " ] Ce chunk " + claimORnot + Color.BLUE + " ..."));
+			    player.sendMessage(Text.of(/*Color.BLUE + */"[ ChunkInfo X:" +/* 
+			    							Color.MAGENTA +*/ chunkNode.getLocationX() + 
+			    							/*Color.BLUE +*/ " / Z:"/* + 
+			    							Color.MAGENTA*/ + chunkNode.getLocationZ() /*+ Color.BLUE*/ + " ] Ce chunk " + claimORnot /*+ Color.BLUE*/ + " ..."));
 			    return CommandResult.success();
 			    
 		    }
