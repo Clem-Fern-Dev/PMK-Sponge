@@ -185,7 +185,7 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	public boolean createChunkConfig(String world, int posX , int posZ) {
-		if(getChunkConfigFile(world,posX,posZ) != null) {
+		if(getChunkConfigFile(world,posX,posZ) == null) {
 			// création du fichier
 			File file = new File(pluginName + chunkPath + posX +"_"+ posZ + extensionFile); 	// Instancie new file
 			
