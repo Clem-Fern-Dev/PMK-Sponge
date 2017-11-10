@@ -1,8 +1,11 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -17,6 +20,7 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 public class PlayerNode implements ConfigurationNode{
 
 	private ConfigurationNode cfgNode;
+	protected String name = "player";
 	
 	public ConfigurationNode getCfgNode() {
 		return cfgNode;
@@ -160,4 +164,81 @@ public class PlayerNode implements ConfigurationNode{
 	/*
 	 * Ajout des getters et setter simplifiés
 	 */
+	
+	// info player
+	
+	public String getPlayerUUIDString() {
+		return cfgNode.getNode(name,"UUID").getString();
+	}
+	
+	public UUID getPlayerUUID() {
+		return UUID.fromString(cfgNode.getNode(name,"UUID").getString());
+	}
+	
+	public String getPlayerName() {
+		return cfgNode.getNode(name,"name").getString();
+	}
+	
+	/*public List<String> getChunkOwned(){
+		return cfgNode.getNode(name,"chunkOwner").getLi
+	}
+	loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
+	
+	public URL getForumProfileURL() {
+		try {
+			return new URL(cfgNode.getNode(name,"forum","profile-link").getString());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getForumProfile() {
+		return cfgNode.getNode(name,"forum","profile-link").getString();
+	}
+	
+	public String getForumName() {
+		return cfgNode.getNode(name,"forum","name").getString();
+	}
+	
+	public boolean getForumProfileIsBan() {
+		return cfgNode.getNode(name,"forum","isBan").getBoolean();
+	}
+	
+	public String getPrimGroup() {
+		return cfgNode.getNode(name,"grade","prim-grade").getString();
+	}
+	
+	public List<String> getSubGroup(){
+		return null;
+	}
+	
+	public boolean getIsBanned() {
+		return cfgNode.getNode(name,"ban","enable").getBoolean();
+	}
+	
+	public UUID getBanAuthorUUID() {
+		return UUID.fromString(cfgNode.getNode(name,"ban","author","UUID").getString());
+	}
+	
+	public String getBanAuthorUUIDString() {
+		return cfgNode.getNode(name,"ban","author","UUID").getString();
+	}
+	
+	public String getBanAuthorName() {
+		return cfgNode.getNode(name,"ban","author","name").getString();
+	}
+	
+	public String getBanAuthorGrade() {
+		return cfgNode.getNode(name,"ban","author","grade").getString();
+	}
+	
+	public List<String> getBanList(){
+		return null;
+	}
+	
+	public String getLangage() {
+		return cfgNode.getNode(name,"config","langage").getString();
+	}	
 }
