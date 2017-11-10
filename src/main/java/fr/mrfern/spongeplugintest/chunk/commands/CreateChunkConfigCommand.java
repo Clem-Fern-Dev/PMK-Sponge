@@ -12,6 +12,10 @@ import org.spongepowered.api.text.Text;
 
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
+import fr.mrfern.spongeplugintest.config.IConfig;
+import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class CreateChunkConfigCommand implements CommandExecutor {
 
@@ -24,13 +28,12 @@ public class CreateChunkConfigCommand implements CommandExecutor {
 		    String worldName = player.getWorld().getName();
 		    
 		    ChunkConfig.getInstance().createChunkConfig(worldName, posX, posZ);
-		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
-		    if(chunkNode != null) {
-			    chunkNode.setNameDiscoverer(player.getName());
-			    return CommandResult.success();
-		    }
+		 
 		    
-		    return CommandResult.empty(); 
+		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
+		    chunkNode.setNameDiscoverer(player.getName());
+		    chunkNode.save();
+			return CommandResult.success(); 
 		}
 		else if(src instanceof ConsoleSource) {
 		    src.sendMessage(Text.of("Impossible d'exécuter cette commands ici"));
