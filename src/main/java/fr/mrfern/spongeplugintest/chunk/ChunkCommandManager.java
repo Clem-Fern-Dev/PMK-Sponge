@@ -33,8 +33,6 @@ public class ChunkCommandManager {
 			    .executor(new ChunkCommand())
 			    .build();
 		
-		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "chunk");
-		
 		CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
 			    .description(Text.of("Chunk create file config commande"))
 			    .permission("spongeplugintest.chunk.commands.createConfig")
@@ -42,6 +40,7 @@ public class ChunkCommandManager {
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandCreateChunkConfigSpec, "chunk-add");
+		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "chunk");
 		
 	}
 
