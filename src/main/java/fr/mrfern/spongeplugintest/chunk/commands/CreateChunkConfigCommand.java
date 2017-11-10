@@ -1,4 +1,4 @@
-package fr.mrfern.spongeplugintest.chunk.commad;
+package fr.mrfern.spongeplugintest.chunk.commands;
 
 import java.awt.Color;
 

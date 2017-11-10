@@ -1,4 +1,4 @@
-package fr.mrfern.spongeplugintest.chunk.commad;
+package fr.mrfern.spongeplugintest.chunk;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -6,6 +6,8 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
 
 import fr.mrfern.spongeplugintest.Main;
+import fr.mrfern.spongeplugintest.chunk.commands.ChunkCommand;
+import fr.mrfern.spongeplugintest.chunk.commands.CreateChunkConfigCommand;
 
 public class ChunkCommandManager {
 	
