@@ -167,7 +167,6 @@ public class ChunkNode implements ConfigurationNode {
 	/*
 	 * Ajout des getters et setter simplifiés
 	 */
-	
 	/*
 	 *  Chunk info
 	 */
