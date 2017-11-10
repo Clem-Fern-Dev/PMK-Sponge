@@ -1,7 +1,5 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
-import java.awt.Color;
-
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -27,7 +25,12 @@ public class CreateChunkConfigCommand implements CommandExecutor {
 		    
 		    ChunkConfig.getInstance().createChunkConfig(worldName, posX, posZ);
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
+		    if(chunkNode != null) {
+			    chunkNode.setNameDiscoverer(player.getName());
+			    return CommandResult.success();
+		    }
 		    
+		    return CommandResult.empty(); 
 		}
 		else if(src instanceof ConsoleSource) {
 		    src.sendMessage(Text.of("Impossible d'exécuter cette commands ici"));
