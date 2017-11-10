@@ -1,7 +1,6 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,15 +23,27 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 public class ChunkNode implements ConfigurationNode {
 	
 	private ConfigurationNode cfgNode;
+	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	protected String name = "chunk";
 	
 	public ConfigurationNode getCfgNode() {
 		return cfgNode;
 	}
-
-	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfgNode) {
+	
+	public void save() {
 		try {
-			this.cfgNode = cfgNode.load();
+			cfgLoader.save(cfgNode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfg) {
+		cfgLoader = cfg;
+		try {
+			this.cfgNode = cfg.load();
+			cfg.save(cfgNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -203,7 +214,7 @@ public class ChunkNode implements ConfigurationNode {
 	
 	public void setLocation(Location<World> location){		
 		 setLocationX(location.getBlockX());
-		 setLocationZ(location.getBlockX());
+		 setLocationZ(location.getBlockZ());
 		 setWorld(location.getExtent());
 	}
 
