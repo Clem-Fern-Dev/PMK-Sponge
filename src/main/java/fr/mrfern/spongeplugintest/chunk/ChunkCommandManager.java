@@ -11,16 +11,10 @@ import fr.mrfern.spongeplugintest.chunk.commands.CreateChunkConfigCommand;
 
 public class ChunkCommandManager {
 	
-	public ChunkCommandManager(CommandManager manager) {
-		cmdManager = manager;
-	}
-	
-	protected static CommandManager cmdManager;
-	private static ChunkCommandManager instance = new ChunkCommandManager(null);
+	private static ChunkCommandManager instance = new ChunkCommandManager();
 	private static Main mainManager;
 
-	public static ChunkCommandManager commands(Main main,CommandManager manager) {
-		cmdManager = manager;
+	public static ChunkCommandManager commands(Main main) {
 		mainManager = main;
 		return instance;
 	}
@@ -44,9 +38,4 @@ public class ChunkCommandManager {
 		
 	}
 
-	public CommandManager getCmdManager() {
-		return cmdManager;
-	}
-
-	
 }
