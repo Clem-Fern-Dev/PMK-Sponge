@@ -9,7 +9,7 @@ public class ChunkListenerManager {
 	private static ChunkListenerManager instance = new ChunkListenerManager();
 	private static Main mainManager;
 
-		public static ChunkListenerManager commands(Main main) {
+		public static ChunkListenerManager listener(Main main) {
 			mainManager = main;
 			return instance;
 		}
