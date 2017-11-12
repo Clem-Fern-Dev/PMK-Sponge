@@ -12,8 +12,8 @@ import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import com.google.inject.Inject;
 
-import fr.mrfern.spongeplugintest.chunk.ChunkCommandManager;
 import fr.mrfern.spongeplugintest.chunk.ChunkListenerManager;
+import fr.mrfern.spongeplugintest.chunk.commands.ChunkCommandManager;
 import fr.mrfern.spongeplugintest.command.BasicCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
