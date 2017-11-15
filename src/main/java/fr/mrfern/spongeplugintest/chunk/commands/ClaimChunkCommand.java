@@ -9,14 +9,9 @@ import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.util.Color;
-
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
-import fr.mrfern.spongeplugintest.config.PlayerConfig;
-import fr.mrfern.spongeplugintest.config.PlayerNode;
 
 public class ClaimChunkCommand implements CommandExecutor {
 
