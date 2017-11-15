@@ -16,7 +16,7 @@ public class ChunkDiscoverListener {
 
 		double posX = e.getToTransform().getLocation().getChunkPosition().getX();
 		double posZ = e.getToTransform().getLocation().getChunkPosition().getZ();
-		
+
 		if(e.getFromTransform().getLocation().getChunkPosition().equals(e.getToTransform().getLocation().getChunkPosition())) {
 			
 		}else {

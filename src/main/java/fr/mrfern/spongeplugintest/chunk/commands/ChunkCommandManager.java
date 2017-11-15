@@ -1,7 +1,6 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
 

@@ -12,10 +12,6 @@ import org.spongepowered.api.text.Text;
 
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
-import fr.mrfern.spongeplugintest.config.IConfig;
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
-import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class CreateChunkConfigCommand implements CommandExecutor {
 

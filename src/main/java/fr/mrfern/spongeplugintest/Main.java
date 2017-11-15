@@ -102,7 +102,7 @@ public class Main {
 		
 		// Tu crée ton commands manager
 		CommandManager cmdManager = Sponge.getCommandManager();
-		// Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
+		//Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
 		ChunkCommandManager.commands(this).setupCommands();
 		BasicCommandManager.commands(this,cmdManager).setupCommands();
 	}
