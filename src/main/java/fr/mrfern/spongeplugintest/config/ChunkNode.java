@@ -472,9 +472,17 @@ public class ChunkNode implements ConfigurationNode {
 		});
 	}
 	
-	@Deprecated
 	public List<String> getPermInviteList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","perm-invite").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
 	@Deprecated
@@ -505,9 +513,8 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-player-perm","user").setValue(userList);
 	}
 	
-	@Deprecated
-	public void setPermInviteList(){
-		//
+	public void setPermInviteList(List<String> permInviteList){
+		cfgNode.getNode(name,"chunk-player-perm","").setValue(permInviteList);
 	}
 	
 	@Deprecated
