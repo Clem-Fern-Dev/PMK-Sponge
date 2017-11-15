@@ -37,6 +37,8 @@ public class ChunkCommandManager {
 			    .executor(new UnClaimChunkCommand())
 			    .build();
 		
+		
+		
 		CommandSpec commandChunkInfoSpec = CommandSpec.builder()
 			    .description(Text.of("ChunkInfo commande"))
 			    .executor(new ChunkCommand())
