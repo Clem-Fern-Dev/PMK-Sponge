@@ -446,9 +446,17 @@ public class ChunkNode implements ConfigurationNode {
 		});
 	}
 	
-	@Deprecated
 	public List<String> getCoOwnerList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","co-owner-list").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
 	@Deprecated
@@ -481,9 +489,8 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-player-perm","group-overpass").setValue(overpassList);
 	}
 	
-	@Deprecated
-	public void setCoOwnerList(){
-		//
+	public void setCoOwnerList(List<String> ownerList){
+		cfgNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(ownerList);
 	}
 	
 	@Deprecated
