@@ -433,9 +433,17 @@ public class ChunkNode implements ConfigurationNode {
 		return cfgNode.getNode(name,"chunk-player-claim","claim-by").getString();
 	}
 	
-	@Deprecated
 	public List<String> getGroupOverpassList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","group-overpass").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
 	@Deprecated
@@ -468,9 +476,9 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-player-claim","claim-by").setValue(claimerName);
 	}
 	
-	@Deprecated
-	public void setGroupOverpassList(){
-		//
+
+	public void setGroupOverpassList(List<String> overpassList){
+		cfgNode.getNode(name,"chunk-player-perm","group-overpass").setValue(overpassList);
 	}
 	
 	@Deprecated
