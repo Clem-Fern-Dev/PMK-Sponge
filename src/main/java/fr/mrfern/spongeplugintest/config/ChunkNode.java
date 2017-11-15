@@ -485,9 +485,17 @@ public class ChunkNode implements ConfigurationNode {
 		});
 	}
 	
-	@Deprecated
 	public List<String> getTempInviteList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","temp-invite").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}	
 	
 	// setter
@@ -514,12 +522,11 @@ public class ChunkNode implements ConfigurationNode {
 	}
 	
 	public void setPermInviteList(List<String> permInviteList){
-		cfgNode.getNode(name,"chunk-player-perm","").setValue(permInviteList);
+		cfgNode.getNode(name,"chunk-player-perm","perm-invite").setValue(permInviteList);
 	}
 	
-	@Deprecated
-	public void setTempInviteList(){
-		//
+	public void setTempInviteList(List<String> tempInviteList){
+		cfgNode.getNode(name,"chunk-player-perm","temp-invite").setValue(tempInviteList);
 	}
 	/*
 	loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");
