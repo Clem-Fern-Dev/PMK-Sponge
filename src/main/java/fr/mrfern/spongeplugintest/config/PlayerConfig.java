@@ -28,6 +28,12 @@ public class PlayerConfig implements IConfig{
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
 	
+	@Deprecated
+	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
+		// TODO Auto-generated method stub
+		return IConfig.super.loadConfigNode(cfgConfigBuilderResult);
+	}
+	
 	public void setup() {
 		
 		defaultFileConfig = new File(playerPath + name + IConfig.extensionFile);
@@ -60,7 +66,7 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"forum","isBan").setValue(false);
 		
 		loaderRootNode.getNode(name,"grade","prim-grade").setValue("none");
-		loaderRootNode.getNode(name,"grade","sub-grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","sub-grade").setValue(Arrays.asList("none"));
 		
 		loaderRootNode.getNode(name,"ban","enable").setValue(false);
 		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");

@@ -179,10 +179,19 @@ public class PlayerNode implements ConfigurationNode{
 		return cfgNode.getNode(name,"name").getString();
 	}
 	
-	/*public List<String> getChunkOwned(){
-		return cfgNode.getNode(name,"chunkOwner").getLi
+	public List<String> getChunkOwned(){
+		return cfgNode.getNode(name,"chunkOwner").getList(new Function<Object,String>() {
+																@Override
+																public String apply(Object input) {
+																	if (input instanceof String) {
+																		return (String) input;
+																	} else {
+																		return null;
+																	}
+																}
+															});
 	}
-	loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
+	//loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
 	
 	public URL getForumProfileURL() {
 		try {
@@ -211,7 +220,16 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public List<String> getSubGroup(){
-		return null;
+		return cfgNode.getNode(name,"grade","sub-grade").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
 	public boolean getIsBanned() {
@@ -235,7 +253,16 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public List<String> getBanList(){
-		return null;
+		return cfgNode.getNode(name,"last-ban-list").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
 	public String getLangage() {
@@ -256,10 +283,10 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"name").setValue(playerName);
 	}
 	
-	/*public List<String> getChunkOwned(){
-		return cfgNode.getNode(name,"chunkOwner").getLi
+	public void setChunkOwned(List<String> list){
+		cfgNode.getNode(name,"chunkOwner").setValue(list);
 	}
-	loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
+	//loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));*/
 	
 	public void setForumProfileURL(URL url) {
 		cfgNode.getNode(name,"forum","profile-link").setValue(url.getPath());
@@ -281,8 +308,8 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"grade","prim-grade").setValue(groupName);
 	}
 	
-	public void setSubGroup(List<String> banlist){
-		// list
+	public void setSubGroup(List<String> subGroup){
+		cfgNode.getNode(name,"grade","sub-grade").setValue(subGroup);
 	}
 	
 	public void setPlayerIsBanned(boolean b) {
@@ -305,8 +332,8 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"ban","author","grade").setValue(gradeName);
 	}
 	
-	public void setPlayerBanList(){
-		// list
+	public void setPlayerBanList(List<String> banlist){
+		cfgNode.getNode(name,"last-ban-list").setValue(banlist);
 	}
 	
 	public void setLangage(String lang) {

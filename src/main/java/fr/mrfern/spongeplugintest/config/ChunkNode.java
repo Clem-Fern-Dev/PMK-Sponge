@@ -1,7 +1,6 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,15 +23,27 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 public class ChunkNode implements ConfigurationNode {
 	
 	private ConfigurationNode cfgNode;
+	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	protected String name = "chunk";
 	
 	public ConfigurationNode getCfgNode() {
 		return cfgNode;
 	}
-
-	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfgNode) {
+	
+	public void save() {
 		try {
-			this.cfgNode = cfgNode.load();
+			cfgLoader.save(cfgNode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfg) {
+		cfgLoader = cfg;
+		try {
+			this.cfgNode = cfg.load();
+			cfg.save(cfgNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -203,7 +214,7 @@ public class ChunkNode implements ConfigurationNode {
 	
 	public void setLocation(Location<World> location){		
 		 setLocationX(location.getBlockX());
-		 setLocationZ(location.getBlockX());
+		 setLocationZ(location.getBlockZ());
 		 setWorld(location.getExtent());
 	}
 
@@ -422,29 +433,69 @@ public class ChunkNode implements ConfigurationNode {
 		return cfgNode.getNode(name,"chunk-player-claim","claim-by").getString();
 	}
 	
-	@Deprecated
 	public List<String> getGroupOverpassList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","group-overpass").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
-	@Deprecated
 	public List<String> getCoOwnerList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","co-owner-list").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
-	@Deprecated
 	public List<String> getUserList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","user").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
-	@Deprecated
 	public List<String> getPermInviteList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","perm-invite").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 	
-	@Deprecated
 	public List<String> getTempInviteList(){
-		return null;
+		return cfgNode.getNode(name,"chunk-player-perm","temp-invite").getList(new Function<Object,String>() {
+			@Override
+			public String apply(Object input) {
+				if (input instanceof String) {
+					return (String) input;
+				} else {
+					return null;
+				}
+			}
+		});
 	}	
 	
 	// setter
@@ -457,29 +508,25 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-player-claim","claim-by").setValue(claimerName);
 	}
 	
-	@Deprecated
-	public void setGroupOverpassList(){
-		//
+
+	public void setGroupOverpassList(List<String> overpassList){
+		cfgNode.getNode(name,"chunk-player-perm","group-overpass").setValue(overpassList);
 	}
 	
-	@Deprecated
-	public void setCoOwnerList(){
-		//
+	public void setCoOwnerList(List<String> ownerList){
+		cfgNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(ownerList);
 	}
 	
-	@Deprecated
-	public void setUserList(){
-		//
+	public void setUserList(List<String> userList){
+		cfgNode.getNode(name,"chunk-player-perm","user").setValue(userList);
 	}
 	
-	@Deprecated
-	public void setPermInviteList(){
-		//
+	public void setPermInviteList(List<String> permInviteList){
+		cfgNode.getNode(name,"chunk-player-perm","perm-invite").setValue(permInviteList);
 	}
 	
-	@Deprecated
-	public void setTempInviteList(){
-		//
+	public void setTempInviteList(List<String> tempInviteList){
+		cfgNode.getNode(name,"chunk-player-perm","temp-invite").setValue(tempInviteList);
 	}
 	/*
 	loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");

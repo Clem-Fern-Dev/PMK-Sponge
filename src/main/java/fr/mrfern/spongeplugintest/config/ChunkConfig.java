@@ -185,12 +185,18 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	public boolean createChunkConfig(String world, int posX , int posZ) {
-		if(getChunkConfigFile(world,posX,posZ) != null) {
+		if(getChunkConfigFile(world,posX,posZ) == null) {
 			// création du fichier
-			File file = new File(pluginName + chunkPath + posX +"_"+ posZ + extensionFile); 	// Instancie new file
+			File file = new File(chunkPath + posX +"_"+ posZ + extensionFile); 	// Instancie new file
 			
 			try {
 				FileUtils.copyFile(defaultFileConfig, file);
+				
+				ChunkNode chunkNode = getChunkConfigNode(world, posX, posZ);
+				chunkNode.setLocationZ(posZ);
+				chunkNode.setLocationX(posX);
+				chunkNode.save();
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -203,14 +209,14 @@ public class ChunkConfig implements IConfig{
 	
 	public File getChunkConfigFile(String world, int posX , int posZ) {
 		if(ChunkConfigExist(world,posX,posZ)) {	// check si un fichier du nom de l'UUID existe
-			return new File(pluginName + chunkPath + posX +"_"+ posZ + extensionFile);		// Return la file du nom de l'UUID
+			return new File(chunkPath + posX +"_"+ posZ + extensionFile);		// Return la file du nom de l'UUID
 		}
 		return null;
 	}
 	
 	public ChunkNode getChunkConfigNode(String world, int posX , int posZ) {
 		if(ChunkConfigExist(world,posX,posZ)) {			
-			File file = new File(pluginName + chunkPath + posX + "_" + posZ + extensionFile); 	// Instancie new file		
+			File file = new File(chunkPath + posX + "_" + posZ + extensionFile); 	// Instancie new file		
 			ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
 			ChunkNode plyNode = new ChunkNode();	//load file / return loader
@@ -222,7 +228,7 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	public boolean ChunkConfigExist(String world, int posX , int posZ) {
-		File chunkFile = new File(pluginName + chunkPath + posX + "_" + posZ + extensionFile);	// Instancie new file
+		File chunkFile = new File(chunkPath + posX + "_" + posZ + extensionFile);	// Instancie new file
 		if(checkFile(chunkFile, false)){	// check si file exist
 			return true;
 		}
