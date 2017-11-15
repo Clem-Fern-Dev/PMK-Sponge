@@ -32,7 +32,7 @@ public class ClaimChunkCommand implements CommandExecutor {
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
 	    	
 	    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
-	    	Text textSlasher = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).build();
+	    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
 	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
 	    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
 		    
