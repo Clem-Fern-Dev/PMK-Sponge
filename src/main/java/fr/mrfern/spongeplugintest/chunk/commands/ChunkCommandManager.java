@@ -26,13 +26,13 @@ public class ChunkCommandManager {
 		*/
 		
 		CommandSpec commandClaimChunkSpec = CommandSpec.builder()
-	    .description(Text.of("Chunk create file config commande"))
+	    .description(Text.of("Claim d'une zone"))
 	    .permission("spongeplugintest.chunk.commands.claim")
 	    .executor(new ClaimChunkCommand())
 	    .build();
 		
 		CommandSpec commandUnClaimChunkSpec = CommandSpec.builder()
-			    .description(Text.of("Chunk create file config commande"))
+			    .description(Text.of("Unclaim d'une zone"))
 			    .permission("spongeplugintest.chunk.commands.unclaim")
 			    .executor(new UnClaimChunkCommand())
 			    .build();
