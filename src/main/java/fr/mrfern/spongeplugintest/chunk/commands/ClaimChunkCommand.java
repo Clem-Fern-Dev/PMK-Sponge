@@ -30,7 +30,6 @@ public class ClaimChunkCommand implements CommandExecutor {
 		    String worldName = ply.getWorld().getName();
 		    
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
-	    	PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(ply.getUniqueId());
 	    	
 	    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
 	    	Text textSlasher = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).build();
