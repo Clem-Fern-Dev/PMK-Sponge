@@ -18,20 +18,39 @@ public class ChunkCommandManager {
 	
 	public void setupCommands() {
 		
-		CommandSpec commandChunkInfoSpec = CommandSpec.builder()
-			    .description(Text.of("ChunkInfo commande"))
-			    .permission("spongeplugintest.chunk.commands.info")
-			    .executor(new ChunkCommand())
-			    .build();
-		
-		CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
+		/*CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
 			    .description(Text.of("Chunk create file config commande"))
-			    .permission("spongeplugintest.chunk.commands.createConfig")
+			    .permission("spongeplugintest.chunk.commands.op.createConfig")
 			    .executor(new CreateChunkConfigCommand())
 			    .build();
+		*/
 		
-		Sponge.getCommandManager().register(mainManager, commandCreateChunkConfigSpec, "chunk-add");
-		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "chunk");
+		CommandSpec commandClaimChunkSpec = CommandSpec.builder()
+	    .description(Text.of("Chunk create file config commande"))
+	    .permission("spongeplugintest.chunk.commands.claim")
+	    .executor(new ClaimChunkCommand())
+	    .build();
+		
+		CommandSpec commandUnClaimChunkSpec = CommandSpec.builder()
+			    .description(Text.of("Chunk create file config commande"))
+			    .permission("spongeplugintest.chunk.commands.unclaim")
+			    .executor(new UnClaimChunkCommand())
+			    .build();
+		
+		CommandSpec commandChunkInfoSpec = CommandSpec.builder()
+			    .description(Text.of("ChunkInfo commande"))
+			    .executor(new ChunkCommand())
+			    .child(commandClaimChunkSpec, "c" , "claim")
+			    .child(commandUnClaimChunkSpec, "u","unclaim")
+			    .arguments(    			
+			    			/*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.createConfig","-c").buildWith(GenericArguments.none())
+			    		   /*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.deleteConfig","-d").buildWith(GenericArguments.none()),*/
+			    		   /*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.createConfig","-r").buildWith(GenericArguments.none())*/)
+			    .build();
+		
+		Sponge.getCommandManager().register(mainManager, commandClaimChunkSpec, "cc","chunk-claim");
+		Sponge.getCommandManager().register(mainManager, commandUnClaimChunkSpec, "cu","chunk-unclaim");
+		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "c", "chunk");
 		
 	}
 
