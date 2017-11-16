@@ -13,7 +13,6 @@ import fr.mrfern.spongeplugintest.Main;
 
 public class TpaCommandManager {
 	
-	@SuppressWarnings("unused")
 	private static Main mainManager;
 	
 	public TpaCommandManager(CommandManager manager) {
@@ -34,13 +33,19 @@ public class TpaCommandManager {
 	public void setupCommands() {
 		CommandSpec tpaCommandSpec = CommandSpec.builder()
 			.description(Text.of("Tp request command"))
-			.permission("spongeplugintest")
+			.permission("spongeplugintest.command.tpa")
 			.arguments(
 					GenericArguments.onlyOne(GenericArguments.player(Text.of("target"))))
 			.executor(new TpaCommand())
 			.build();
+		CommandSpec tpacceptCommandSpec = CommandSpec.builder()
+				.description(Text.of("Accpetion tp request command"))
+				.permission("spongeplugintest.command.tpaccept")
+				.executor(new TpacceptCommand())
+				.build();
 		
 		Sponge.getCommandManager().register(mainManager, tpaCommandSpec, "tpa");
+		Sponge.getCommandManager().register(mainManager, tpacceptCommandSpec, "tpaccept","tpyes");
 	}
 	
 	public CommandManager getCmdManager() {
