@@ -44,10 +44,18 @@ public class ClaimChunkCommand implements CommandExecutor {
 			    	return CommandResult.success();
 			    	
 			    }else {
-			    	Text textClaimed = Text.builder("Vous ne pouvez pas claim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
-			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-			    	ply.sendMessage(textEnTete);
-			    	return CommandResult.empty();
+			    	if(chunkNode.getClaimedBy().equals(ply.getName())) {
+			    		Text textClaimed = Text.builder("Vous avez déjà claim ce chunk").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+				    	ply.sendMessage(textEnTete);
+				    	return CommandResult.empty();
+			    	}else {
+			    		Text textClaimed = Text.builder("Vous ne pouvez pas claim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+				    	ply.sendMessage(textEnTete);
+				    	return CommandResult.empty();
+			    	}
+			    	
 			    	
 			    }
 		    }
