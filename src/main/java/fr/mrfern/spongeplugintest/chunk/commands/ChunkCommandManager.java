@@ -18,12 +18,11 @@ public class ChunkCommandManager {
 	
 	public void setupCommands() {
 		
-		/*CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
+		CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
 			    .description(Text.of("Chunk create file config commande"))
 			    .permission("spongeplugintest.chunk.commands.op.createConfig")
 			    .executor(new CreateChunkConfigCommand())
 			    .build();
-		*/
 		
 		CommandSpec commandClaimChunkSpec = CommandSpec.builder()
 	    .description(Text.of("Claim d'une zone"))
@@ -52,6 +51,7 @@ public class ChunkCommandManager {
 		
 		Sponge.getCommandManager().register(mainManager, commandClaimChunkSpec, "cc","chunk-claim");
 		Sponge.getCommandManager().register(mainManager, commandUnClaimChunkSpec, "cu","chunk-unclaim");
+		Sponge.getCommandManager().register(mainManager, commandCreateChunkConfigSpec,"chunk-create","c-create");
 		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "c", "chunk");
 		
 	}
