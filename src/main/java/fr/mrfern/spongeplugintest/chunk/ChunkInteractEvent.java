@@ -4,6 +4,7 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.living.humanoid.HandInteractEvent;
 import org.spongepowered.api.event.filter.cause.First;
+import org.spongepowered.api.event.filter.type.Exclude;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.world.Location;
@@ -16,36 +17,42 @@ public class ChunkInteractEvent{
 
 	@Listener
 	public void onInteractEvent(HandInteractEvent e,@First Player player) throws Exception {
-		Location<Extent> location = new Location<Extent>(player.getWorld(),e.getInteractionPoint().get());
-		double posX = location.getChunkPosition().getX();
-		double posZ = location.getChunkPosition().getZ();
-		String worldName = player.getWorld().getName();
+		Location<Extent> location;
+		double posX;//= player.getLocation().getChunkPosition().getX();
+		double posZ; //= player.getLocation().getChunkPosition().getZ();
 		
-		if(player != null) {
+		if(e.getInteractionPoint().isPresent()) {
+			location = new Location<Extent>(player.getWorld(),e.getInteractionPoint().get());
+			posX = location.getChunkPosition().getX();
+			posZ = location.getChunkPosition().getZ();
 			
-			 ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,(int) posX, (int) posZ);
+			String worldName = player.getWorld().getName();
 			
-		    if(chunkNode != null) {
+			if(player != null) {
 		    	
-		    	if(!chunkNode.getClaimedBy().equals(player.getName())){
-		    		
-		    		Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
-			    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
-			    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
-			    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+				ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,(int) posX, (int) posZ);
+				
+			    if(chunkNode != null) {
 			    	
-			    	Text textClaimed = Text.builder("Impossible d'executé : "+ e.getHandType().getName() +", Ce chunk appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
-			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    		
-		    		player.sendMessage(textEnTete);
-		    		e.setCancelled(true);
-		    	}
-		    	
-		    }else {
-		    	throw new Exception("Erreur null chunkNode return" + this.getClass().getName());
-		    }
-		}
-		
-	}
-	
+			    	if(!chunkNode.getClaimedBy().equals(player.getName())){
+			    		
+			    		Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
+				    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
+				    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
+				    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+				    	
+				    	Text textClaimed = Text.builder("Impossible d'executé : "+ e.getHandType().getName() +", Ce chunk appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+				    	player.sendMessage(textEnTete);
+			    		e.setCancelled(true);
+			    	}
+			    	
+			    }else {
+			    	throw new Exception("Erreur null chunkNode return" + this.getClass().getName());
+			    }
+			    
+		   }
+			
+	   }
+	}	
 }
