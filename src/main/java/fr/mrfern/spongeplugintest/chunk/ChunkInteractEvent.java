@@ -6,6 +6,8 @@ import org.spongepowered.api.event.entity.living.humanoid.HandInteractEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.extent.Extent;
 
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
@@ -14,8 +16,9 @@ public class ChunkInteractEvent{
 
 	@Listener
 	public void onInteractEvent(HandInteractEvent e,@First Player player) throws Exception {
-		double posX = player.getLocation().getChunkPosition().getX();
-		double posZ = player.getLocation().getChunkPosition().getZ();
+		Location<Extent> location = new Location<Extent>(player.getWorld(),e.getInteractionPoint().get());
+		double posX = location.getChunkPosition().getX();
+		double posZ = location.getChunkPosition().getZ();
 		String worldName = player.getWorld().getName();
 		
 		if(player != null) {
