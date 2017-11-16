@@ -31,7 +31,6 @@ public class TpaCommand implements CommandExecutor {
 				
 				if((System.currentTimeMillis()-data.getTimestamp()) >= 90000 ) {
 					iter.remove(); // C'est censé remove les request périmées de la hashmap
-					break;
 				}
 				else if(data.getSender().equals(sender.getUniqueId())) {
 					iter.remove();
