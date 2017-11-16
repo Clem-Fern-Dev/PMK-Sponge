@@ -65,10 +65,8 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"forum","name").setValue("none");
 		loaderRootNode.getNode(name,"forum","isBan").setValue(false);
 		
-		
-		loaderRootNode.getNode(name,"grade").setValue("none");
 		loaderRootNode.getNode(name,"grade","prim-grade").setValue("none");
-		loaderRootNode.getNode(name,"grade","sub-grade").setValue("none");
+		loaderRootNode.getNode(name,"grade","sub-grade").setValue(Arrays.asList("none"));
 		
 		loaderRootNode.getNode(name,"ban","enable").setValue(false);
 		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
