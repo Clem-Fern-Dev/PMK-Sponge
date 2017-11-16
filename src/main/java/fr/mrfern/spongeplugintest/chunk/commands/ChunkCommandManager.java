@@ -1,6 +1,7 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
 
@@ -18,12 +19,6 @@ public class ChunkCommandManager {
 	
 	public void setupCommands() {
 		
-		CommandSpec commandCreateChunkConfigSpec = CommandSpec.builder()
-			    .description(Text.of("Chunk create file config commande"))
-			    .permission("spongeplugintest.chunk.commands.op.createConfig")
-			    .executor(new CreateChunkConfigCommand())
-			    .build();
-		
 		CommandSpec commandClaimChunkSpec = CommandSpec.builder()
 	    .description(Text.of("Claim d'une zone"))
 	    .permission("spongeplugintest.chunk.commands.claim")
@@ -36,6 +31,24 @@ public class ChunkCommandManager {
 			    .executor(new UnClaimChunkCommand())
 			    .build();
 		
+		CommandSpec commandGroupAddChunkSpec = CommandSpec.builder()
+			    .description(Text.of("Manager les groupes de chunk"))
+			    .permission("spongeplugintest.chunk.commands.changegroup.add")
+			    .executor(new ChangeGroupAddChunk())
+			    .arguments(GenericArguments.flags().flag("-co-owner").buildWith(GenericArguments.none()),
+		    				GenericArguments.flags().flag("-user").buildWith(GenericArguments.none())
+			    )
+			    .build();
+		
+		CommandSpec commandGroupDelChunkSpec = CommandSpec.builder()
+			    .description(Text.of("Manager les groupes de chunk"))
+			    .permission("spongeplugintest.chunk.commands.changegroup.del")
+			    .executor(new ChangeGroupDelChunk())
+			    .arguments(GenericArguments.flags().flag("co-owner").buildWith(GenericArguments.none()),
+			    			GenericArguments.flags().flag("user").buildWith(GenericArguments.none())
+			    )
+			    .build();
+		
 		
 		
 		CommandSpec commandChunkInfoSpec = CommandSpec.builder()
@@ -43,15 +56,19 @@ public class ChunkCommandManager {
 			    .executor(new ChunkCommand())
 			    .child(commandClaimChunkSpec, "c" , "claim")
 			    .child(commandUnClaimChunkSpec, "u","unclaim")
+			    .child(commandGroupAddChunkSpec, "g-add")
+			    .child(commandGroupDelChunkSpec, "g-del")
 			    .arguments(    			
 			    			/*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.createConfig","-c").buildWith(GenericArguments.none())
 			    		   /*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.deleteConfig","-d").buildWith(GenericArguments.none()),*/
 			    		   /*GenericArguments.flags().permissionFlag("spongeplugintest.chunk.commands.op.createConfig","-r").buildWith(GenericArguments.none())*/)
 			    .build();
 		
+		Sponge.getCommandManager().register(mainManager, commandGroupAddChunkSpec, "cg-add","chunk-groupadd");
+		Sponge.getCommandManager().register(mainManager, commandGroupDelChunkSpec, "cg-del","chunk-groupdel");
+		
 		Sponge.getCommandManager().register(mainManager, commandClaimChunkSpec, "cc","chunk-claim");
 		Sponge.getCommandManager().register(mainManager, commandUnClaimChunkSpec, "cu","chunk-unclaim");
-		Sponge.getCommandManager().register(mainManager, commandCreateChunkConfigSpec,"chunk-create","c-create");
 		Sponge.getCommandManager().register(mainManager, commandChunkInfoSpec, "c", "chunk");
 		
 	}
