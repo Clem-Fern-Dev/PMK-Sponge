@@ -35,6 +35,7 @@ if(src instanceof Player) {
 			    if(chunkNode.getClaimedBy().equals(ply.getName())) {
 			    	
 			    	chunkNode.setClaimedBy("none");
+			    	chunkNode.save();
 			    	
 			    	Text textClaimed = Text.builder("Ce chunk est maintenant libre").color(TextColors.BLUE).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();

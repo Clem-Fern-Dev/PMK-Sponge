@@ -36,6 +36,7 @@ public class ClaimChunkCommand implements CommandExecutor {
 			    if(chunkNode.getClaimedBy().equals("none")) {
 			    	
 			    	chunkNode.setClaimedBy(ply.getName());
+			    	chunkNode.save();
 			    	
 			    	Text textClaimed = Text.builder("Ce chunk vous appartient").color(TextColors.BLUE).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
