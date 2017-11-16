@@ -26,32 +26,36 @@ if(src instanceof Player) {
 		    
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
 	    	
-	    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
-	    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
-	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
-	    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
-		    
-		    if(chunkNode.getClaimedBy().equals(ply.getName())) {
-		    	
-		    	chunkNode.setClaimedBy("none");
-		    	
-		    	Text textClaimed = Text.builder("Ce chunk est maintenant libre").color(TextColors.BLUE).build();
-		    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    	ply.sendMessage(textEnTete);
-		    	CommandResult.success();
-		    	
-		    }else if(chunkNode.getClaimedBy().equals("none")){
-		    	Text textClaimed = Text.builder("Vous ne pouvez pas unclaim ce chunk, il n'est pas claim ").color(TextColors.RED).build();
-		    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    	ply.sendMessage(textEnTete);
-		    	CommandResult.empty();
-		    	
-		    }else {
-		    	Text textClaimed = Text.builder("Vous ne pouvez pas unclaim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
-		    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    	ply.sendMessage(textEnTete);
-		    	CommandResult.empty();
+		    if(chunkNode != null) {
+		    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
+		    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
+		    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
+		    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+			    
+			    if(chunkNode.getClaimedBy().equals(ply.getName())) {
+			    	
+			    	chunkNode.setClaimedBy("none");
+			    	
+			    	Text textClaimed = Text.builder("Ce chunk est maintenant libre").color(TextColors.BLUE).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+			    	ply.sendMessage(textEnTete);
+			    	CommandResult.success();
+			    	
+			    }else if(chunkNode.getClaimedBy().equals("none")){
+			    	Text textClaimed = Text.builder("Vous ne pouvez pas unclaim ce chunk, il n'est pas claim ").color(TextColors.RED).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+			    	ply.sendMessage(textEnTete);
+			    	return CommandResult.empty();
+			    	
+			    }else {
+			    	Text textClaimed = Text.builder("Vous ne pouvez pas unclaim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+			    	ply.sendMessage(textEnTete);
+			    	return CommandResult.empty();
+			    }
 		    }
+		    
+		    return CommandResult.empty();    	
 			
 		}
 		else if(src instanceof ConsoleSource) {

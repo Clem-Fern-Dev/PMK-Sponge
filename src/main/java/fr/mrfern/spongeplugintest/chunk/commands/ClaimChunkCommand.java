@@ -40,19 +40,19 @@ public class ClaimChunkCommand implements CommandExecutor {
 			    	Text textClaimed = Text.builder("Ce chunk vous appartient").color(TextColors.BLUE).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 			    	ply.sendMessage(textEnTete);
-			    	CommandResult.success();
+			    	return CommandResult.success();
 			    	
 			    }else {
 			    	Text textClaimed = Text.builder("Vous ne pouvez pas claim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 			    	ply.sendMessage(textEnTete);
-			    	CommandResult.empty();
+			    	return CommandResult.empty();
 			    	
 			    }
 		    }
 		    
-	    	
-			
+		    return CommandResult.empty();
+		    		
 		}
 		else if(src instanceof ConsoleSource) {
 		    src.sendMessage(Text.of("Impossible d'exécuter cette commands ici"));
