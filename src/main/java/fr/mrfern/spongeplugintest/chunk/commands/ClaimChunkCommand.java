@@ -21,32 +21,37 @@ public class ClaimChunkCommand implements CommandExecutor {
 		if(src instanceof Player) {
 			
 			Player ply = (Player) src;
-			int posX = (int) ply.getLocation().getX(), posZ = (int) ply.getLocation().getZ();
+			int posX = (int) ply.getLocation().getChunkPosition().getX(), posZ = (int) ply.getLocation().getChunkPosition().getZ();
 		    String worldName = ply.getWorld().getName();
 		    
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
 	    	
-	    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
-	    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
-	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
-	    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
-		    
-		    if(chunkNode.getClaimedBy().equals("none")) {
+		    if(chunkNode != null) {
 		    	
-		    	chunkNode.setClaimedBy(ply.getName());
-		    	
-		    	Text textClaimed = Text.builder("Ce chunk vous appartient").color(TextColors.BLUE).build();
-		    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    	ply.sendMessage(textEnTete);
-		    	CommandResult.success();
-		    	
-		    }else {
-		    	Text textClaimed = Text.builder("Vous ne pouvez pas claim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
-		    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-		    	ply.sendMessage(textEnTete);
-		    	CommandResult.empty();
-		    	
+		    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
+		    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
+		    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
+		    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+			    
+			    if(chunkNode.getClaimedBy().equals("none")) {
+			    	
+			    	chunkNode.setClaimedBy(ply.getName());
+			    	
+			    	Text textClaimed = Text.builder("Ce chunk vous appartient").color(TextColors.BLUE).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+			    	ply.sendMessage(textEnTete);
+			    	CommandResult.success();
+			    	
+			    }else {
+			    	Text textClaimed = Text.builder("Vous ne pouvez pas claim ce chunk, il appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+			    	ply.sendMessage(textEnTete);
+			    	CommandResult.empty();
+			    	
+			    }
 		    }
+		    
+	    	
 			
 		}
 		else if(src instanceof ConsoleSource) {

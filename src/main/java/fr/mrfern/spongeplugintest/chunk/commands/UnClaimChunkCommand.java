@@ -21,7 +21,7 @@ public class UnClaimChunkCommand implements CommandExecutor {
 if(src instanceof Player) {
 			
 			Player ply = (Player) src;
-			int posX = (int) ply.getLocation().getX(), posZ = (int) ply.getLocation().getZ();
+			int posX = (int) ply.getLocation().getChunkPosition().getX(), posZ = (int) ply.getLocation().getChunkPosition().getZ();
 		    String worldName = ply.getWorld().getName();
 		    
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
