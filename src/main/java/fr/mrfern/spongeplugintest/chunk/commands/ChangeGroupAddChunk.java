@@ -20,7 +20,7 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		if(src instanceof Player) {
+if(src instanceof Player) {
 			
 			Player player;
 			if(args.<Player>getOne("player").isPresent()) {
@@ -82,7 +82,7 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 				    						    		
 				    if((listGroupCoOwner.contains(player.getName()) & groupName.equals("co-owner")) || (listGroupUser.contains(player.getName()) & groupName.equals("user"))) {
 				    	
-				    	Text textClaimed = Text.builder(" est déjà dans la liste du groupes ").color(TextColors.RED).build();
+				    	Text textClaimed = Text.builder(" est déjà dans la liste du groupe ").color(TextColors.RED).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
 			    		ply.sendMessage(textEnTete);
 				    	// joueur déjà dans la liste
