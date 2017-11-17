@@ -1,7 +1,6 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
@@ -151,29 +150,6 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 			return CommandResult.empty();
 		}
 		
-	}
-	
-	private List<String> getNodeGroupList(String groupName, ChunkNode chunkNode) {
-		switch (groupName) {
-		case "co-owner":
-			return chunkNode.getCoOwnerList();
-			
-		case "user":
-			return chunkNode.getUserList();
-		}
-		return null;
-	}
-	
-	private void setNodeGroupList(List<String> list ,String groupName, ChunkNode chunkNode) {
-		switch (groupName) {
-		case "co-owner":
-			//chunkNode.setCoOwnerList(list);
-			break;	
-			
-		case "user":
-			//chunkNode.setUserList(list);
-			break;	
-		}
 	}
 	
 }
