@@ -28,7 +28,7 @@ public class ClaimChunkCommand implements CommandExecutor {
 	    	
 		    if(chunkNode != null) {
 		    	
-		    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
+		    	Text textPosX = Text.builder("X:"+ posX ).color(TextColors.LIGHT_PURPLE).build();
 		    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
 		    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
 		    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
