@@ -112,7 +112,7 @@ if(src instanceof Player) {
 				    	chunkNode.getNode("chunk","chunk-player-perm",groupName).setValue(list);				    	
 				    	chunkNode.save();
 				    	
-				    	Text textClaimed = Text.builder(" a été ajouté à la liste ").color(TextColors.BLUE).build();
+				    	Text textClaimed = Text.builder(" a été retiré de la liste ").color(TextColors.BLUE).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
 			    		ply.sendMessage(textEnTete);
 				    	
