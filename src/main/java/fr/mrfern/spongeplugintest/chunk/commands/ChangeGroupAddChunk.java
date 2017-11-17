@@ -1,5 +1,6 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
+import java.util.Iterator;
 import java.util.List;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -76,7 +77,11 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 				    }else if(listGroupCoOwner.contains(player.getName()) & groupName.equals("user")){
 				    	
 				    	// suppression de la liste co-owner et ajout à list user
-				    	listGroupCoOwner.remove(player.getName());
+				    	Iterator<String> itr = listGroupCoOwner.iterator();
+				        while(itr.hasNext()){
+				            if(itr.next().equals(player.getName()))
+				                itr.remove();
+				        }
 				    	listGroupUser.add(player.getName());
 				    	
 				    	chunkNode.setCoOwnerList(listGroupCoOwner);
@@ -114,6 +119,7 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 				    	
 				    	setNodeGroupList(listGroup, groupName, chunkNode);
 				    	chunkNode.save();
+				    	
 				    	Text textClaimed = Text.builder(" a été ajouté à la liste ").color(TextColors.BLUE).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
 			    		ply.sendMessage(textEnTete);
