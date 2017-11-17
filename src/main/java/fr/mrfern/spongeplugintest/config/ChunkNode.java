@@ -1,6 +1,7 @@
 package fr.mrfern.spongeplugintest.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -433,61 +434,51 @@ public class ChunkNode implements ConfigurationNode {
 		return cfgNode.getNode(name,"chunk-player-claim","claim-by").getString();
 	}
 	
-	public List<String> getGroupOverpassList(){
-		return cfgNode.getNode(name,"chunk-player-perm","group-overpass").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+	@Deprecated
+	public ArrayList<String> getGroupOverpassList(){
+		return null;
 	}
 	
 	public List<String> getCoOwnerList(){
-		return cfgNode.getNode(name,"chunk-player-perm","co-owner-list").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"chunk-player-perm","co-owner").getList(stringTransformer);
 	}
 	
 	public List<String> getUserList(){
-		return cfgNode.getNode(name,"chunk-player-perm","user").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+		
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"chunk-player-perm","user").getList(stringTransformer);
 	}
 	
-	public List<String> getPermInviteList(){
-		return cfgNode.getNode(name,"chunk-player-perm","perm-invite").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+	@Deprecated
+	public ArrayList<String> getPermInviteList(){
+		return null;
 	}
 	
-	public List<String> getTempInviteList(){
-		return cfgNode.getNode(name,"chunk-player-perm","temp-invite").getList(new Function<Object,String>() {
-			@Override
+	@Deprecated
+	public ArrayList<String> getTempInviteList(){
+		return null ;//cfgNode.getNode(name,"chunk-player-perm","temp-invite").getList(new Function<Object,String>() {
+			/*@Override
 			public String apply(Object input) {
 				if (input instanceof String) {
 					return (String) input;
@@ -495,7 +486,7 @@ public class ChunkNode implements ConfigurationNode {
 					return null;
 				}
 			}
-		});
+		});*/
 	}	
 	
 	// setter
@@ -509,23 +500,27 @@ public class ChunkNode implements ConfigurationNode {
 	}
 	
 
-	public void setGroupOverpassList(List<String> overpassList){
+	@Deprecated
+	public void setGroupOverpassList(ArrayList<String> overpassList){
 		cfgNode.getNode(name,"chunk-player-perm","group-overpass").setValue(overpassList);
 	}
 	
 	public void setCoOwnerList(List<String> ownerList){
-		cfgNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(ownerList);
+		cfgNode.getNode(name,"chunk-player-perm","co-owner").setValue(ownerList);
 	}
 	
-	public void setUserList(List<String> userList){
-		cfgNode.getNode(name,"chunk-player-perm","user").setValue(userList);
+
+	public void setUserList(List<String> list){
+		cfgNode.getNode(name,"chunk-player-perm","user").setValue(list);
 	}
 	
-	public void setPermInviteList(List<String> permInviteList){
+	@Deprecated
+	public void setPermInviteList(ArrayList<String> permInviteList){
 		cfgNode.getNode(name,"chunk-player-perm","perm-invite").setValue(permInviteList);
 	}
 	
-	public void setTempInviteList(List<String> tempInviteList){
+	@Deprecated
+	public void setTempInviteList(ArrayList<String> tempInviteList){
 		cfgNode.getNode(name,"chunk-player-perm","temp-invite").setValue(tempInviteList);
 	}
 	/*
