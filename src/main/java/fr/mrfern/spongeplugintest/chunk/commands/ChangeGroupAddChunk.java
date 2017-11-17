@@ -1,9 +1,6 @@
 package fr.mrfern.spongeplugintest.chunk.commands;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -11,6 +8,7 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
@@ -42,13 +40,24 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 		    String worldName = ply.getWorld().getName();		
 				    
 		    ChunkNode chunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,posX,posZ);
+		    
+		    Text textPosX = Text.builder("X:"+ posX ).color(TextColors.LIGHT_PURPLE).build();
+	    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
+	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
+	    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+	    	Text textPlayerNameCible = Text.builder(player.getName()).color(TextColors.GOLD).build();
+	    	//Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.GOLD).build();
+	    	Text textGroupName = Text.builder(groupName).color(TextColors.GOLD).build();
 				    
 		    if(chunkNode != null) {
 		    	
-		    	if(chunkNode.getClaimedBy().equals(player.getName())){
+		    	/*if(chunkNode.getClaimedBy().equals(player.getName())){
 		    		// vous ne pouvez pas vou ajouté vous meme
-		    		return CommandResult.success();
-		    	}
+		    		Text textClaimed = Text.builder("Vous ne pouvez pas vous ajoutez vous même, ce claim vous appartient.").color(TextColors.RED).build();
+			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
+		    		ply.sendMessage(textEnTete);
+			    	return CommandResult.empty();
+		    	}*/
 		    	
 		    	// ajout
 		    	if(chunkNode.getClaimedBy().equals(ply.getName())){
@@ -56,26 +65,60 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 		    		List<String> listGroupCoOwner = getNodeGroupList("co-owner", chunkNode);
 				    List<String> listGroupUser = getNodeGroupList("user", chunkNode);
 				    						    		
-				    if(listGroupCoOwner.contains(player.getName()) & groupName.equals("co-owner")) {
-				    		ply.sendMessage(Text.of("joueur déjà dans la liste co-owner"));
-				    		// joueur déjà dans la liste
-					    	return CommandResult.success();
-				    }else if(listGroupUser.contains(player.getName()) & groupName.equals("user")) {
-				    		ply.sendMessage(Text.of("joueur déjà dans la liste user"));
-				    		// joueur déjà dans la liste
-					    	return CommandResult.success();
+				    if((listGroupCoOwner.contains(player.getName()) & groupName.equals("co-owner")) | (listGroupUser.contains(player.getName()) & groupName.equals("user"))) {
+				    	
+				    	Text textClaimed = Text.builder(" est déjà dans la liste du groupes ").color(TextColors.RED).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
+			    		ply.sendMessage(textEnTete);
+				    	// joueur déjà dans la liste
+					    return CommandResult.success();
+					    
 				    }else if(listGroupCoOwner.contains(player.getName()) & groupName.equals("user")){
-				    		ply.sendMessage(Text.of("suppression de la liste co-owner et ajout à list user"));
-				    		// suppression de la liste co-owner et ajout à list user
-					    	return CommandResult.success();
+				    	
+				    	// suppression de la liste co-owner et ajout à list user
+				    	listGroupCoOwner.remove(player.getName());
+				    	listGroupUser.add(player.getName());
+				    	
+				    	chunkNode.setCoOwnerList(listGroupCoOwner);
+				    	chunkNode.setUserList(listGroupUser);
+				    	chunkNode.save();
+				    	
+				    	Text textClaimed = Text.builder(" a été supprimé de sa liste d'origine et ajouté à la liste ").color(TextColors.BLUE).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
+			    		ply.sendMessage(textEnTete);
+
+					    return CommandResult.success();
+					    
 				    }else if(listGroupUser.contains(player.getName()) & groupName.equals("co-owner")) {
-				    		ply.sendMessage(Text.of("suppression de la list user et ajout à la list co-owner"));
-				    		// suppression de la list user et ajout à la list co-owner
-					    	return CommandResult.success();
+				    	
+				    	// suppression de la list user et ajout à la list co-owner
+				    	listGroupUser.remove(player.getName());
+				    	listGroupCoOwner.add(player.getName());
+				    	
+				    	chunkNode.setCoOwnerList(listGroupCoOwner);
+				    	chunkNode.setUserList(listGroupUser);
+				    	chunkNode.save();
+				    	
+				    	Text textClaimed = Text.builder(" a été supprimé de sa liste d'origine et ajouté à la liste ").color(TextColors.BLUE).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
+			    		ply.sendMessage(textEnTete);
+				    	
+					    return CommandResult.success();
+					    
 				    }else {
-				    		ply.sendMessage(Text.of("ajout à la liste demandé simple"));
-				    		// ajout à la liste demandé
-					    	return CommandResult.success();
+				    	
+				    	// ajout à la liste demandé
+				    	
+				    	List<String> listGroup = getNodeGroupList(groupName, chunkNode);
+				    	listGroup.add(player.getName());
+				    	
+				    	setNodeGroupList(listGroup, groupName, chunkNode);
+				    	chunkNode.save();
+				    	Text textClaimed = Text.builder(" a été ajouté à la liste ").color(TextColors.BLUE).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed,textGroupName).build();
+			    		ply.sendMessage(textEnTete);
+				    	
+					    return CommandResult.success();
 				    }
 
 				    		
@@ -104,6 +147,18 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 			return chunkNode.getUserList();
 		}
 		return null;
+	}
+	
+	private void setNodeGroupList(List<String> list ,String groupName, ChunkNode chunkNode) {
+		switch (groupName) {
+		case "co-owner":
+			chunkNode.setCoOwnerList(list);
+			break;	
+			
+		case "user":
+			chunkNode.setUserList(list);
+			break;	
+		}
 	}
 	
 }
