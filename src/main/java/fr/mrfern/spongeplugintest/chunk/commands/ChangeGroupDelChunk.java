@@ -49,7 +49,7 @@ if(src instanceof Player) {
 	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
 	    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
 	    	Text textPlayerNameCible = Text.builder(player.getName()).color(TextColors.GOLD).build();
-	    	//Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.GOLD).build();
+	    	///Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.GOLD).build();
 	    	Text textGroupName = Text.builder(groupName).color(TextColors.GOLD).build();
 				    
 		    if(chunkNode != null) {
