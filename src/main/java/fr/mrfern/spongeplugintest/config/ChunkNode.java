@@ -319,108 +319,6 @@ public class ChunkNode implements ConfigurationNode {
 	}
 	
 	/*
-	 * perm config
-	 */
-	
-	public String getGroupName(ChunkGroupTypes group) {
-		if(ChunkGroupTypes.Co_Owner.equals(group)) {
-			return "co-owner";
-		}else if (ChunkGroupTypes.User.equals(group)) {
-			return "user";
-		}else if (ChunkGroupTypes.Invite_Perm.equals(group)) {
-			return "perm-invite";
-		}else if (ChunkGroupTypes.Invite_Temp.equals(group)) {
-			return "temp-invite";
-		}
-		
-		return null;		
-		
-	}
-	
-	// getter	
-	public boolean getPermBlock(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"block").getBoolean();	
-	}
-	
-	public boolean getPermVault(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"vault").getBoolean();	
-	}
-	
-	public boolean getPermDoor(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"door").getBoolean();	
-	}
-	
-	public boolean getPermButton(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"button").getBoolean();	
-	}
-	
-	public boolean getPermPromoteUser(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"promote-user").getBoolean();	
-	}
-	
-	public boolean getCommandsPermUnClaim(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","unclaim").getBoolean();	
-	}
-	
-	public boolean getCommandsPermAddCoOwner(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","add-co-owner").getBoolean();	
-	}
-	
-	public boolean getCommandsPermAddUser(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","adduser").getBoolean();	
-	}
-	
-	public boolean getCommandsPermAddPrimInvite(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-prim").getBoolean();	
-	}
-	
-	public boolean getCommandsPermAddTempInvite(ChunkGroupTypes group) {
-		return cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-temp").getBoolean();	
-	}
-	
-	// setter
-	
-	public void setPermBlock(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"block").setValue(b);	
-	}
-	
-	public void setPermVault(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"vault").setValue(b);	
-	}
-	
-	public void setPermDoor(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"door").setValue(b);	
-	}
-	
-	public void setPermButton(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"button").setValue(b);	
-	}
-	
-	public void setPermPromoteUser(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"promote-user").setValue(b);	
-	}
-	
-	public void setCommandsPermUnClaim(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","unclaim").setValue(b);	
-	}
-	
-	public void setCommandsPermAddCoOwner(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","add-co-owner").setValue(b);	
-	}
-	
-	public void setCommandsPermAddUser(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","adduser").setValue(b);	
-	}
-	
-	public void setCommandsPermAddPrimInvite(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-prim").setValue(b);	
-	}
-	
-	public void setCommandsPermAddTempInvite(ChunkGroupTypes group, boolean b) {
-		cfgNode.getNode(name,"chunk-group-perm",getGroupName(group),"command-chunk","addinvite-temp").setValue(b);	
-	}
-	
-	/*
 	 * Chunk info
 	 */
 	
@@ -439,21 +337,6 @@ public class ChunkNode implements ConfigurationNode {
 		return null;
 	}
 	
-	public List<String> getCoOwnerList(){
-		Function<Object,String> stringTransformer = new Function<Object,String>() {
-		    @Override
-		    public String apply(Object input) {
-		        if (input instanceof String) {
-		            return (String) input;
-		        } else {
-		            return null;
-		        }
-		    }
-		};
-		
-		return cfgNode.getNode(name,"chunk-player-perm","co-owner").getList(stringTransformer);
-	}
-	
 	public List<String> getUserList(){
 		
 		Function<Object,String> stringTransformer = new Function<Object,String>() {
@@ -469,25 +352,6 @@ public class ChunkNode implements ConfigurationNode {
 		
 		return cfgNode.getNode(name,"chunk-player-perm","user").getList(stringTransformer);
 	}
-	
-	@Deprecated
-	public ArrayList<String> getPermInviteList(){
-		return null;
-	}
-	
-	@Deprecated
-	public ArrayList<String> getTempInviteList(){
-		return null ;//cfgNode.getNode(name,"chunk-player-perm","temp-invite").getList(new Function<Object,String>() {
-			/*@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});*/
-	}	
 	
 	// setter
 	
@@ -505,23 +369,9 @@ public class ChunkNode implements ConfigurationNode {
 		cfgNode.getNode(name,"chunk-player-perm","group-overpass").setValue(overpassList);
 	}
 	
-	public void setCoOwnerList(List<String> ownerList){
-		cfgNode.getNode(name,"chunk-player-perm","co-owner").setValue(ownerList);
-	}
-	
 
 	public void setUserList(List<String> list){
 		cfgNode.getNode(name,"chunk-player-perm","user").setValue(list);
-	}
-	
-	@Deprecated
-	public void setPermInviteList(ArrayList<String> permInviteList){
-		cfgNode.getNode(name,"chunk-player-perm","perm-invite").setValue(permInviteList);
-	}
-	
-	@Deprecated
-	public void setTempInviteList(ArrayList<String> tempInviteList){
-		cfgNode.getNode(name,"chunk-player-perm","temp-invite").setValue(tempInviteList);
 	}
 	/*
 	loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");
