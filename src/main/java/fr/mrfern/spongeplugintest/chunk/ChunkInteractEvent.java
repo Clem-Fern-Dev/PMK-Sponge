@@ -33,7 +33,7 @@ public class ChunkInteractEvent{
 				
 			    if(chunkNode != null) {
 			    	
-			    	if(!chunkNode.getClaimedBy().equals(player.getName()) | !chunkNode.getUserList().contains(player.getName())){
+			    	if(!chunkNode.getClaimedBy().equals("none") & !chunkNode.getUserList().contains(player.getName())){
 			    		
 			    		Text textPosX = Text.builder("X:"+ posX ).color(TextColors.LIGHT_PURPLE).build();
 				    	Text textSlasher = Text.builder("/").color(TextColors.GOLD).build();
@@ -44,7 +44,10 @@ public class ChunkInteractEvent{
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 				    	player.sendMessage(textEnTete);
 			    		e.setCancelled(true);
+			    	}else {
+			    		
 			    	}
+			    	
 			    	
 			    }else {
 			    	throw new Exception("Erreur null chunkNode return" + this.getClass().getName());
