@@ -35,18 +35,14 @@ public class ChunkCommandManager {
 			    .description(Text.of("Manager les groupes de chunk"))
 			    .permission("spongeplugintest.chunk.commands.changegroup.add")
 			    .executor(new ChangeGroupAddChunk())
-			    .arguments(GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-			    			GenericArguments.string(Text.of("group-name"))
-			    )
+			    .arguments(GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))))
 			    .build();
 		
 		CommandSpec commandGroupDelChunkSpec = CommandSpec.builder()
 			    .description(Text.of("Manager les groupes de chunk"))
 			    .permission("spongeplugintest.chunk.commands.changegroup.del")
 			    .executor(new ChangeGroupDelChunk())
-			    .arguments(GenericArguments.flags().flag("co-owner").buildWith(GenericArguments.none()),
-			    			GenericArguments.flags().flag("user").buildWith(GenericArguments.none())
-			    )
+			    .arguments(GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))))
 			    .build();
 		
 		
