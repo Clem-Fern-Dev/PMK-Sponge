@@ -4,7 +4,6 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
-import org.spongepowered.api.text.Text;
 
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
@@ -21,8 +20,8 @@ public class ChunkDiscoverListener {
 			
 		}else {
 			
-			player.sendMessage(Text.of("Changement de chunk / ancien : X: " + e.getFromTransform().getLocation().getChunkPosition().getX() + " / Z : " + 
-			e.getFromTransform().getLocation().getChunkPosition().getZ() + " nouveau : X: " + posX + " / Z: " + posZ));
+			//player.sendMessage(Text.of("Changement de chunk / ancien : X: " + e.getFromTransform().getLocation().getChunkPosition().getX() + " / Z : " + 
+			//e.getFromTransform().getLocation().getChunkPosition().getZ() + " nouveau : X: " + posX + " / Z: " + posZ));
 			
 			if(player != null) {
 								
