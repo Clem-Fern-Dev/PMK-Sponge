@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.GameReloadEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
 import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
@@ -16,6 +15,7 @@ import com.google.inject.Inject;
 import fr.mrfern.spongeplugintest.chunk.ChunkListenerManager;
 import fr.mrfern.spongeplugintest.chunk.commands.ChunkCommandManager;
 import fr.mrfern.spongeplugintest.command.BasicCommandManager;
+import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
@@ -106,6 +106,7 @@ public class Main {
 		//Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
 		ChunkCommandManager.commands(this).setupCommands();
 		BasicCommandManager.commands(this,cmdManager).setupCommands();
+		TpaCommandManager.commands(this, cmdManager).setupCommands();
 	}
 }
 
