@@ -78,24 +78,7 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-player-info","discover-by").setValue("none");
 		loaderRootNode.getNode(name,"chunk-player-claim","claim-by").setValue("none");
 		loaderRootNode.getNode(name,"chunk-player-perm","group-overpass").setValue(Arrays.asList("none"));
-		loaderRootNode.getNode(name,"chunk-player-perm","co-owner-list").setValue(Arrays.asList("none"));
-		loaderRootNode.getNode(name,"chunk-player-perm","user").setValue(Arrays.asList("none"));
-		loaderRootNode.getNode(name,"chunk-player-perm","perm-invite").setValue(Arrays.asList("none"));
-		loaderRootNode.getNode(name,"chunk-player-perm","temp-invite").setValue(Arrays.asList("none"));
-		
-		// co_owner
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","block").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","vault").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","door").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","button").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","promote-user").setValue(false);
-		
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","unclaim").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","add-co-owner").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","adduser").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","addinvite-prim").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","co-owner","command-chunk","addinvite-temp").setValue(true);
-		
+		loaderRootNode.getNode(name,"chunk-player-perm","user").setValue(Arrays.asList("none"));	
 		
 		// user
 		loaderRootNode.getNode(name,"chunk-group-perm","user","block").setValue(true);
@@ -109,33 +92,6 @@ public class ChunkConfig implements IConfig{
 		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","adduser").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","addinvite-prim").setValue(true);
 		loaderRootNode.getNode(name,"chunk-group-perm","user","command-chunk","addinvite-temp").setValue(true);
-		
-		// perm_invite
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","block").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","vault").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","door").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","button").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","promote-user").setValue(false);
-				
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","unclaim").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","add-co-owner").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","adduser").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","addinvite-prim").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","perm-invite","command-chunk","addinvite-temp").setValue(true);
-				
-		// temp_invite
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","block").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","vault").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","door").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","button").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","promote-user").setValue(false);
-				
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","unclaim").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","add-co-owner").setValue(false);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","adduser").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","addinvite-prim").setValue(true);
-		loaderRootNode.getNode(name,"chunk-group-perm","temp-invite","command-chunk","addinvite-temp").setValue(true);
-		
 		
 		/*perm:
 		    co_owner:
