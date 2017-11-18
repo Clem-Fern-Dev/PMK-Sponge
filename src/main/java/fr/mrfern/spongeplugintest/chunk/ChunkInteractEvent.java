@@ -4,7 +4,6 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.living.humanoid.HandInteractEvent;
 import org.spongepowered.api.event.filter.cause.First;
-import org.spongepowered.api.event.filter.type.Exclude;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.world.Location;
@@ -34,14 +33,14 @@ public class ChunkInteractEvent{
 				
 			    if(chunkNode != null) {
 			    	
-			    	if(!chunkNode.getClaimedBy().equals(player.getName())){
+			    	if(!chunkNode.getClaimedBy().equals(player.getName()) | !chunkNode.getUserList().contains(player.getName())){
 			    		
-			    		Text textPosX = Text.builder("X:"+ posX ).color(TextColors.RED).build();
-				    	Text textSlasher = Text.builder("/").color(TextColors.DARK_BLUE).build();
+			    		Text textPosX = Text.builder("X:"+ posX ).color(TextColors.LIGHT_PURPLE).build();
+				    	Text textSlasher = Text.builder("/").color(TextColors.GOLD).build();
 				    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
-				    	Text textEnd = Text.builder(" ] ").color(TextColors.DARK_BLUE).build();
+				    	Text textEnd = Text.builder(" ] ").color(TextColors.GOLD).build();
 				    	
-				    	Text textClaimed = Text.builder("Impossible d'executé : "+ e.getHandType().getName() +", Ce chunk appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.GOLD).build()).build();
+				    	Text textClaimed = Text.builder("Impossible d'executé : "+ e.getHandType().getName() +", Ce chunk appartient à ").color(TextColors.RED).append(Text.builder(chunkNode.getClaimedBy()).color(TextColors.YELLOW).build()).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 				    	player.sendMessage(textEnTete);
 			    		e.setCancelled(true);
