@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.commons.io.FileUtils;
+
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -25,6 +27,11 @@ public class ChunkConfig implements IConfig{
 	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	private ConfigurationNode loaderRootNode;
 	
+	@Deprecated
+	public ConfigurationNode loadConfigNode(ConfigurationLoader<CommentedConfigurationNode> cfgConfigBuilderResult) {
+		// TODO Auto-generated method stub
+		return IConfig.super.loadConfigNode(cfgConfigBuilderResult);
+	}
 	
 	public void setup() {
 		
@@ -178,16 +185,22 @@ public class ChunkConfig implements IConfig{
 	}
 	
 	public boolean createChunkConfig(String world, int posX , int posZ) {
-		if(getChunkConfigFile(world,posX,posZ) != null) {
+		if(getChunkConfigFile(world,posX,posZ) == null) {
 			// création du fichier
-			//File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file
+			File file = new File(chunkPath + posX +"_"+ posZ + extensionFile); 	// Instancie new file
 			
-			/*try {
-				//FileUtils.copyFile(defaultFileConfig, file);
+			try {
+				FileUtils.copyFile(defaultFileConfig, file);
+				
+				ChunkNode chunkNode = getChunkConfigNode(world, posX, posZ);
+				chunkNode.setLocationZ(posZ);
+				chunkNode.setLocationX(posX);
+				chunkNode.save();
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 			
 			return true;
 		}
@@ -196,28 +209,27 @@ public class ChunkConfig implements IConfig{
 	
 	public File getChunkConfigFile(String world, int posX , int posZ) {
 		if(ChunkConfigExist(world,posX,posZ)) {	// check si un fichier du nom de l'UUID existe
-			//return new File(pluginName + playerPath + uuid.toString() + extensionFile);		// Return la file du nom de l'UUID
+			return new File(chunkPath + posX +"_"+ posZ + extensionFile);		// Return la file du nom de l'UUID
 		}
 		return null;
 	}
 	
-	public ChunkNode getChukConfigNode(String world, int posX , int posZ) {
+	public ChunkNode getChunkConfigNode(String world, int posX , int posZ) {
 		if(ChunkConfigExist(world,posX,posZ)) {			
-			//File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
-			//ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
+			File file = new File(chunkPath + posX + "_" + posZ + extensionFile); 	// Instancie new file		
+			ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
 			ChunkNode plyNode = new ChunkNode();	//load file / return loader
-			//plyNode.setCfgNode(loader);
+			plyNode.setCfgNode(loader);
 			return plyNode;
 			
 		}
 		return null;
 	}
 	
-	@SuppressWarnings("unused")
 	public boolean ChunkConfigExist(String world, int posX , int posZ) {
-		//File playerFile = new File(pluginName + playerPath + uuid.toString() + extensionFile);	// Instancie new file
-		if(/*playerFile.exists()*/true){	// check si file exist
+		File chunkFile = new File(chunkPath + posX + "_" + posZ + extensionFile);	// Instancie new file
+		if(checkFile(chunkFile, false)){	// check si file exist
 			return true;
 		}
 		return false;

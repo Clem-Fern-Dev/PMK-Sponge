@@ -2,8 +2,7 @@ package fr.mrfern.spongeplugintest;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.args.GenericArguments;
-import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
@@ -11,11 +10,11 @@ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-
 import com.google.inject.Inject;
 
-import fr.mrfern.spongeplugintest.command.*;
+import fr.mrfern.spongeplugintest.chunk.ChunkListenerManager;
+import fr.mrfern.spongeplugintest.chunk.commands.ChunkCommandManager;
+import fr.mrfern.spongeplugintest.command.BasicCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
@@ -29,7 +28,6 @@ public class Main {
 	protected static String defaultpath = "./mods/plugins/"+ pluginName +"/";
 	protected static String playerpath = "./mods/plugins/"+ pluginName +"/player";
 	protected static String chunkpath = "./mods/plugins/"+ pluginName +"/chunk";
-	
 	
 	public static String getPluginName() {		return pluginName;	}
 	
@@ -71,10 +69,11 @@ public class Main {
 	public void onInit(GameInitializationEvent event) {
 		
 		logger.info("Plugin Init");
-				
 		/*L’événement GameInitializationEvent est levé. Durant cet état, le plugin devrait avoir finit tout ce qu’il avait à faire afin de fonctionner. 
 		 * Les gestionnaires d’événements sont traités à ce moment là.
 		 */
+		
+		ChunkListenerManager.listener(this).setup();
 		
 	}
 	
@@ -98,25 +97,14 @@ public class Main {
 		
 	}
 	
-	@SuppressWarnings("unused")
 	@Listener
 	public void onStartServer(GameStartingServerEvent event) {
 		
-		CommandSpec myCommandSpec = CommandSpec.builder()
-			    .description(Text.of("Hello World Command"))
-			    .permission("spongeplugintest.command.helloworld")
-			    .executor(new HelloWorldCommand())
-			    .build();
-		CommandSpec messageCommandSpec = CommandSpec.builder()
-				.description(Text.of("Message command"))
-				.permission("spongeplugintest.command.message")
-				.arguments(
-						GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-						GenericArguments.remainingJoinedStrings(Text.of("message")))
-				.executor(new MessageCommand())
-				.build();
-		
-		Sponge.getCommandManager().register(this, myCommandSpec, "helloworld");
+		// Tu crée ton commands manager
+		CommandManager cmdManager = Sponge.getCommandManager();
+		//Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
+		ChunkCommandManager.commands(this).setupCommands();
+		BasicCommandManager.commands(this,cmdManager).setupCommands();
 	}
 }
 
