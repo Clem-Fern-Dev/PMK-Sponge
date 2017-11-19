@@ -16,7 +16,7 @@ public class ChunkListenerManager {
 		 
 		public void setup() {
 			Sponge.getEventManager().registerListeners(mainManager, new ChunkDiscoverListener());
-			Sponge.getEventManager().registerListeners(mainManager, new ChunkInteractEvent());//HandInteractEvent
+			Sponge.getEventManager().registerListeners(mainManager, new ProtectChunk());//HandInteractEvent
 		}
 	
 }
