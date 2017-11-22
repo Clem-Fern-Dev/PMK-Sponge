@@ -19,6 +19,7 @@ import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.Config;
 import fr.mrfern.spongeplugintest.config.PlayerConfig;
+import fr.mrfern.spongeplugintest.player.PlayerListenerManager;
 
 
 @Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0.0")
@@ -75,6 +76,7 @@ public class Main {
 		 */
 		
 		//ChunkListenerManager.listener(this).setup();
+		PlayerListenerManager.listener(this).setup();
 		
 	}
 	
