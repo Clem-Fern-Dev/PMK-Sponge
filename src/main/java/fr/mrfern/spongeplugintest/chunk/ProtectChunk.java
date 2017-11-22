@@ -16,9 +16,11 @@ import org.spongepowered.api.world.World;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class ProtectChunk{
 
 	//@Listener
+	@Deprecated
 	public void OnInteractBlockEvent(InteractBlockEvent.Primary e, @First Player player) throws Exception {
 		
 		player.sendMessage(Text.of("interact"));
@@ -60,7 +62,8 @@ public class ProtectChunk{
 		}
 	}
 	
-	@Listener
+	//@Listener
+	@Deprecated
 	public void OnBrakBlock(ChangeBlockEvent.Break e,@First Player player, @First BlockSnapshot block) throws Exception {
 		
 		player.sendMessage(Text.of("change block break " + block.getLocation().get().getBlockType().getName()));
@@ -103,7 +106,8 @@ public class ProtectChunk{
 		
 	}
 	
-	@Listener
+	//@Listener
+	@Deprecated
 	public void OnBrakBlock(ChangeBlockEvent.Place e,@First Player player) {
 		player.sendMessage(Text.of("change block place"));
 	}

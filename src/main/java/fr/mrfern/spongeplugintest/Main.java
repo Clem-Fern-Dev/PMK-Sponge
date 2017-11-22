@@ -46,7 +46,7 @@ public class Main {
 		
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();
-		ChunkConfig.getInstance().setup();
+		//ChunkConfig.getInstance().setup();
 	
     
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
@@ -74,7 +74,7 @@ public class Main {
 		 * Les gestionnaires d’événements sont traités à ce moment là.
 		 */
 		
-		ChunkListenerManager.listener(this).setup();
+		//ChunkListenerManager.listener(this).setup();
 		
 	}
 	
@@ -104,7 +104,7 @@ public class Main {
 		// Tu crée ton commands manager
 		CommandManager cmdManager = Sponge.getCommandManager();
 		//Tu appelles ta classe, tu l'instancie en y ajoutant le command manager par la methods commands, et enfin tu fait un setup pour build les commands
-		ChunkCommandManager.commands(this).setupCommands();
+		//ChunkCommandManager.commands(this).setupCommands();
 		BasicCommandManager.commands(this,cmdManager).setupCommands();
 		TpaCommandManager.commands(this, cmdManager).setupCommands();
 	}

@@ -7,6 +7,7 @@ import org.spongepowered.api.text.Text;
 
 import fr.mrfern.spongeplugintest.Main;
 
+@Deprecated
 public class ChunkCommandManager {
 	
 	private static ChunkCommandManager instance = new ChunkCommandManager();

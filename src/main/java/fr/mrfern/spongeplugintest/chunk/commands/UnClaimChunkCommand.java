@@ -14,6 +14,7 @@ import org.spongepowered.api.text.format.TextColors;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class UnClaimChunkCommand implements CommandExecutor {
 
 	@Override

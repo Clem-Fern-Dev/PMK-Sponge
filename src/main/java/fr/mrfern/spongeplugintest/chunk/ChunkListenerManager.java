@@ -4,6 +4,7 @@ import org.spongepowered.api.Sponge;
 
 import fr.mrfern.spongeplugintest.Main;
 
+@Deprecated
 public class ChunkListenerManager {
 
 	private static ChunkListenerManager instance = new ChunkListenerManager();
@@ -14,6 +15,7 @@ public class ChunkListenerManager {
 			return instance;
 		}
 		 
+		@Deprecated
 		public void setup() {
 			Sponge.getEventManager().registerListeners(mainManager, new ChunkDiscoverListener());
 			Sponge.getEventManager().registerListeners(mainManager, new ProtectChunk());//HandInteractEvent

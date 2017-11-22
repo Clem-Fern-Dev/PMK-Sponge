@@ -9,9 +9,11 @@ import org.spongepowered.api.text.Text;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class ChunkDiscoverListener {
 
-	@Listener
+	//@Listener
+	@Deprecated
 	public void OnDiscoverChunk(MoveEntityEvent e,@First Player player) {		
 
 		double posX = e.getToTransform().getLocation().getChunkPosition().getX();
