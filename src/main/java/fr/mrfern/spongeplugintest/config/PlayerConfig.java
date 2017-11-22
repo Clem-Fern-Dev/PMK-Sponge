@@ -73,7 +73,7 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
 				
-		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=\"\"/./raison=\"pas de raison\"/"));
+		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=none/./player-name=none/./raison=none/./time=none"));
 	
 		loaderRootNode.getNode(name,"config","langage").setValue("default");
 		
