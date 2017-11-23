@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.spongepowered.api.Sponge;
 
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -59,7 +60,10 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"UUID").setValue("none");
 		loaderRootNode.getNode(name,"name").setValue("none");
 		
-		loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));
+		//loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));
+		
+		loaderRootNode.getNode(name,"IP").setValue("0.0.0.0");
+		loaderRootNode.getNode(name,"IP-list").setValue(Arrays.asList("0.0.0.0 /./ 00/00/00+00H00M"));		
 		
 		loaderRootNode.getNode(name,"forum","profile-link").setValue("none");
 		loaderRootNode.getNode(name,"forum","name").setValue("none");
@@ -73,7 +77,7 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
 				
-		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=none/./player-name=none/./raison=none/./time=none"));
+		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=none/./IP-player=0.0.0/./player-name=none/./UUID-of-player=none/./raison=none/./time=none"));
 	
 		loaderRootNode.getNode(name,"config","langage").setValue("default");
 		
@@ -111,9 +115,9 @@ public class PlayerConfig implements IConfig{
 	}
 	
 	public boolean createPlayerConfig(UUID uuid) {
-		if(getPlayerConfigFile(uuid) != null) {
+		if(!playerConfigExist(uuid)) {
 			// création du fichier
-			File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file
+			File file = new File(playerPath + uuid.toString() + extensionFile); 	// Instancie new file
 			
 			try {
 				FileUtils.copyFile(defaultFileConfig, file);
@@ -129,14 +133,14 @@ public class PlayerConfig implements IConfig{
 	
 	public File getPlayerConfigFile(UUID uuid) {
 		if(playerConfigExist(uuid)) {	// check si un fichier du nom de l'UUID existe
-			return new File(pluginName + playerPath + uuid.toString() + extensionFile);		// Return la file du nom de l'UUID
+			return new File(playerPath + uuid.toString() + extensionFile);		// Return la file du nom de l'UUID
 		}
 		return null;
 	}
 	
 	public PlayerNode getPlayerConfigNode(UUID uuid) {
 		if(playerConfigExist(uuid)) {			
-			File file = new File(pluginName + playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
+			File file = new File(playerPath + uuid.toString() + extensionFile); 	// Instancie new file		
 			ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
 			
 			PlayerNode plyNode = new PlayerNode();	//load file / return loader
@@ -148,7 +152,7 @@ public class PlayerConfig implements IConfig{
 	}
 	
 	public boolean playerConfigExist(UUID uuid) {
-		File playerFile = new File(pluginName + playerPath + uuid.toString() + extensionFile);	// Instancie new file
+		File playerFile = new File(playerPath + uuid.toString() + extensionFile);	// Instancie new file
 		if(playerFile.exists()){	// check si file exist
 			return true;
 		}

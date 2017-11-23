@@ -20,15 +20,27 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 public class PlayerNode implements ConfigurationNode{
 
 	private ConfigurationNode cfgNode;
+	private ConfigurationLoader<CommentedConfigurationNode> cfgLoader;
 	protected String name = "player";
 	
 	public ConfigurationNode getCfgNode() {
 		return cfgNode;
 	}
-
-	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfgNode) {
+	
+	public void save() {
 		try {
-			this.cfgNode = cfgNode.load();
+			cfgLoader.save(cfgNode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setCfgNode(ConfigurationLoader<CommentedConfigurationNode> cfg) {
+		cfgLoader = cfg;
+		try {
+			this.cfgNode = cfg.load();
+			cfg.save(cfgNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,6 +191,7 @@ public class PlayerNode implements ConfigurationNode{
 		return cfgNode.getNode(name,"name").getString();
 	}
 	
+	@Deprecated
 	public List<String> getChunkOwned(){
 		return cfgNode.getNode(name,"chunkOwner").getList(new Function<Object,String>() {
 																@Override
@@ -220,16 +233,19 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public List<String> getSubGroup(){
-		return cfgNode.getNode(name,"grade","sub-grade").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+		
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"grade","sub-grade").getList(stringTransformer);
 	}
 	
 	public boolean getIsBanned() {
@@ -253,21 +269,44 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public List<String> getBanList(){
-		return cfgNode.getNode(name,"last-ban-list").getList(new Function<Object,String>() {
-			@Override
-			public String apply(Object input) {
-				if (input instanceof String) {
-					return (String) input;
-				} else {
-					return null;
-				}
-			}
-		});
+		
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"last-ban-list").getList(stringTransformer);
 	}
 	
 	public String getLangage() {
 		return cfgNode.getNode(name,"config","langage").getString();
 	}	
+	
+	public String getIP() {
+		return cfgNode.getNode(name,"IP").getString();
+	}
+	
+	public List<String> getIPList() {
+		
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"IP-list").getList(stringTransformer);
+	}
 	
 	// setter
 	
@@ -283,6 +322,7 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"name").setValue(playerName);
 	}
 	
+	@Deprecated
 	public void setChunkOwned(List<String> list){
 		cfgNode.getNode(name,"chunkOwner").setValue(list);
 	}
@@ -338,6 +378,14 @@ public class PlayerNode implements ConfigurationNode{
 	
 	public void setLangage(String lang) {
 		cfgNode.getNode(name,"config","langage").setValue(lang);
+	}
+	
+	public void setIP(String ip) {
+		cfgNode.getNode(name,"IP").setValue(ip);
+	}
+	
+	public void setIPList(List<String> list) {		
+		cfgNode.getNode(name,"IP-list").setValue(list);
 	}
 	
 }
