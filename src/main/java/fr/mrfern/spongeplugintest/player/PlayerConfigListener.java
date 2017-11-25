@@ -94,29 +94,29 @@ public class PlayerConfigListener {
 				
 				case "staff":
 					
-					p.sendMessage(Text.of("test"));
+					Sponge.getServer().getBroadcastChannel().send(Text.of("staff"));
 					
 					break;
 				
 				case "donateur":
 				
-					p.sendMessage(Text.of("test"));
+					Sponge.getServer().getBroadcastChannel().send(Text.of("donateur"));
 					
 					break;
 				case "vip":
 	
-					p.sendMessage(Text.of("test"));
+					Sponge.getServer().getBroadcastChannel().send(Text.of("vip"));
 					
 					break;
 				case "vip+":
 	
-					p.sendMessage(Text.of("test"));
+					Sponge.getServer().getBroadcastChannel().send(Text.of("vip+"));
 					
 					break;
 					
 				case "none":
 					
-					p.sendMessage(Text.of("test"));
+					Sponge.getServer().getBroadcastChannel().send(Text.of("none"));
 					
 					break;
 			}
