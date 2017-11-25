@@ -3,6 +3,7 @@ package fr.mrfern.spongeplugintest.command.tp;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.spongepowered.api.command.CommandException;
@@ -21,7 +22,8 @@ public class TpaCommand implements CommandExecutor {
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		if(src instanceof Player) {
 			Player sender = (Player) src;
-			Player target = (Player) args.getOne("player").get();
+			Player target = (Player) args.<Player>getOne("target").get();
+			// recuperation de la cible
 				
 			HashMap<UUID,TeleportData> hashmap = TpaCommandManager.getTpHM();
 			
