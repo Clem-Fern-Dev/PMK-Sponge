@@ -252,6 +252,22 @@ public class PlayerNode implements ConfigurationNode{
 		return cfgNode.getNode(name,"ban","enable").getBoolean();
 	}
 	
+	public String getPlayerBanRaison() {
+		return cfgNode.getNode(name,"ban","raison").getString();
+	}
+	
+	public int getPlayerBanTimeDay() {
+		return cfgNode.getNode(name,"ban","time","day").getInt();
+	}
+	
+	public int getPlayerBanTimeHour() {
+		return cfgNode.getNode(name,"ban","time","day").getInt();
+	}
+	
+	public int getPlayerBanTimeMinut() {
+		return cfgNode.getNode(name,"ban","time","day").getInt();
+	}	
+	
 	public UUID getBanAuthorUUID() {
 		return UUID.fromString(cfgNode.getNode(name,"ban","author","UUID").getString());
 	}
