@@ -61,8 +61,8 @@ public class PlayerConfig implements IConfig{
 		
 		//loaderRootNode.getNode(name,"chunkOwner").setValue(Arrays.asList("none"));
 		
-		loaderRootNode.getNode(name,"IP").setValue("0.0.0.0");
-		loaderRootNode.getNode(name,"IP-list").setValue(Arrays.asList("0.0.0.0 /./ 00/00/00+00H00M"));		
+		loaderRootNode.getNode(name,"IP").setValue("0.0.0.0 /./ 0/0/0 0:0 AM");
+		loaderRootNode.getNode(name,"IP-list").setValue(Arrays.asList("0.0.0.0 /./ 0/0/0 0:0 AM"));		
 		
 		loaderRootNode.getNode(name,"forum","profile-link").setValue("none");
 		loaderRootNode.getNode(name,"forum","name").setValue("none");
