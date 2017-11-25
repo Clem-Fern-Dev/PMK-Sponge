@@ -1,5 +1,7 @@
 package fr.mrfern.spongeplugintest;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -24,9 +26,9 @@ public class Main {
 	
 	protected static String pluginName = "spongeplugintest";
 	
-	protected static String defaultpath = "./mods/plugins/"+ pluginName +"/";
-	protected static String playerpath = "./mods/plugins/"+ pluginName +"/player";
-	protected static String chunkpath = "./mods/plugins/"+ pluginName +"/chunk";
+	protected static String defaultpath = "mods/plugins/"+ pluginName +"/";
+	protected static String playerpath = "mods/plugins/"+ pluginName +"/player";
+	protected static String chunkpath = "mods/plugins/"+ pluginName +"/chunk";
 	
 	public static String getPluginName() {		return pluginName;	}
 	
@@ -41,6 +43,7 @@ public class Main {
 	public void onPreInit(GamePreInitializationEvent event) {
 		
 		logger.info("Plugin preInit " + defaultpath);
+		
 		
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();

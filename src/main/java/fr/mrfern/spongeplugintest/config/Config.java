@@ -14,7 +14,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class Config implements IConfig{
 
 	protected String name = "config";
-	protected String defaultpath = "./mods/plugins/spongeplugintest/";
+	protected String defaultpath = "mods/plugins/spongeplugintest/";
 	protected String gAuthNode = "google-authentificator";
 	protected String bddNode = "bdd";
 	protected String configNode = "config";
