@@ -13,6 +13,7 @@ import org.spongepowered.api.text.Text;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class CreateChunkConfigCommand implements CommandExecutor {
 
 	@Override

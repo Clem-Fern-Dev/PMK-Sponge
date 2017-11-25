@@ -2,7 +2,6 @@ package fr.mrfern.spongeplugintest.chunk.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -16,6 +15,7 @@ import org.spongepowered.api.text.format.TextColors;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class ChangeGroupDelChunk implements CommandExecutor {
 
 	@Override
@@ -44,17 +44,17 @@ public class ChangeGroupDelChunk implements CommandExecutor {
 			}
 			
 			Text textPlayerNameCible = Text.builder(player.getName()).color(TextColors.YELLOW).build();
-			
+	    	Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.YELLOW).build();			
 				    
 		    if(chunkNode != null) {
 		    	
-		    	/*if(chunkNode.getClaimedBy().equals(player.getName())){
+		    	if(chunkNode.getClaimedBy().equals(player.getName())){
 		    		// vous ne pouvez pas vou ajouté vous meme
 		    		Text textClaimed = Text.builder("Vous ne pouvez pas vous retirez vous même, ce claim vous appartient.").color(TextColors.RED).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 		    		ply.sendMessage(textEnTete);
 			    	return CommandResult.empty();
-		    	}*/
+		    	}
 		    	
 		    	// ajout
 		    	if(chunkNode.getClaimedBy().equals(ply.getName())){
@@ -65,7 +65,7 @@ public class ChangeGroupDelChunk implements CommandExecutor {
 				    if(!listGroupUser.contains(player.getName())) {
 				    	
 				    	Text textClaimed = Text.builder(" ne fais pas parti du chunk ").color(TextColors.RED).build();
-				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible).build();
+				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed).build();
 			    		ply.sendMessage(textEnTete);
 				    	// joueur déjà dans la liste
 					    return CommandResult.success();
@@ -81,6 +81,9 @@ public class ChangeGroupDelChunk implements CommandExecutor {
 				    	Text textClaimed = Text.builder(" a été retiré du chunk").color(TextColors.BLUE).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textPlayerNameCible,textClaimed).build();
 			    		ply.sendMessage(textEnTete);
+			    		textClaimed = Text.builder("Les autorisations sur ce chunk vous ont été retiré par ").color(TextColors.BLUE).build();
+			    		textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed,textPlayerNameYou).build();
+			    		player.sendMessage(textEnTete);
 				    	
 					    return CommandResult.success();
 				    }

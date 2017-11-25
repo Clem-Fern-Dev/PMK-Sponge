@@ -15,6 +15,7 @@ import org.spongepowered.api.text.format.TextColors;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class ChangeGroupAddChunk implements CommandExecutor {
 
 	@Override
@@ -31,6 +32,7 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 	    	Text textSlasher = Text.builder("/").color(TextColors.GOLD).build();
 	    	Text textPosZ = Text.builder("Z:"+ posZ ).color(TextColors.GREEN).build();
 	    	Text textEnd = Text.builder(" ] ").color(TextColors.GOLD).build();
+	    	
 			
 			Player player;
 			if(args.<Player>getOne("player").isPresent()) {
@@ -42,20 +44,18 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 			    return CommandResult.empty();
 			}
 			
-			Text textPlayerNameCible = Text.builder(player.getName()).color(TextColors.YELLOW).build();
-            
-            
-	    	//Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.GOLD).build();
+			Text textPlayerNameCible = Text.builder(player.getName()).color(TextColors.YELLOW).build();            
+	    	Text textPlayerNameYou = Text.builder(ply.getName()).color(TextColors.YELLOW).build();
 				    
 		    if(chunkNode != null) {
 		    	
-		    	/*if(chunkNode.getClaimedBy().equals(player.getName())){
+		    	if(chunkNode.getClaimedBy().equals(player.getName())){
 		    		// vous ne pouvez pas vou ajouté vous meme
 		    		Text textClaimed = Text.builder("Vous ne pouvez pas vous ajoutez vous même, ce claim vous appartient.").color(TextColors.RED).build();
 			    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
 		    		ply.sendMessage(textEnTete);
 			    	return CommandResult.empty();
-		    	}*/
+		    	}
 		    	
 		    	// ajout
 		    	if(chunkNode.getClaimedBy().equals(ply.getName())){
@@ -81,6 +81,10 @@ public class ChangeGroupAddChunk implements CommandExecutor {
 				    	Text textClaimed = Text.builder("Les autorisations sur le chunk ont été donné à ").color(TextColors.BLUE).build();
 				    	Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed,textPlayerNameCible).build();
 			    		ply.sendMessage(textEnTete);
+			    		textClaimed = Text.builder("Les autorisations sur ce chunk vous ont été donné par ").color(TextColors.BLUE).build();
+			    		textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.GOLD).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed,textPlayerNameYou).build();
+			    		player.sendMessage(textEnTete);
+			    		
 				    	
 					    return CommandResult.success();
 				    }

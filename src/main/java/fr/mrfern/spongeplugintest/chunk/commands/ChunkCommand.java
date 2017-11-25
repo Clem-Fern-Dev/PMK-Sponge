@@ -14,6 +14,7 @@ import org.spongepowered.api.util.Color;
 import fr.mrfern.spongeplugintest.config.ChunkConfig;
 import fr.mrfern.spongeplugintest.config.ChunkNode;
 
+@Deprecated
 public class ChunkCommand implements CommandExecutor {
 
 	@Override
