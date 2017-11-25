@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
-import org.spongepowered.api.Sponge;
 
 import fr.mrfern.spongeplugintest.Main;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -73,6 +72,10 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"grade","sub-grade").setValue(Arrays.asList("none"));
 		
 		loaderRootNode.getNode(name,"ban","enable").setValue(false);
+		loaderRootNode.getNode(name,"ban","raison").setValue("none");
+		loaderRootNode.getNode(name,"ban","time","day").setValue(0);
+		loaderRootNode.getNode(name,"ban","time","hour").setValue(0);
+		loaderRootNode.getNode(name,"ban","time","minut").setValue(0);
 		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
