@@ -1,7 +1,6 @@
 package fr.mrfern.spongeplugintest.chunk;
 	
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.text.Text;
@@ -33,6 +32,7 @@ public class ChunkDiscoverListener {
 				int lastchunkZ = e.getFromTransform().getLocation().getChunkPosition().getZ();
 				ChunkNode lastChunkNode = ChunkConfig.getInstance().getChunkConfigNode(worldName,lastchunkX,lastchunkZ);
 				
+				@SuppressWarnings("unused")
 				String fromClaimedBy = lastChunkNode.getClaimedBy(), ToClaimedBy = chunkNode.getClaimedBy();
 				//player.sendMessage(Text.of(fromClaimedBy + " to " + ToClaimedBy));
 				
