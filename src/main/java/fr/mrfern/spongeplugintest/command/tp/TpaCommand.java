@@ -23,6 +23,7 @@ public class TpaCommand implements CommandExecutor {
 		if(src instanceof Player) {
 			Player sender = (Player) src;
 			Player target = (Player) args.<Player>getOne("target").get();
+			// recuperation de la cible
 				
 			HashMap<UUID,TeleportData> hashmap = TpaCommandManager.getTpHM();
 			
