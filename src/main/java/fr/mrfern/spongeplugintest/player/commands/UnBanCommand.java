@@ -8,6 +8,7 @@ import org.spongepowered.api.command.source.CommandBlockSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.text.Text;
 
 public class UnBanCommand implements CommandExecutor {
 
@@ -16,6 +17,10 @@ public class UnBanCommand implements CommandExecutor {
 		
 		if(src instanceof Player) {
 		    
+			if (args.hasAny("all")) {
+			   // alors ban all
+			}
+			
 		}
 		else if(src instanceof ConsoleSource | src instanceof CommandBlockSource){
 			
