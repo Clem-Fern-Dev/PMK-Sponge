@@ -36,6 +36,9 @@ public class PlayerConfigListener {
 		UUID uuid = p.getUniqueId();
 		PlayerNode plyNode;
 		
+		DateFormat date = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+		String newIP = p.getConnection().getAddress().getAddress().getHostAddress();
+		
 		if(!PlayerConfig.getInstance().playerConfigExist(p.getUniqueId())) {
 			
 			PlayerConfig.getInstance().createPlayerConfig(uuid);			
@@ -51,6 +54,9 @@ public class PlayerConfigListener {
 			
 			plyNode.setPlayerUUIDString(p.getUniqueId().toString());
 			plyNode.setPlayerName(p.getName());
+			
+			plyNode.setIP(newIP + " /./ " + date.format(new Date()).toString());
+			
 			plyNode.save();
 			
 			welcomeMessage(p);
@@ -60,13 +66,11 @@ public class PlayerConfigListener {
 			plyNode = PlayerConfig.getInstance().getPlayerConfigNode(uuid);
 			
 			String lastIP = plyNode.getIP();
-			String newIP = p.getConnection().getAddress().getAddress().getHostAddress();
-			DateFormat date = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
 			
-			plyNode.setIP(newIP);
+			plyNode.setIP(newIP + " /./ " + date.format(new Date()).toString());
 			
 			List<String> list = new ArrayList<>(plyNode.getIPList());				    	
-	    	list.add(lastIP + " /./ " + date.format(new Date()).toString());
+	    	list.add(lastIP);
 	    	plyNode.setIPList(list);				    	
 	    	plyNode.save();
 			
