@@ -38,5 +38,5 @@
 	</dependency>
 	  	
   </dependencies>  
-  <artifactId>PumpMySponge</artifactId>
+  <artifactId>pumpmysponge</artifactId>
 </project>

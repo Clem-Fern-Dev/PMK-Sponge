@@ -1,7 +1,5 @@
 package fr.mrfern.pumpmysponge;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -12,6 +10,7 @@ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+
 import com.google.inject.Inject;
 
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
@@ -23,10 +22,10 @@ import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 
 
 
-@Plugin(id = "spongeplugintest", name = "spongeplugintest", version = "1.0.0")
+@Plugin(id = "pumpmysponge", name = "PumpMySponge", version = "1.0.4")
 public class Main {
 	
-	protected static String pluginName = "spongeplugintest";
+	protected static String pluginName = "PumpMySponge";
 	
 	protected static String defaultpath = "mods/plugins/"+ pluginName +"/";
 	protected static String playerpath = "mods/plugins/"+ pluginName +"/player";
