@@ -26,7 +26,7 @@ public class PlayerBanListener{
 	}
 
 	@Listener
-	public void OnClientAuth(ClientConnectionEvent.Auth e) {
+	public void OnClientAuth(ClientConnectionEvent.Auth e) {		
 		if(isBanned(e.getProfile().getUniqueId())) {
 			
 			logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
@@ -67,7 +67,11 @@ public class PlayerBanListener{
 	}
 	
 	private boolean isBanned(UUID uniqueId) {
-		return PlayerConfig.getInstance().getPlayerConfigNode(uniqueId).getIsBanned();
+		if(PlayerConfig.getInstance().getPlayerConfigNode(uniqueId) != null) {
+			return PlayerConfig.getInstance().getPlayerConfigNode(uniqueId).getIsBanned();
+		}
+		return false;
+		
 	}
 
 	@Listener
