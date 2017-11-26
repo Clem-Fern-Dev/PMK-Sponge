@@ -1,6 +1,7 @@
 package fr.mrfern.spongeplugintest.player.commands;
 
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
 
@@ -20,6 +21,7 @@ public class PlayerCommandManager {
 		CommandSpec commandTempBanSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .executor(new TBanCommand())
+			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()))
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandTempBanSpec, "tban");
@@ -27,6 +29,7 @@ public class PlayerCommandManager {
 		CommandSpec commandUnBanSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .executor(new UnBanCommand())
+			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()))
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandUnBanSpec, "unban");
