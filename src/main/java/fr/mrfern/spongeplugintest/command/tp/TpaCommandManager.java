@@ -9,7 +9,7 @@ import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
 
-import fr.mrfern.spongeplugintest.Main;
+import fr.mrfern.pumpmysponge.Main;
 
 public class TpaCommandManager {
 	
