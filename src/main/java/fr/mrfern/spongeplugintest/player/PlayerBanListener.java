@@ -37,18 +37,18 @@ public class PlayerBanListener{
 			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
 			
 			header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
-			raison = Text.builder("").color(TextColors.BLUE).build();	
+			raison = Text.builder(plyNode.getPlayerBanRaison()).color(TextColors.BLUE).build();	
 			
 			
 			time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
 			time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
 			time_Minut_format = Text.builder(" M ").color(TextColors.GOLD).build();	
 			
-			time_Day = Text.builder("90").color(TextColors.AQUA).append(time_Day_format).build();	
-			time_Hour = Text.builder("11").color(TextColors.AQUA).append(time_Hour_format).build();	
-			time_Minut = Text.builder("22").color(TextColors.AQUA).append(time_Minut_format).build();	
+			time_Day = Text.builder(plyNode.getPlayerBanTimeDay()+"").color(TextColors.AQUA).append(time_Day_format).build();	
+			time_Hour = Text.builder(plyNode.getPlayerBanTimeHour()+"").color(TextColors.AQUA).append(time_Hour_format).build();	
+			time_Minut = Text.builder(plyNode.getPlayerBanTimeMinut()+"").color(TextColors.AQUA).append(time_Minut_format).build();	
 			
-			ban = Text.builder("Sufike").color(TextColors.DARK_RED).build();	
+			ban = Text.builder(plyNode.getBanAuthorName() + " [ " + plyNode.getBanAuthorUUIDString() + " ]").color(TextColors.DARK_RED).build();	
 			
 			
 			
@@ -63,19 +63,11 @@ public class PlayerBanListener{
 			e.setMessage(header,body,footer);	
 			e.setCancelled(true);
 			
-		}else {
-			
-			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
-			
-			// Set ip + ajout de l'ip à la liste
-			
-			
-			
 		}
 	}
 	
 	private boolean isBanned(UUID uniqueId) {
-		return false;
+		return PlayerConfig.getInstance().getPlayerConfigNode(uniqueId).getIsBanned();
 	}
 
 	@Listener
