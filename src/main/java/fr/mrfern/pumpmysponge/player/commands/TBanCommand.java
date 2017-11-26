@@ -24,25 +24,27 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 		    
 			Player ply = (Player) src;
 			
-			if(!checkPermissions(ply, "")) {
+			if(checkPermissions(ply, "pumpmystaff.ban")) {
 				
-				Text text = Text.builder("[ PumpMyStaff ]").color(TextColors.GOLD).build();
-				ply.sendMessage(text );
+				Player target;
+				
+				if(args.<Player>getOne("player").isPresent()) {
+					target = args.<Player>getOne("player").get();
+				}else {
+					
+					Text textClaimed = Text.builder("Le joueur spécifié n'est pas valide ").color(TextColors.RED).build();
+			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
+		    		ply.sendMessage(textEnTete);
+				    return CommandResult.empty();
+				}
+				
+				
+				
+				
 				
 			}
 			
-			Player player;
-			if(args.<Player>getOne("player").isPresent()) {
-				player = args.<Player>getOne("player").get();
-			}else {
-				//Text textClaimed = Text.builder("Le joueur spécifié n'est pas valide ").color(TextColors.RED).build();
-		    	//Text textEnTete = Text.builder("[PumpMyChunk -- ").color(TextColors.DARK_BLUE).append(textPosX,textSlasher,textPosZ,textEnd,textClaimed).build();
-	    		//ply.sendMessage(textEnTete);
-			    return CommandResult.empty();
-			}
-			
-			
-			
+			return CommandResult.empty();
 			
 		}
 		else if(src instanceof ConsoleSource | src instanceof CommandBlockSource){
