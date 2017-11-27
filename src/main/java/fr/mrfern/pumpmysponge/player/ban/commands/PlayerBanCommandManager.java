@@ -8,11 +8,11 @@ import org.spongepowered.api.text.Text;
 
 import fr.mrfern.pumpmysponge.Main;
 
-public class PlayerCommandManager {
-	private static PlayerCommandManager instance = new PlayerCommandManager();
+public class PlayerBanCommandManager {
+	private static PlayerBanCommandManager instance = new PlayerBanCommandManager();
 	private static Main mainManager;
 
-	public static PlayerCommandManager commands(Main main) {
+	public static PlayerBanCommandManager commands(Main main) {
 		mainManager = main;
 		return instance;
 	}
