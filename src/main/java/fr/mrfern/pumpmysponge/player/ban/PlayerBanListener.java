@@ -74,23 +74,5 @@ public class PlayerBanListener{
 		return false;
 		
 	}
-
-	@Listener
-	public void OnClientLogin(ClientConnectionEvent.Login e) {
-		//logger.info(e.getProfile().getName().get() + " / " + e.getConnection().getAddress().getAddress().getHostAddress() + " login");
-		//System.out.println(e.getProfile().getName().get() + " / " + e.getConnection().getAddress().getAddress().getHostAddress() + " login");
-	}
-	
-	@Listener
-	public void OnClientDisconnect(ClientConnectionEvent.Disconnect e) {
-		//logger.info(e.getTargetEntity().getName() + " disconnect");
-		//System.out.println(e.getTargetEntity().getName() + " disconnect");
-	}
-
-	@Listener
-	public void OnClientJoin(ClientConnectionEvent.Join e) {
-		//logger.info(e.getTargetEntity().getName() + " join");
-		//System.out.println(e.getTargetEntity().getName() + " join");
-	}
 	
 }
