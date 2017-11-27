@@ -17,6 +17,7 @@ import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
+import fr.mrfern.pumpmysponge.player.ban.commands.PlayerBanCommandManager;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 
 
@@ -110,6 +111,7 @@ public class Main {
 		//ChunkCommandManager.commands(this).setupCommands();
 		BasicCommandManager.commands(this,cmdManager).setupCommands();
 		TpaCommandManager.commands(this, cmdManager).setupCommands();
+		PlayerBanCommandManager.commands(this).setupCommands();
 	}
 }
 
