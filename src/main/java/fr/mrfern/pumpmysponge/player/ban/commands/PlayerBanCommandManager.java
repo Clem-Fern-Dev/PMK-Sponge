@@ -24,7 +24,7 @@ public class PlayerBanCommandManager {
 			    .executor(new TBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
 		    				GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-		    				GenericArguments.onlyOne(GenericArguments.string(Text.of("time"))))
+		    				GenericArguments.remainingJoinedStrings(Text.of("time")))
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandTempBanSpec, "tban");
