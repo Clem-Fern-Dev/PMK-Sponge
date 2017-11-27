@@ -3,6 +3,7 @@ package fr.mrfern.pumpmysponge.player;
 import org.spongepowered.api.Sponge;
 
 import fr.mrfern.pumpmysponge.Main;
+import fr.mrfern.pumpmysponge.player.ban.PlayerBanListener;
 
 public class PlayerListenerManager {
 

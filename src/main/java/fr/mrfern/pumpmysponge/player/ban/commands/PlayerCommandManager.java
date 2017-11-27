@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.player.commands;
+package fr.mrfern.pumpmysponge.player.ban.commands;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.CommandFlags.UnknownFlagBehavior;

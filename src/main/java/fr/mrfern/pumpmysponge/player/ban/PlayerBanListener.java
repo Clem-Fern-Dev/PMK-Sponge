@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.player;
+package fr.mrfern.pumpmysponge.player.ban;
 
 import java.util.UUID;
 

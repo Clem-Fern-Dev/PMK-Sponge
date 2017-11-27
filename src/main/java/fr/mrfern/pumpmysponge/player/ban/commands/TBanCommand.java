@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.player.commands;
+package fr.mrfern.pumpmysponge.player.ban.commands;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
