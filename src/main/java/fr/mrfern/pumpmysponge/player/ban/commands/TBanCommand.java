@@ -25,7 +25,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			Player target;
 			
 			String time;
-			HashMap<TimeEnum, String> hashTime = new HashMap<>();
+			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
@@ -59,17 +59,19 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 						switch (splitedTime.charAt(splitedTime.length()-1)) {
 							
 							case 'D':
-									hashTime.putIfAbsent(TimeEnum.Day, splitedTime);
+									hashTime.putIfAbsent(TimeEnum.Day, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
 								break;
 							case 'H':
-									hashTime.putIfAbsent(TimeEnum.Hour, splitedTime);
+									hashTime.putIfAbsent(TimeEnum.Hour, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
 								break;
 							case 'm':
-								hashTime.putIfAbsent(TimeEnum.Minute, splitedTime);
+								hashTime.putIfAbsent(TimeEnum.Minute, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
 								break;
 						}
 					}
 				}
+				
+				
 				
 				ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
 				return CommandResult.success();
