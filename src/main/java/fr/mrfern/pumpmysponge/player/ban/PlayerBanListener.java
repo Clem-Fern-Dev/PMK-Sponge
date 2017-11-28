@@ -30,8 +30,8 @@ public class PlayerBanListener{
 	public void OnClientAuth(ClientConnectionEvent.Auth e) {		
 		if(isBanned(e.getProfile().getUniqueId())) {
 			
-			logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
-			System.out.println(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
+			//logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
+			//System.out.println(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
 			
 			Text header,body,footer,raison,ban,time_Day,time_Hour,time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
 			
