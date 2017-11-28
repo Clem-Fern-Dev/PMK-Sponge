@@ -91,7 +91,35 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 				// info du bannisseur
 				targetNode.setPlayerBanAuthorName(ply.getName());
 				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
-				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
+				
+				targetNode.save();
+				
+				Text header,body,footer,text_raison,text_ban,text_time_Day,text_time_Hour,text_time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
+				
+				header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
+				text_raison = Text.builder("raison").color(TextColors.BLUE).build();	
+				
+				
+				time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
+				time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
+				time_Minut_format = Text.builder(" M ").color(TextColors.GOLD).build();	
+				
+				text_time_Day = Text.builder(hashTime.get(TimeEnum.Day)+"").color(TextColors.AQUA).append(time_Day_format).build();	
+				text_time_Hour = Text.builder(hashTime.get(TimeEnum.Hour)+"").color(TextColors.AQUA).append(time_Hour_format).build();	
+				text_time_Minut = Text.builder(hashTime.get(TimeEnum.Minute)+"").color(TextColors.AQUA).append(time_Minut_format).build();	
+				
+				text_ban = Text.builder(ply.getName() + " [ " + ply.getUniqueId() + " ]").color(TextColors.DARK_RED).build();	
+				
+				
+				
+				body = Text.builder("\n[ Raison ] ").color(TextColors.GOLD).append(text_raison).build();
+				
+				Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(text_ban).build();
+				Text second_head_footer = Text.builder(" ][ Temps restant : ").color(TextColors.GOLD).append(text_time_Day,text_time_Hour,text_time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
+				
+				footer = Text.builder().append(head_footer,second_head_footer).build();
+				
+				target.kick(Text.builder().append(header,body,footer).build());
 				
 				//ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
 				return CommandResult.success();
