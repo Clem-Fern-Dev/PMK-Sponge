@@ -36,7 +36,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					return CommandResult.success();
 				}
 			}else {
-				
+				 
 				Text textClaimed = Text.builder("Le joueur spécifié n'est pas valide ").color(TextColors.RED).build();
 		    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
 	    		ply.sendMessage(textEnTete);
