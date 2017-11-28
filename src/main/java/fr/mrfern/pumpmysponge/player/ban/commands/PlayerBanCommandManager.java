@@ -23,7 +23,7 @@ public class PlayerBanCommandManager {
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .executor(new TBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
-		    				GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
+		    				GenericArguments.player(Text.of("player")),
 		    				GenericArguments.remainingJoinedStrings(Text.of("time")))
 			    .build();
 		
