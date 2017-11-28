@@ -64,7 +64,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 							case 'H':
 									hashTime.putIfAbsent(TimeEnum.Hour, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
 								break;
-							case 'm':
+							case 'M':
 								hashTime.putIfAbsent(TimeEnum.Minute, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
 								break;
 						}
