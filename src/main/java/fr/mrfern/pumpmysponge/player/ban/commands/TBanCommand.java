@@ -12,6 +12,8 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
+import fr.mrfern.pumpmysponge.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.config.PlayerNode;
 import fr.mrfern.pumpmysponge.player.IPermissions;
 
 public class TBanCommand implements CommandExecutor,IPermissions {
@@ -29,6 +31,10 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
+				if(target.getUniqueId().equals(ply.getUniqueId())) {
+					ply.kick(Text.of("Ouf je viens de te sauvé la vie, heuresement que je suis là !"));
+					return CommandResult.success();
+				}
 			}else {
 				
 				Text textClaimed = Text.builder("Le joueur spécifié n'est pas valide ").color(TextColors.RED).build();
@@ -40,8 +46,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			if(args.<Player>getOne("time").isPresent()) {
 				
 				time = args.<String>getOne("time").get();
-				
-				ply.sendMessage(Text.of(time));
+			
 				hashTime.clear();
 				
 				String[] listTime = time.split(" ");
@@ -55,7 +60,6 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					    return CommandResult.empty();
 						
 					}else {
-						ply.sendMessage(Text.of(splitedTime.charAt(splitedTime.length()-1)));
 						switch (splitedTime.charAt(splitedTime.length()-1)) {
 							
 							case 'D':
@@ -71,9 +75,25 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					}
 				}
 				
+				PlayerNode targetNode = PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId());
 				
+				// joueur ban
+				targetNode.setPlayerIsBanned(true);	 
 				
-				ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
+				// ajout des infos
+				targetNode.setPlayerBanRaison("raison");	// raison du bannissement
+				
+				// temps de bannissement
+				targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
+				targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
+				targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+				
+				// info du bannisseur
+				targetNode.setPlayerBanAuthorName(ply.getName());
+				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
+				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
+				
+				//ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
 				return CommandResult.success();
 				
 			}else{
