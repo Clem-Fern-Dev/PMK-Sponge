@@ -27,7 +27,7 @@ public class PlayerBanListener{
 	}
 
 	@Listener
-	public void OnClientAuth(ClientConnectionEvent.Auth e) {		
+	public void OnClientAuth(ClientConnectionEvent.Login e) {		
 		if(isBanned(e.getProfile().getUniqueId())) {
 			
 			//logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
