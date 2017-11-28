@@ -84,9 +84,24 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 				targetNode.setPlayerBanRaison("raison");	// raison du bannissement
 				
 				// temps de bannissement
-				targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
-				targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
-				targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+				if( hashTime.get(TimeEnum.Day) != null) {
+					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
+				}else{
+					targetNode.setPlayerBanTimeDay(0);
+				}
+				
+				if( hashTime.get(TimeEnum.Hour) != null) {
+					targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
+				}else{
+					targetNode.setPlayerBanTimeHour(0);
+				}
+				
+				if( hashTime.get(TimeEnum.Minute) != null) {
+					targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+				}else{
+					targetNode.setPlayerBanTimeMinut(0);
+				}				
+				
 				
 				// info du bannisseur
 				targetNode.setPlayerBanAuthorName(ply.getName());
