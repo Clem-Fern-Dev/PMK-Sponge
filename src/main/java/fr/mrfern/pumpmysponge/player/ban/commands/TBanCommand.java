@@ -14,6 +14,7 @@ import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
 import fr.mrfern.pumpmysponge.config.PlayerNode;
+import fr.mrfern.pumpmysponge.config.ban.BanListConfig;
 import fr.mrfern.pumpmysponge.player.IPermissions;
 
 public class TBanCommand implements CommandExecutor,IPermissions {
@@ -124,6 +125,9 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					target.kick(Text.builder().append(header,body,footer).build());
 						
 					// AJout à la liste des utilisateurs banni
+					
+					BanListConfig.getInstance().add(target.getUniqueId());
+					BanListConfig.getInstance().save();
 					
 					// AJout au logs ( ban )
 					
