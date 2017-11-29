@@ -541,9 +541,9 @@ public class PlayerNode implements ConfigurationNode{
 		String UUID_author_of_ban = getBanAuthorUUIDString();
 		String name_of_athor = getBanAuthorName();
 		
-		String date_begin = ""; 	// A FAIRE
-		String date_end = ""; 		// A FAIRE
-		String time = "";			// A FAIRE
+		String date_begin = getBeginTimeBanYear() + ":" + getBeginTimeBanMonth() + ":" + getBeginTimeBanDay() + ":" + getBeginTimeBanHour() + ":" + getBeginTimeBanMinute() ; 	// A FAIRE
+		String date_end = getEndTimeBanYear() + ":" + getEndTimeBanMonth() + ":" + getEndTimeBanDay() + ":" + getEndTimeBanHour() + ":" + getEndTimeBanMinute(); 		// A FAIRE
+		String time = getPlayerBanTimeDay() + ":" + getPlayerBanTimeHour() + ":" + getPlayerBanTimeMinut();			// A FAIRE
 		
 		String player_name = getPlayerName();
 		String raison = getPlayerBanRaison();

@@ -1,5 +1,7 @@
 package fr.mrfern.pumpmysponge.player.ban.commands;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -85,22 +87,23 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					
 					PlayerNode targetNode = PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId());
 					
-					/*		
-					loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
-					loaderRootNode.getNode(name,"ban","author","name").setValue("none");
-					 */
-					
 					// joueur ban
 					targetNode.setPlayerIsBanned(true);	 
 					targetNode.setPlayerBanRaison(raison);
 					
 					// ajout date de début bannissement A FAIRE
+					Date now = new Date();
+					SimpleDateFormat formater_year = new SimpleDateFormat("yy");
+					SimpleDateFormat formater_month = new SimpleDateFormat("MM");
+					SimpleDateFormat formater_day = new SimpleDateFormat("dd");
+					SimpleDateFormat formater_hour = new SimpleDateFormat("hh");
+					SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
 					
-					targetNode.setBeginTimeBanYear(0);
-					targetNode.setBeginTimeBanMonth(0);
-					targetNode.setBeginTimeBanDay(0);
-					targetNode.setBeginTimeBanHour(0);
-					targetNode.setBeginTimeBanMinute(0);
+					targetNode.setBeginTimeBanYear(Integer.parseInt(formater_year.format(now)));
+					targetNode.setBeginTimeBanMonth(Integer.parseInt(formater_month.format(now)));
+					targetNode.setBeginTimeBanDay(Integer.parseInt(formater_day.format(now)));
+					targetNode.setBeginTimeBanHour(Integer.parseInt(formater_hour.format(now)));
+					targetNode.setBeginTimeBanMinute(Integer.parseInt(formater_minute.format(now)));
 					
 					// ajout date de fin bannissement A FAIRE
 					
