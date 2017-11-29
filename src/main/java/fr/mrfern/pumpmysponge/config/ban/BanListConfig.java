@@ -2,8 +2,10 @@ package fr.mrfern.pumpmysponge.config.ban;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 import fr.mrfern.pumpmysponge.Main;
@@ -118,7 +120,7 @@ public class BanListConfig implements IConfig{
 	
 	// methods d'édition du fichier de config
 	
-	public List<String> getUserList(){
+	public List<String> getBanList(){
 		
 		Function<Object,String> stringTransformer = new Function<Object,String>() {
 		    @Override
@@ -134,8 +136,15 @@ public class BanListConfig implements IConfig{
 		return loaderRootNode.getNode(name).getList(stringTransformer);
 	}
 	
-	public void setUserList(List<String> list){
+	public void setBanList(List<String> list){
 		loaderRootNode.getNode(name).setValue(list);
+	}
+
+	public void add(UUID uuidTarget) {
+		List<String> list = new ArrayList<>(getBanList());				    	
+    	list.add(uuidTarget.toString());
+    	setBanList(list);				    	
+    	save();	
 	}
 
 }
