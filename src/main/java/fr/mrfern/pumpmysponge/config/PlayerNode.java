@@ -284,22 +284,6 @@ public class PlayerNode implements ConfigurationNode{
 		return cfgNode.getNode(name,"ban","author","grade").getString();
 	}
 	
-	public List<String> getBanList(){
-		
-		Function<Object,String> stringTransformer = new Function<Object,String>() {
-		    @Override
-		    public String apply(Object input) {
-		        if (input instanceof String) {
-		            return (String) input;
-		        } else {
-		            return null;
-		        }
-		    }
-		};
-		
-		return cfgNode.getNode(name,"last-ban-list").getList(stringTransformer);
-	}
-	
 	public String getLangage() {
 		return cfgNode.getNode(name,"config","langage").getString();
 	}	
@@ -404,10 +388,6 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"ban","author","grade").setValue(gradeName);
 	}
 	
-	public void setPlayerBanList(List<String> banlist){
-		cfgNode.getNode(name,"last-ban-list").setValue(banlist);
-	}
-	
 	public void setLangage(String lang) {
 		cfgNode.getNode(name,"config","langage").setValue(lang);
 	}
@@ -456,8 +436,76 @@ public class PlayerNode implements ConfigurationNode{
 	public int getEndTimeBanHour() {
 		return cfgNode.getNode(name,"ban","time_end","hour").getInt();
 	}
+	
 	public int getEndTimeBanMinute() {
 		return cfgNode.getNode(name,"ban","time_end","minute").getInt();
+	}
+	
+	public void setBeginTimeBanYear(int year) {
+		cfgNode.getNode(name,"ban","time_begin","year").setValue(year);
+	}
+	
+	public void setBeginTimeBanMonth(int month) {
+		cfgNode.getNode(name,"ban","time_begin","month").setValue(month);
+	}
+
+	public void setBeginTimeBanDay(int day) {
+		cfgNode.getNode(name,"ban","time_begin","day").setValue(day);
+	}
+
+	public void setBeginTimeBanHour(int hour) {
+		cfgNode.getNode(name,"ban","time_begin","hour").setValue(hour);
+	}
+	public void setBeginTimeBanMinute(int minute) {
+		cfgNode.getNode(name,"ban","time_begin","minute").setValue(minute);
+	}
+	
+	public int getBeginTimeBanYear() {
+		return cfgNode.getNode(name,"ban","time_begin","year").getInt();
+	}
+	
+	public int getBeginTimeBanMonth() {
+		return cfgNode.getNode(name,"ban","time_begin","month").getInt();
+	}
+
+	public int getBeginTimeBanDay() {
+		return cfgNode.getNode(name,"ban","time_begin","day").getInt();
+	}
+
+	public int getBeginTimeBanHour() {
+		return cfgNode.getNode(name,"ban","time_begin","hour").getInt();
+	}
+	
+	public int getBeginTimeBanMinute() {
+		return cfgNode.getNode(name,"ban","time_begin","minute").getInt();
+	}
+	
+	// list de bannissement
+	
+	public void setPlayerBanList(List<String> banlist){
+		cfgNode.getNode(name,"last-ban-list").setValue(banlist);
+	}
+	
+	public List<String> getPlayerBanList(){
+		
+		Function<Object,String> stringTransformer = new Function<Object,String>() {
+		    @Override
+		    public String apply(Object input) {
+		        if (input instanceof String) {
+		            return (String) input;
+		        } else {
+		            return null;
+		        }
+		    }
+		};
+		
+		return cfgNode.getNode(name,"last-ban-list").getList(stringTransformer);
+	}
+	
+	public void revokeBanANDAddToList(){
+		String banInfo;
+		
+		
 	}
 	
 	
