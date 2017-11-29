@@ -34,6 +34,12 @@ public class PlayerBanListener{
 			//logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
 			//System.out.println(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
 			
+			// verification de la date de fin
+			
+			//si toujours ban alors affiche temps restant
+			
+			// sinon déban
+			
 			Text header,body,footer,raison,ban,time_Day,time_Hour,time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
 			
 			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
