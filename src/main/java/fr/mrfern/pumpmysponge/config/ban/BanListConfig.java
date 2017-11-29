@@ -139,12 +139,27 @@ public class BanListConfig implements IConfig{
 	public void setBanList(List<String> list){
 		loaderRootNode.getNode(name).setValue(list);
 	}
+	
+	public boolean contains(UUID uuidTarget) {
+		return new ArrayList<>(getBanList()).contains(uuidTarget.toString());
+	}
 
 	public void add(UUID uuidTarget) {
 		List<String> list = new ArrayList<>(getBanList());				    	
     	list.add(uuidTarget.toString());
     	setBanList(list);				    	
     	save();	
+	}
+	
+	public void remove(UUID uuidTarget) {
+		if(contains(uuidTarget)) {
+			
+			List<String> list = new ArrayList<>(getBanList());				    	
+	    	list.remove(uuidTarget.toString());
+	    	setBanList(list);				    	
+	    	save();	
+	    	
+		}
 	}
 
 }
