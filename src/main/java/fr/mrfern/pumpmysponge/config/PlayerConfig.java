@@ -73,9 +73,18 @@ public class PlayerConfig implements IConfig{
 		
 		loaderRootNode.getNode(name,"ban","enable").setValue(false);
 		loaderRootNode.getNode(name,"ban","raison").setValue("none");
+		
 		loaderRootNode.getNode(name,"ban","time","day").setValue(0);
 		loaderRootNode.getNode(name,"ban","time","hour").setValue(0);
 		loaderRootNode.getNode(name,"ban","time","minut").setValue(0);
+		
+		loaderRootNode.getNode(name,"ban","time_end","year").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_end","month").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_end","day").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_end","hour").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_end","minute").setValue(0);
+		
+		
 		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
