@@ -20,6 +20,7 @@ public class PlayerBanListener{
 	 * ClientConnectionEvent.Login
 	 */
 	
+	@SuppressWarnings("unused")
 	private Logger logger;
 	
 	public PlayerBanListener(Logger logger) {

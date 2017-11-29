@@ -3,7 +3,6 @@ package fr.mrfern.spongeplugintest.command.tp;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.spongepowered.api.command.CommandException;
