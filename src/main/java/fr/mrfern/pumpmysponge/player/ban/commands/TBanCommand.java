@@ -82,7 +82,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					targetNode.setPlayerIsBanned(true);	 
 						
 					// ajout des infos
-					//targetNode.setPlayerBanRaison(raison);	// raison du bannissement
+					targetNode.setPlayerBanRaison(raison);	// raison du bannissement
 					
 					// ajout date du bannissement
 					
