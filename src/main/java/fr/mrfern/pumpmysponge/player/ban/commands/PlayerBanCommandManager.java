@@ -34,6 +34,7 @@ public class PlayerBanCommandManager {
 		
 		CommandSpec commandUnBanSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
+			    .permission("pumpmystaff.player.unban")
 			    .executor(new UnBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
 	    				   GenericArguments.player(Text.of("player")))
