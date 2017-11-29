@@ -68,6 +68,13 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 				hour = args.<Integer>getOne("hour").get();
 				minute = args.<Integer>getOne("minute").get();
 				
+				if(day < 0| hour < 0 | hour > 23 | minute < 0 | minute > 59) {
+					Text textClaimed = Text.builder("Les heures doivent être compris entre 0 et 23, les minutes doivent être comprises entre 0 et 59 !").color(TextColors.RED).build();
+			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
+		    		ply.sendMessage(textEnTete);
+				    return CommandResult.empty();
+				}
+				
 				hashTime.put(TimeEnum.Day, day);
 				hashTime.put(TimeEnum.Hour, hour);
 				hashTime.put(TimeEnum.Minute, minute);
