@@ -148,8 +148,4 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 		return CommandResult.empty();
 		
 	}
-	
-	public HashMap<TimeEnum, String> SplitTimer(String timer) {
-		return null;		
-	}
 }
