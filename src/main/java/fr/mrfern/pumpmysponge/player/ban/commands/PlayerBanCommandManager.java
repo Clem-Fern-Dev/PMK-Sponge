@@ -25,9 +25,9 @@ public class PlayerBanCommandManager {
 			    .executor(new TBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
 		    				GenericArguments.player(Text.of("player")),
-		    				GenericArguments.optional(GenericArguments.integer(Text.of("day"))),
-		    				GenericArguments.optional(GenericArguments.integer(Text.of("hour"))),
-		    				GenericArguments.optional(GenericArguments.integer(Text.of("minute"))),		    				
+		    				GenericArguments.integer(Text.of("day")),
+		    				GenericArguments.integer(Text.of("hour")),
+		    				GenericArguments.integer(Text.of("minute")),		    				
 		    				GenericArguments.remainingJoinedStrings(Text.of("raison")))
 			    .build();
 		
