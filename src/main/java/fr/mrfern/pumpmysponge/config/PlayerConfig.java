@@ -17,7 +17,7 @@ public class PlayerConfig implements IConfig{
 
 	protected String name = "player";
 	private String pluginName = Main.getPluginName();
-	protected String defaultPath = "./mods/plugins/"+ pluginName + "/";
+	protected String defaultPath = "mods/plugins/"+ pluginName + "/";
 	protected String playerPath = defaultPath + "player/";
 	
 	private boolean isSetup = false;
