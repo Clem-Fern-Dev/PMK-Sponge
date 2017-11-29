@@ -45,22 +45,25 @@ if(src instanceof Player) {
 			
 			if(targetNode.getIsBanned()) {
 				
-				// joueur ban
 				targetNode.setPlayerIsBanned(false);	 
-					
-				// ajout des infos
-				//targetNode.setPlayerBanRaison(raison);	// raison du bannissement
+				targetNode.setPlayerBanRaison("");
 				
-				// ajout date du bannissement
+				// ajout date de fin bannissement A FAIRE
+				
+				targetNode.setEndTimeBanYear(0);
+				targetNode.setEndTimeBanMonth(0);
+				targetNode.setEndTimeBanDay(0);
+				targetNode.setEndTimeBanHour(0);
+				targetNode.setEndTimeBanMinute(0);
 				
 				// temps de bannissement
-				targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
-				targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
-				targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+				targetNode.setPlayerBanTimeDay(0);
+				targetNode.setPlayerBanTimeHour(0);
+				targetNode.setPlayerBanTimeMinut(0);
 										
 				// info du bannisseur
-				targetNode.setPlayerBanAuthorName(ply.getName());
-				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
+				targetNode.setPlayerBanAuthorName("none");
+				targetNode.setPlayerBanAuthorUUIDString("none");
 				
 				targetNode.save();
 				
@@ -72,21 +75,7 @@ if(src instanceof Player) {
 			    return CommandResult.empty();
 			    
 			}
-					
-					
-						
-					
-		
-				}else {
-					
-					Text textClaimed = Text.builder("Il faut une raison valide ( non vide, plus de 8 caractères )").color(TextColors.RED).build();
-			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
-		    		ply.sendMessage(textEnTete);
-				    return CommandResult.empty();
-				    
-				}			
 				
-			}
 			
 		}
 		else if(src instanceof ConsoleSource | src instanceof CommandBlockSource){
