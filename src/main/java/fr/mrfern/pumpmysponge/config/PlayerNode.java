@@ -420,4 +420,46 @@ public class PlayerNode implements ConfigurationNode{
 		cfgNode.getNode(name,"IP-list").setValue(list);
 	}
 	
+	// utils ban time
+	
+	public void setEndTimeBanYear(int year) {
+		cfgNode.getNode(name,"ban","time_end","year").setValue(year);
+	}
+	
+	public void setEndTimeBanMonth(int month) {
+		cfgNode.getNode(name,"ban","time_end","month").setValue(month);
+	}
+
+	public void setEndTimeBanDay(int day) {
+		cfgNode.getNode(name,"ban","time_end","day").setValue(day);
+	}
+
+	public void setEndTimeBanHour(int hour) {
+		cfgNode.getNode(name,"ban","time_end","hour").setValue(hour);
+	}
+	public void setEndTimeBanMinute(int minute) {
+		cfgNode.getNode(name,"ban","time_end","minute").setValue(minute);
+	}
+	
+	public int getEndTimeBanYear() {
+		return cfgNode.getNode(name,"ban","time_end","year").getInt();
+	}
+	
+	public int getEndTimeBanMonth() {
+		return cfgNode.getNode(name,"ban","time_end","month").getInt();
+	}
+
+	public int getEndTimeBanDay() {
+		return cfgNode.getNode(name,"ban","time_end","day").getInt();
+	}
+
+	public int getEndTimeBanHour() {
+		return cfgNode.getNode(name,"ban","time_end","hour").getInt();
+	}
+	public int getEndTimeBanMinute() {
+		return cfgNode.getNode(name,"ban","time_end","minute").getInt();
+	}
+	
+	
+	
 }
