@@ -48,6 +48,14 @@ if(src instanceof Player) {
 				targetNode.setPlayerIsBanned(false);	 
 				targetNode.setPlayerBanRaison("");
 				
+				// ajout date de début bannissement A FAIRE
+				
+				targetNode.setBeginTimeBanYear(0);
+				targetNode.setBeginTimeBanMonth(0);
+				targetNode.setBeginTimeBanDay(0);
+				targetNode.setBeginTimeBanHour(0);
+				targetNode.setBeginTimeBanMinute(0);
+				
 				// ajout date de fin bannissement A FAIRE
 				
 				targetNode.setEndTimeBanYear(0);
