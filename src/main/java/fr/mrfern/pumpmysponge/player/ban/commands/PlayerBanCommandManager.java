@@ -21,10 +21,14 @@ public class PlayerBanCommandManager {
 		
 		CommandSpec commandTempBanSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
+			    .permission("pumpmystaff.player.ban")
 			    .executor(new TBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
 		    				GenericArguments.player(Text.of("player")),
-		    				GenericArguments.remainingJoinedStrings(Text.of("time")))
+		    				GenericArguments.optional(GenericArguments.integer(Text.of("day"))),
+		    				GenericArguments.optional(GenericArguments.integer(Text.of("hour"))),
+		    				GenericArguments.optional(GenericArguments.integer(Text.of("minute"))),		    				
+		    				GenericArguments.remainingJoinedStrings(Text.of("raison")))
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandTempBanSpec, "tban");
