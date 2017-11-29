@@ -14,7 +14,6 @@ import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
 import fr.mrfern.pumpmysponge.config.PlayerNode;
-import fr.mrfern.pumpmysponge.config.ban.BanListConfig;
 import fr.mrfern.pumpmysponge.player.IPermissions;
 
 public class TBanCommand implements CommandExecutor,IPermissions {
@@ -29,7 +28,6 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			Integer day = 0, hour = 0,minute = 0;
 			String raison;
-			boolean no_time;
 			
 			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
 			
@@ -85,7 +83,9 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 						
 					// ajout des infos
 					//targetNode.setPlayerBanRaison(raison);	// raison du bannissement
-						
+					
+					// ajout date du bannissement
+					
 					// temps de bannissement
 					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
 					targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
@@ -123,11 +123,6 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					footer = Text.builder().append(head_footer,second_head_footer).build();
 						
 					target.kick(Text.builder().append(header,body,footer).build());
-						
-					// AJout à la liste des utilisateurs banni
-					
-					BanListConfig.getInstance().add(target.getUniqueId());
-					BanListConfig.getInstance().save();
 					
 					// AJout au logs ( ban )
 					

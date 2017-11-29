@@ -1,7 +1,6 @@
 package fr.mrfern.pumpmysponge.player.ban.commands;
 
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.args.CommandFlags.UnknownFlagBehavior;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.text.Text;
