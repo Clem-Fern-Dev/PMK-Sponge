@@ -565,11 +565,34 @@ public class PlayerNode implements ConfigurationNode{
     	
     	save();
 		//loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("|.|UUID-author-of-ban=none|.|name-of-athor=none|.|date_begin=YY:MM:DD:HH:mm|.|date_end=YY:MM:DD:HH:mm|.|time=YY:MM:DD:HH:mm|.|player-name=none|.|raison=none|.|"));
-		
-		
-		
+	
+	}
+	
+	public int getEndTimeYear() {
+		return 0;
 		
 	}
+	
+	public int getEndTimeMonth() {
+		return 0;
+		
+	}
+	
+	public int getEndTimeDay() {
+		return 0;
+		
+	}
+	
+	public int getEndTimeHour() {
+		return 0;
+		
+	}
+	
+	public int getEndTimeMinute() {
+		return 0;
+		
+	}
+	
 	
 	
 	
