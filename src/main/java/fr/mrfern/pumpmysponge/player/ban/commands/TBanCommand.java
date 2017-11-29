@@ -26,7 +26,8 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			Player ply = (Player) src;
 			Player target;
 			
-			String day,hour,minut,raison;
+			Integer day = 0, hour = 0,minute = 0;
+			String raison;
 			boolean no_time;
 			
 			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
@@ -47,23 +48,25 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			no_time = true;
 			
-			if(args.<Player>getOne("day").isPresent()) {
+			if(args.<Integer>getOne("day").isPresent()) {
 								
-				day = args.<String>getOne("day").get();	
+				day = args.<Integer>getOne("day").get();	
+				no_time = false;
+				
+			}else {
+				
+			}
+			
+			if(args.<Integer>getOne("hour").isPresent()) {
+								
+				hour = args.<Integer>getOne("hour").get();
 				no_time = false;
 				
 			}
 			
-			if(args.<Player>getOne("hour").isPresent()) {
-								
-				hour = args.<String>getOne("hour").get();
-				no_time = false;
-				
-			}
-			
-			if(args.<Player>getOne("minute").isPresent()) {
+			if(args.<Integer>getOne("minute").isPresent()) {
 		
-				day = args.<String>getOne("minute").get();	
+				minute = args.<Integer>getOne("minute").get();
 				no_time = false;
 	
 			}
@@ -75,6 +78,25 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 	    		ply.sendMessage(textEnTete);
 			    return CommandResult.empty();
 				
+			}else {
+								
+				hashTime.put(TimeEnum.Day, day);
+				hashTime.put(TimeEnum.Day, hour);
+				hashTime.put(TimeEnum.Day, minute);
+				
+			}
+			
+			if(args.<Player>getOne("raison").isPresent()) {
+				
+				raison = args.<String>getOne("raison").get();
+	
+			}else {
+				
+				Text textClaimed = Text.builder("Aucun temps n'a été spécifié, faite /bhelp pour voir les commandes de bannissement").color(TextColors.RED).build();
+		    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
+	    		ply.sendMessage(textEnTete);
+			    return CommandResult.empty();
+			    
 			}
 			
 			
