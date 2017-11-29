@@ -26,7 +26,9 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			Player ply = (Player) src;
 			Player target;
 			
-			String time;
+			String day,hour,minut,raison;
+			boolean no_time;
+			
 			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
 			
 			if(args.<Player>getOne("player").isPresent()) {
@@ -43,109 +45,105 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			    return CommandResult.empty();
 			}
 			
-			if(args.<Player>getOne("time").isPresent()) {
-				
-				time = args.<String>getOne("time").get();
+			no_time = true;
 			
-				hashTime.clear();
+			if(args.<Player>getOne("day").isPresent()) {
+								
+				day = args.<String>getOne("day").get();	
+				no_time = false;
 				
-				String[] listTime = time.split(" ");
+			}
+			
+			if(args.<Player>getOne("hour").isPresent()) {
+								
+				hour = args.<String>getOne("hour").get();
+				no_time = false;
 				
-				for (String splitedTime : listTime) {
-					if(!splitedTime.endsWith("D") & !splitedTime.endsWith("H") &!splitedTime.endsWith("M")) {
-						
-						Text textClaimed = Text.builder("Le temps spécifié n'est pas valide, faite /bhelp pour voir les commandes , le temps").color(TextColors.RED).build();
-				    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
-			    		ply.sendMessage(textEnTete);
-					    return CommandResult.empty();
-						
-					}else {
-						switch (splitedTime.charAt(splitedTime.length()-1)) {
-							
-							case 'D':
-									hashTime.putIfAbsent(TimeEnum.Day, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
-								break;
-							case 'H':
-									hashTime.putIfAbsent(TimeEnum.Hour, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
-								break;
-							case 'M':
-								hashTime.putIfAbsent(TimeEnum.Minute, Integer.parseInt(splitedTime.substring(0, splitedTime.length()-1)));
-								break;
-						}
-					}
-				}
+			}
+			
+			if(args.<Player>getOne("minute").isPresent()) {
+		
+				day = args.<String>getOne("minute").get();	
+				no_time = false;
+	
+			}
+			
+			if(no_time & ply.hasPermission("")) {
+			
+			}
+			
+			
+			PlayerNode targetNode = PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId());
 				
-				PlayerNode targetNode = PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId());
+			// joueur ban
+			targetNode.setPlayerIsBanned(true);	 
 				
-				// joueur ban
-				targetNode.setPlayerIsBanned(true);	 
+			// ajout des infos
+			//targetNode.setPlayerBanRaison(raison);	// raison du bannissement
 				
-				// ajout des infos
-				targetNode.setPlayerBanRaison("raison");	// raison du bannissement
-				
-				// temps de bannissement
-				if( hashTime.get(TimeEnum.Day) != null) {
-					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
-				}else{
-					targetNode.setPlayerBanTimeDay(0);
-				}
-				
-				if( hashTime.get(TimeEnum.Hour) != null) {
-					targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
-				}else{
-					targetNode.setPlayerBanTimeHour(0);
-				}
-				
-				if( hashTime.get(TimeEnum.Minute) != null) {
-					targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
-				}else{
-					targetNode.setPlayerBanTimeMinut(0);
-				}				
-				
-				
-				// info du bannisseur
-				targetNode.setPlayerBanAuthorName(ply.getName());
-				targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
-				
-				targetNode.save();
-				
-				Text header,body,footer,text_raison,text_ban,text_time_Day,text_time_Hour,text_time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
-				
-				header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
-				text_raison = Text.builder("raison").color(TextColors.BLUE).build();	
-				
-				
-				time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
-				time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
-				time_Minut_format = Text.builder(" M ").color(TextColors.GOLD).build();	
-				
-				text_time_Day = Text.builder(hashTime.get(TimeEnum.Day)+"").color(TextColors.AQUA).append(time_Day_format).build();	
-				text_time_Hour = Text.builder(hashTime.get(TimeEnum.Hour)+"").color(TextColors.AQUA).append(time_Hour_format).build();	
-				text_time_Minut = Text.builder(hashTime.get(TimeEnum.Minute)+"").color(TextColors.AQUA).append(time_Minut_format).build();	
-				
-				text_ban = Text.builder(ply.getName() + " [ " + ply.getUniqueId() + " ]").color(TextColors.DARK_RED).build();	
-				
-				
-				
-				body = Text.builder("\n[ Raison ] ").color(TextColors.GOLD).append(text_raison).build();
-				
-				Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(text_ban).build();
-				Text second_head_footer = Text.builder(" ][ Temps restant : ").color(TextColors.GOLD).append(text_time_Day,text_time_Hour,text_time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
-				
-				footer = Text.builder().append(head_footer,second_head_footer).build();
-				
-				target.kick(Text.builder().append(header,body,footer).build());
-				
-				//ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
-				return CommandResult.success();
-				
+			// temps de bannissement
+			if( hashTime.get(TimeEnum.Day) != null) {
+				targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
 			}else{
+				targetNode.setPlayerBanTimeDay(0);
+			}
+				
+			if( hashTime.get(TimeEnum.Hour) != null) {
+				targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
+			}else{
+				targetNode.setPlayerBanTimeHour(0);
+			}
+				
+			if( hashTime.get(TimeEnum.Minute) != null) {
+				targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+			}else{
+				targetNode.setPlayerBanTimeMinut(0);
+			}				
+				
+				
+			// info du bannisseur
+			targetNode.setPlayerBanAuthorName(ply.getName());
+			targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
+				
+			targetNode.save();
+				
+			Text header,body,footer,text_raison,text_ban,text_time_Day,text_time_Hour,text_time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
+				
+			header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
+			//text_raison = Text.builder(raison).color(TextColors.BLUE).build();	
+				
+				
+			time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
+			time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
+			time_Minut_format = Text.builder(" M ").color(TextColors.GOLD).build();	
+				
+			text_time_Day = Text.builder(hashTime.get(TimeEnum.Day)+"").color(TextColors.AQUA).append(time_Day_format).build();	
+			text_time_Hour = Text.builder(hashTime.get(TimeEnum.Hour)+"").color(TextColors.AQUA).append(time_Hour_format).build();	
+			text_time_Minut = Text.builder(hashTime.get(TimeEnum.Minute)+"").color(TextColors.AQUA).append(time_Minut_format).build();	
+				
+			text_ban = Text.builder(ply.getName() + " [ " + ply.getUniqueId() + " ]").color(TextColors.DARK_RED).build();	
+				
+				
+				
+			//body = Text.builder("\n[ Raison ] ").color(TextColors.GOLD).append(text_raison).build();
+				
+			Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(text_ban).build();
+			Text second_head_footer = Text.builder(" ][ Temps restant : ").color(TextColors.GOLD).append(text_time_Day,text_time_Hour,text_time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
+				
+			footer = Text.builder().append(head_footer,second_head_footer).build();
+				
+			//target.kick(Text.builder().append(header,body,footer).build());
+				
+			//ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute)));
+			return CommandResult.success();
+				
+			/*}else{
 				
 				Text textClaimed = Text.builder("Le temps spécifié n'est pas valide, faite /bhelp pour voir les commandes").color(TextColors.RED).build();
 		    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
 	    		ply.sendMessage(textEnTete);
 			    return CommandResult.empty();
-			}
+			}*/
 			
 		}
 		else if(src instanceof ConsoleSource | src instanceof CommandBlockSource){
