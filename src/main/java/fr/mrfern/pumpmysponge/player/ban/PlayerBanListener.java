@@ -1,5 +1,7 @@
 package fr.mrfern.pumpmysponge.player.ban;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -34,15 +36,32 @@ public class PlayerBanListener{
 			//logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
 			//System.out.println(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
 			
+			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
+			
 			// verification de la date de fin
 			
+			Date now = new Date();
+			SimpleDateFormat formater_year = new SimpleDateFormat("yy");
+			SimpleDateFormat formater_month = new SimpleDateFormat("MM");
+			SimpleDateFormat formater_day = new SimpleDateFormat("dd");
+			SimpleDateFormat formater_hour = new SimpleDateFormat("hh");
+			SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
+			
+			int today_year = Integer.parseInt(formater_year.format(now));
+			int today_month =Integer.parseInt(formater_month.format(now));
+			int today_day = Integer.parseInt(formater_day.format(now));
+			int today_hour = Integer.parseInt(formater_hour.format(now));
+			int today_minut = Integer.parseInt(formater_minute.format(now));
+			
 			//si toujours ban alors affiche temps restant
+			
+			// A FAIRE
 			
 			// sinon déban
 			
 			Text header,body,footer,raison,ban,time_Day,time_Hour,time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
 			
-			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
+			
 			
 			header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
 			raison = Text.builder(plyNode.getPlayerBanRaison()).color(TextColors.BLUE).build();	
