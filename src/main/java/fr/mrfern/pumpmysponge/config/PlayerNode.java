@@ -3,6 +3,8 @@ package fr.mrfern.pumpmysponge.config;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -502,8 +504,69 @@ public class PlayerNode implements ConfigurationNode{
 		return cfgNode.getNode(name,"last-ban-list").getList(stringTransformer);
 	}
 	
-	public void revokeBanANDAddToList(){
-		String banInfo;
+	public void clearBan() {
+		setPlayerIsBanned(false);	 
+		setPlayerBanRaison("");
+		
+		// ajout date de début bannissement A FAIRE
+		
+		setBeginTimeBanYear(0);
+		setBeginTimeBanMonth(0);
+		setBeginTimeBanDay(0);
+		setBeginTimeBanHour(0);
+		setBeginTimeBanMinute(0);
+		
+		// ajout date de fin bannissement A FAIRE
+		
+		setEndTimeBanYear(0);
+		setEndTimeBanMonth(0);
+		setEndTimeBanDay(0);
+		setEndTimeBanHour(0);
+		setEndTimeBanMinute(0);
+		
+		// temps de bannissement
+		setPlayerBanTimeDay(0);
+		setPlayerBanTimeHour(0);
+		setPlayerBanTimeMinut(0);
+								
+		// info du bannisseur
+		setPlayerBanAuthorName("none");
+		setPlayerBanAuthorUUIDString("none");
+		
+		save();
+	}
+	
+	public String buildHistoryLineBan() {
+		
+		String UUID_author_of_ban = getBanAuthorUUIDString();
+		String name_of_athor = getBanAuthorName();
+		
+		String date_begin = ""; 	// A FAIRE
+		String date_end = ""; 		// A FAIRE
+		String time = "";			// A FAIRE
+		
+		String player_name = getPlayerName();
+		String raison = getPlayerBanRaison();
+		
+		String banLine;
+		banLine = "|.|" + UUID_author_of_ban + "|.|" + name_of_athor + "|.|" + date_begin + "|.|" + date_end + "|.|" + time + "|.|" + player_name + "|.|" + raison + "|.|";
+		return banLine;
+	}
+	
+	public void revokeBanANDAddToList(){		
+		
+		String banLine = buildHistoryLineBan();
+		
+		List<String> list = new ArrayList<>(getPlayerBanList());				    	
+    	list.add(banLine);
+    	setPlayerBanList(list);
+    	
+    	clearBan();
+    	
+    	save();
+		//loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("|.|UUID-author-of-ban=none|.|name-of-athor=none|.|date_begin=YY:MM:DD:HH:mm|.|date_end=YY:MM:DD:HH:mm|.|time=YY:MM:DD:HH:mm|.|player-name=none|.|raison=none|.|"));
+		
+		
 		
 		
 	}

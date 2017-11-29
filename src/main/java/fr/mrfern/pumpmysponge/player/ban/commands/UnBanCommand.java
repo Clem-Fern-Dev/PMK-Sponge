@@ -45,35 +45,7 @@ if(src instanceof Player) {
 			
 			if(targetNode.getIsBanned()) {
 				
-				targetNode.setPlayerIsBanned(false);	 
-				targetNode.setPlayerBanRaison("");
-				
-				// ajout date de début bannissement A FAIRE
-				
-				targetNode.setBeginTimeBanYear(0);
-				targetNode.setBeginTimeBanMonth(0);
-				targetNode.setBeginTimeBanDay(0);
-				targetNode.setBeginTimeBanHour(0);
-				targetNode.setBeginTimeBanMinute(0);
-				
-				// ajout date de fin bannissement A FAIRE
-				
-				targetNode.setEndTimeBanYear(0);
-				targetNode.setEndTimeBanMonth(0);
-				targetNode.setEndTimeBanDay(0);
-				targetNode.setEndTimeBanHour(0);
-				targetNode.setEndTimeBanMinute(0);
-				
-				// temps de bannissement
-				targetNode.setPlayerBanTimeDay(0);
-				targetNode.setPlayerBanTimeHour(0);
-				targetNode.setPlayerBanTimeMinut(0);
-										
-				// info du bannisseur
-				targetNode.setPlayerBanAuthorName("none");
-				targetNode.setPlayerBanAuthorUUIDString("none");
-				
-				targetNode.save();
+				targetNode.revokeBanANDAddToList();
 				
 			}else {
 				
