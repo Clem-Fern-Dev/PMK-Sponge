@@ -89,9 +89,9 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			if(args.<Player>getOne("raison").isPresent()) {
 				
 				raison = args.<String>getOne("raison").get();
-				if(raison.isEmpty() | raison.trim().isEmpty()) {
+				if(raison.isEmpty() | raison.trim().isEmpty() | raison.length() < 8) {
 					
-					Text textClaimed = Text.builder("Aucun temps n'a été spécifié, faite /bhelp pour voir les commandes de bannissement").color(TextColors.RED).build();
+					Text textClaimed = Text.builder("Il faut une raison valide ( non vide, plus de 8 caractères )").color(TextColors.RED).build();
 			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
 		    		ply.sendMessage(textEnTete);
 				    return CommandResult.empty();
