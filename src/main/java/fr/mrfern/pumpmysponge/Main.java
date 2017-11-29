@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.config.ban.BanListConfig;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
 import fr.mrfern.pumpmysponge.player.ban.commands.PlayerBanCommandManager;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
@@ -49,6 +50,7 @@ public class Main {
 		
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();
+		BanListConfig.getInstance().setup();
 		//ChunkConfig.getInstance().setup();
 		
     

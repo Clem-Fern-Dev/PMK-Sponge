@@ -44,6 +44,7 @@ public interface IConfig {
 			return true;
 		}
 	}
+	
 	public default boolean checkPath(String path, boolean b) {
 		File filepath = new File(path);
 		if(!filepath.exists()) {
