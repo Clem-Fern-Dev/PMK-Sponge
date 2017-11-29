@@ -78,13 +78,22 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					
 					PlayerNode targetNode = PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId());
 					
+					/*		
+					loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
+					loaderRootNode.getNode(name,"ban","author","name").setValue("none");
+					 */
+					
 					// joueur ban
 					targetNode.setPlayerIsBanned(true);	 
-						
-					// ajout des infos
-					targetNode.setPlayerBanRaison(raison);	// raison du bannissement
+					targetNode.setPlayerBanRaison(raison);
 					
-					// ajout date du bannissement
+					// ajout date de fin bannissement
+					
+					targetNode.setEndTimeBanYear(0);
+					targetNode.setEndTimeBanMonth(0);
+					targetNode.setEndTimeBanDay(0);
+					targetNode.setEndTimeBanHour(0);
+					targetNode.setEndTimeBanMinute(0);
 					
 					// temps de bannissement
 					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
