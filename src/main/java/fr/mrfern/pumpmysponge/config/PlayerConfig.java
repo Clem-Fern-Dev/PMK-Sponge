@@ -84,12 +84,18 @@ public class PlayerConfig implements IConfig{
 		loaderRootNode.getNode(name,"ban","time_end","hour").setValue(0);
 		loaderRootNode.getNode(name,"ban","time_end","minute").setValue(0);
 		
+		loaderRootNode.getNode(name,"ban","time_begin","year").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_begin","month").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_begin","day").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_begin","hour").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_begin","minute").setValue(0);
+		
 		
 		loaderRootNode.getNode(name,"ban","author","UUID").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","name").setValue("none");
 		loaderRootNode.getNode(name,"ban","author","grade").setValue("none");
 				
-		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("n°XXXXXXXXXX/./UUID-author-of-ban=none/./name-of-athor=none/./IP-player=0.0.0/./player-name=none/./UUID-of-player=none/./raison=none/./time=none"));
+		loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("UUID-author-of-ban=none/./name-of-athor=none/./player-name=none/./UUID-of-player=none/./raison=none/./time=none"));
 	
 		loaderRootNode.getNode(name,"config","langage").setValue("default");
 		
