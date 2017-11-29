@@ -37,8 +37,7 @@ public class PlayerBanCommandManager {
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .executor(new UnBanCommand())
 			    .arguments(GenericArguments.flags().flag("all").buildWith(GenericArguments.none()),
-			    			GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-			    		   GenericArguments.flags().setUnknownLongFlagBehavior(UnknownFlagBehavior.ACCEPT_VALUE).buildWith(GenericArguments.none()))
+	    				   GenericArguments.player(Text.of("player")))
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandUnBanSpec, "unban");
