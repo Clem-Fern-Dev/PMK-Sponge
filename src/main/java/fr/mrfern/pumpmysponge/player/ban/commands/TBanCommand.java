@@ -34,10 +34,10 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
-				/*if(target.getUniqueId().equals(ply.getUniqueId())) {
+				if(target.getUniqueId().equals(ply.getUniqueId())) {
 					ply.kick(Text.of("Ouf je viens de te sauvé la vie, heuresement que je suis là !"));
 					return CommandResult.success();
-				}*/
+				}
 			}else {
 				 
 				Text textClaimed = Text.builder("Le joueur spécifié n'est pas valide ").color(TextColors.RED).build();
@@ -121,12 +121,12 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 						
 					footer = Text.builder().append(head_footer,second_head_footer).build();
 						
-					//target.kick(Text.builder().append(header,body,footer).build());
+					target.kick(Text.builder().append(header,body,footer).build());
 						
-					ply.sendMessage(Text.of(target.getName() + "  " + hashTime.get(TimeEnum.Day) + "  " + hashTime.get(TimeEnum.Hour) + "  " + hashTime.get(TimeEnum.Minute) + "  "));
-					ply.sendMessage(header);
-					ply.sendMessage(body);
-					ply.sendMessage(footer);
+					// AJout à la liste des utilisateurs banni
+					
+					// AJout au logs ( ban )
+					
 					return CommandResult.success();
 		
 				}else {
