@@ -87,7 +87,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					targetNode.setPlayerIsBanned(true);	 
 					targetNode.setPlayerBanRaison(raison);
 					
-					// ajout date de fin bannissement
+					// ajout date de fin bannissement A FAIRE
 					
 					targetNode.setEndTimeBanYear(0);
 					targetNode.setEndTimeBanMonth(0);
