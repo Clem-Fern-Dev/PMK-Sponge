@@ -1,6 +1,7 @@
 package fr.mrfern.pumpmysponge.player.ban;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -37,18 +38,15 @@ public class PlayerBanListener{
 			
 			// verification de la date de fin
 			
-			Date now = new Date();
-			SimpleDateFormat formater_year = new SimpleDateFormat("yy");
-			SimpleDateFormat formater_month = new SimpleDateFormat("MM");
-			SimpleDateFormat formater_day = new SimpleDateFormat("dd");
-			SimpleDateFormat formater_hour = new SimpleDateFormat("HH");
-			SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
+			Date now = new Date();				
+			Calendar c = Calendar.getInstance();
+			c.setTime(now);
 			
-			int today_year = Integer.parseInt(formater_year.format(now));
-			int today_month =Integer.parseInt(formater_month.format(now));
-			int today_day = Integer.parseInt(formater_day.format(now));
-			int today_hour = Integer.parseInt(formater_hour.format(now));
-			int today_minute = Integer.parseInt(formater_minute.format(now));
+			int today_year = c.get(Calendar.YEAR);
+			int today_month = c.get(Calendar.MONTH);
+			int today_day = c.get(Calendar.DAY_OF_MONTH);
+			int today_hour = c.get(Calendar.HOUR_OF_DAY);
+			int today_minute = c.get(Calendar.MINUTE);
 			
 			//si toujours ban alors affiche temps restant
 			
@@ -79,7 +77,7 @@ public class PlayerBanListener{
 				time_Minut_format = Text.builder(" m ").color(TextColors.GOLD).build();	
 				
 				time_year = Text.builder(plyNode.getEndTimeBanYear()+"").color(TextColors.AQUA).append(time_year_format).build();	
-				time_month = Text.builder(plyNode.getEndTimeBanMonth()+"").color(TextColors.AQUA).append(time_month_format).build();	
+				time_month = Text.builder((plyNode.getEndTimeBanMonth() + 1)+"").color(TextColors.AQUA).append(time_month_format).build();	
 				time_Day = Text.builder(plyNode.getEndTimeBanDay()+"").color(TextColors.AQUA).append(time_Day_format).build();	
 				time_Hour = Text.builder(plyNode.getEndTimeBanHour()+"").color(TextColors.AQUA).append(time_Hour_format).build();	
 				time_Minut = Text.builder(plyNode.getEndTimeBanMinute()+"").color(TextColors.AQUA).append(time_Minut_format).build();	
