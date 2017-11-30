@@ -153,7 +153,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					body = Text.builder("\n[ Raison ] ").color(TextColors.GOLD).append(text_raison).build();
 						
 					Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(ban).build();
-					Text second_head_footer = Text.builder(" ][ Date de débannissement : ").color(TextColors.GOLD).append(time_year,time_month,time_Day,time_Hour,time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
+					Text second_head_footer = Text.builder(" ]\n[ Date de débannissement : ").color(TextColors.GOLD).append(time_year,time_month,time_Day,time_Hour,time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
 						
 					footer = Text.builder().append(head_footer,second_head_footer).build();
 						
