@@ -56,12 +56,12 @@ public class PlayerBanListener{
 			//si toujours ban alors affiche temps restant
 			
 			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth() 
-			   & today_day <= plyNode.getEndTimeBanDay() &today_year <= plyNode.getEndTimeBanHour() & today_minute <= plyNode.getEndTimeBanMinute()) {
+			   & today_day <= plyNode.getEndTimeBanDay() &today_hour <= plyNode.getEndTimeBanHour() & today_minute <= plyNode.getEndTimeBanMinute()) {
 				
 				// si déban alors déban
 				
 				plyNode.revokeBanANDAddToList();				
-				e.setCancelled(false);
+				//e.setCancelled(false);
 				
 				// et connexion autorisé
 				
