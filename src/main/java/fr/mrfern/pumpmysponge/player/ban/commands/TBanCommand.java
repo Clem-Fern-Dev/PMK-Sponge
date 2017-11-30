@@ -36,10 +36,10 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
-				if(target.getUniqueId().equals(ply.getUniqueId())) {
+				/*if(target.getUniqueId().equals(ply.getUniqueId())) {
 					ply.kick(Text.of("Ouf je viens de te sauvé la vie, heuresement que je suis là !"));
 					return CommandResult.success();
-				}else if(PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId()).getIsBanned()){
+				}else*/ if(PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId()).getIsBanned()){
 					
 					Text textClaimed = Text.builder("Le joueur spécifié est déjà banni ").color(TextColors.RED).build();
 			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();

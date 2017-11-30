@@ -57,7 +57,8 @@ public class PlayerBanListener{
 				
 				// si déban alors déban
 				
-				plyNode.revokeBanANDAddToList();				
+				plyNode.revokeBanANDAddToList();
+				plyNode.save();
 				//e.setCancelled(false);
 				
 				// et connexion autorisé
