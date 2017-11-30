@@ -32,8 +32,6 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			Integer day = 0, hour = 0,minute = 0;
 			String raison;
 			
-			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
-			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
 				/*if(target.getUniqueId().equals(ply.getUniqueId())) {
@@ -76,10 +74,6 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 				    return CommandResult.empty();
 				}
 				
-				hashTime.put(TimeEnum.Day, day);
-				hashTime.put(TimeEnum.Hour, hour);
-				hashTime.put(TimeEnum.Minute, minute);
-				
 				if(args.<String>getOne("raison").isPresent()) {
 					
 					raison = args.<String>getOne("raison").get();
@@ -100,35 +94,32 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					targetNode.setPlayerBanRaison(raison);
 					
 					// ajout date de début bannissement A FAIRE
-					Date now = new Date();
-					SimpleDateFormat formater_year = new SimpleDateFormat("yy");
-					SimpleDateFormat formater_month = new SimpleDateFormat("MM");
-					SimpleDateFormat formater_day = new SimpleDateFormat("dd");
-					SimpleDateFormat formater_hour = new SimpleDateFormat("HH");
-					SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
-					
+					Date now = new Date();				
 					Calendar c = Calendar.getInstance();
-					int max_day_in_month = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+					c.setTime(now);
 					
-					targetNode.setBeginTimeBanYear(Integer.parseInt(formater_year.format(now)));
-					targetNode.setBeginTimeBanMonth(Integer.parseInt(formater_month.format(now)));
-					targetNode.setBeginTimeMaxDayInMonth(max_day_in_month);
-					targetNode.setBeginTimeBanDay(Integer.parseInt(formater_day.format(now)));
-					targetNode.setBeginTimeBanHour(Integer.parseInt(formater_hour.format(now)));
-					targetNode.setBeginTimeBanMinute(Integer.parseInt(formater_minute.format(now)));
+					targetNode.setBeginTimeBanYear(c.get(Calendar.YEAR));
+					targetNode.setBeginTimeBanMonth(c.get(Calendar.MONTH));
+					targetNode.setBeginTimeBanDay(c.get(Calendar.DATE));
+					targetNode.setBeginTimeBanHour(c.get(Calendar.HOUR_OF_DAY));
+					targetNode.setBeginTimeBanMinute(c.get(Calendar.MINUTE));
 					
 					// temps de bannissement
-					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
-					targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
-					targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+					targetNode.setPlayerBanTimeDay(day);
+					targetNode.setPlayerBanTimeHour(hour);
+					targetNode.setPlayerBanTimeMinut(minute);
 					
 					// ajout date de fin bannissement
-					targetNode.calculEndTime();
+					//targetNode.calculEndTime();
 											
 					// info du bannisseur
 					targetNode.setPlayerBanAuthorName(ply.getName());
 					targetNode.setPlayerBanAuthorUUID(ply.getUniqueId());
 						
+					targetNode.save();
+					
+					targetNode.calculEndTime();
+					
 					targetNode.save();
 						
 					Text header,body,footer,text_raison,ban,time_year,time_month,time_Day,time_Hour,time_Minut,time_year_format,time_month_format,time_Day_format,time_Hour_format,time_Minut_format;
@@ -143,7 +134,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					time_Minut_format = Text.builder(" m ").color(TextColors.GOLD).build();	
 					
 					time_year = Text.builder(targetNode.getEndTimeBanYear()+"").color(TextColors.AQUA).append(time_year_format).build();	
-					time_month = Text.builder(targetNode.getEndTimeBanMonth()+"").color(TextColors.AQUA).append(time_month_format).build();	
+					time_month = Text.builder((targetNode.getEndTimeBanMonth() + 1)+"").color(TextColors.AQUA).append(time_month_format).build();	
 					time_Day = Text.builder(targetNode.getEndTimeBanDay()+"").color(TextColors.AQUA).append(time_Day_format).build();	
 					time_Hour = Text.builder(targetNode.getEndTimeBanHour()+"").color(TextColors.AQUA).append(time_Hour_format).build();	
 					time_Minut = Text.builder(targetNode.getEndTimeBanMinute()+"").color(TextColors.AQUA).append(time_Minut_format).build();
