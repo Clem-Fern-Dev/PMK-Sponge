@@ -86,6 +86,7 @@ public class PlayerConfig implements IConfig{
 		
 		loaderRootNode.getNode(name,"ban","time_begin","year").setValue(0);
 		loaderRootNode.getNode(name,"ban","time_begin","month").setValue(0);
+		loaderRootNode.getNode(name,"ban","time_begin","month-max-day").setValue(0);		
 		loaderRootNode.getNode(name,"ban","time_begin","day").setValue(0);
 		loaderRootNode.getNode(name,"ban","time_begin","hour").setValue(0);
 		loaderRootNode.getNode(name,"ban","time_begin","minute").setValue(0);
