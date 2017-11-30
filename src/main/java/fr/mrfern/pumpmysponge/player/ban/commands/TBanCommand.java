@@ -133,7 +133,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 						
 					Text header,body,footer,text_raison,ban,time_year,time_month,time_Day,time_Hour,time_Minut,time_year_format,time_month_format,time_Day_format,time_Hour_format,time_Minut_format;
 						
-					header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
+					header = Text.builder("\n▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
 					text_raison = Text.builder(targetNode.getPlayerBanRaison()).color(TextColors.BLUE).build();	
 							
 					time_year_format = Text.builder(" Y / ").color(TextColors.GOLD).build();	
