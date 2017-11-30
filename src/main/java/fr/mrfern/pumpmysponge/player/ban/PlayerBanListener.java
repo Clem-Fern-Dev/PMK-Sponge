@@ -33,9 +33,6 @@ public class PlayerBanListener{
 	public void OnClientAuth(ClientConnectionEvent.Login e) {		
 		if(isBanned(e.getProfile().getUniqueId())) {
 			
-			//logger.info(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
-			//System.out.println(e.getConnection().getAddress().getAddress().getHostAddress() + " auth");
-			
 			PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(e.getProfile().getUniqueId());
 			
 			// verification de la date de fin
@@ -55,7 +52,8 @@ public class PlayerBanListener{
 			
 			//si toujours ban alors affiche temps restant
 			
-			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth()) {
+			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth() 
+			   & today_day <= plyNode.getEndTimeBanDay() &today_hour <= plyNode.getEndTimeBanHour() & today_minute <= plyNode.getEndTimeBanMinute()) {
 				
 				// si déban alors déban
 				
