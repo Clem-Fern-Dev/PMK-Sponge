@@ -104,7 +104,7 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					SimpleDateFormat formater_year = new SimpleDateFormat("yy");
 					SimpleDateFormat formater_month = new SimpleDateFormat("MM");
 					SimpleDateFormat formater_day = new SimpleDateFormat("dd");
-					SimpleDateFormat formater_hour = new SimpleDateFormat("hh");
+					SimpleDateFormat formater_hour = new SimpleDateFormat("HH");
 					SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
 					
 					Calendar c = Calendar.getInstance();

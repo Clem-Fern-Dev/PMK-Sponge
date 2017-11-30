@@ -44,7 +44,7 @@ public class PlayerBanListener{
 			SimpleDateFormat formater_year = new SimpleDateFormat("yy");
 			SimpleDateFormat formater_month = new SimpleDateFormat("MM");
 			SimpleDateFormat formater_day = new SimpleDateFormat("dd");
-			SimpleDateFormat formater_hour = new SimpleDateFormat("hh");
+			SimpleDateFormat formater_hour = new SimpleDateFormat("HH");
 			SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
 			
 			int today_year = Integer.parseInt(formater_year.format(now));
@@ -55,8 +55,7 @@ public class PlayerBanListener{
 			
 			//si toujours ban alors affiche temps restant
 			
-			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth() 
-			   & today_day <= plyNode.getEndTimeBanDay() &today_hour <= plyNode.getEndTimeBanHour() & today_minute <= plyNode.getEndTimeBanMinute()) {
+			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth()) {
 				
 				// si déban alors déban
 				
