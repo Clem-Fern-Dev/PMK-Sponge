@@ -46,6 +46,7 @@ if(src instanceof Player) {
 			if(targetNode.getIsBanned()) {
 				
 				targetNode.revokeBanANDAddToList();
+				targetNode.save();
 				
 			}else {
 				
