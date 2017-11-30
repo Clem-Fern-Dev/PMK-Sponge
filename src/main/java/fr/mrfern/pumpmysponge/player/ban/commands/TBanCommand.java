@@ -1,6 +1,7 @@
 package fr.mrfern.pumpmysponge.player.ban.commands;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import org.spongepowered.api.command.CommandException;
@@ -106,8 +107,12 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					SimpleDateFormat formater_hour = new SimpleDateFormat("hh");
 					SimpleDateFormat formater_minute = new SimpleDateFormat("mm");
 					
+					Calendar c = Calendar.getInstance();
+					int max_day_in_month = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+					
 					targetNode.setBeginTimeBanYear(Integer.parseInt(formater_year.format(now)));
 					targetNode.setBeginTimeBanMonth(Integer.parseInt(formater_month.format(now)));
+					targetNode.setBeginTimeMaxDayInMonth(max_day_in_month);
 					targetNode.setBeginTimeBanDay(Integer.parseInt(formater_day.format(now)));
 					targetNode.setBeginTimeBanHour(Integer.parseInt(formater_hour.format(now)));
 					targetNode.setBeginTimeBanMinute(Integer.parseInt(formater_minute.format(now)));
