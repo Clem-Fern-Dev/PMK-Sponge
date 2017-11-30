@@ -55,13 +55,13 @@ public class PlayerBanListener{
 			
 			//si toujours ban alors affiche temps restant
 			
-			if(today_year >= plyNode.getEndTimeBanYear() & today_month >= plyNode.getEndTimeBanMonth() 
-			   & today_day >= plyNode.getEndTimeBanDay() &today_year >= plyNode.getEndTimeBanHour() & today_minute >= plyNode.getEndTimeBanMinute()) {
+			if(today_year <= plyNode.getEndTimeBanYear() & today_month <= plyNode.getEndTimeBanMonth() 
+			   & today_day <= plyNode.getEndTimeBanDay() &today_year <= plyNode.getEndTimeBanHour() & today_minute <= plyNode.getEndTimeBanMinute()) {
 				
 				// si déban alors déban
 				
 				plyNode.revokeBanANDAddToList();				
-				e.setCancelled(true);
+				e.setCancelled(false);
 				
 				// et connexion autorisé
 				
@@ -71,15 +71,13 @@ public class PlayerBanListener{
 				
 				Text header,body,footer,raison,ban,time_year,time_month,time_Day,time_Hour,time_Minut,time_year_format,time_month_format,time_Day_format,time_Hour_format,time_Minut_format;
 				
-				
-				
 				header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
 				raison = Text.builder(plyNode.getPlayerBanRaison()).color(TextColors.BLUE).build();	
 				
 				time_year_format = Text.builder(" Y / ").color(TextColors.GOLD).build();	
 				time_month_format = Text.builder(" M / ").color(TextColors.GOLD).build();	
-				time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
-				time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
+				time_Day_format = Text.builder(" D    ").color(TextColors.GOLD).build();	
+				time_Hour_format = Text.builder(" H : ").color(TextColors.GOLD).build();	
 				time_Minut_format = Text.builder(" m ").color(TextColors.GOLD).build();	
 				
 				time_year = Text.builder(plyNode.getEndTimeBanYear()+"").color(TextColors.AQUA).append(time_year_format).build();	

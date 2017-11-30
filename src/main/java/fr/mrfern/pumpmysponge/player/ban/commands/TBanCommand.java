@@ -36,10 +36,10 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
-				if(target.getUniqueId().equals(ply.getUniqueId())) {
+				/*if(target.getUniqueId().equals(ply.getUniqueId())) {
 					ply.kick(Text.of("Ouf je viens de te sauvé la vie, heuresement que je suis là !"));
 					return CommandResult.success();
-				}else if(PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId()).getIsBanned()){
+				}else*/ if(PlayerConfig.getInstance().getPlayerConfigNode(target.getUniqueId()).getIsBanned()){
 					
 					Text textClaimed = Text.builder("Le joueur spécifié est déjà banni ").color(TextColors.RED).build();
 			    	Text textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textClaimed).build();
@@ -131,28 +131,29 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 						
 					targetNode.save();
 						
-					Text header,body,footer,text_raison,text_ban,text_time_Day,text_time_Hour,text_time_Minut,time_Day_format,time_Hour_format,time_Minut_format;
+					Text header,body,footer,text_raison,ban,time_year,time_month,time_Day,time_Hour,time_Minut,time_year_format,time_month_format,time_Day_format,time_Hour_format,time_Minut_format;
 						
 					header = Text.builder("▂▄▅▆▇█ Vous avez été banni █▇▆▅▄▂").color(TextColors.GOLD).build();
-					text_raison = Text.builder(raison).color(TextColors.BLUE).build();	
+					text_raison = Text.builder(targetNode.getPlayerBanRaison()).color(TextColors.BLUE).build();	
+							
+					time_year_format = Text.builder(" Y / ").color(TextColors.GOLD).build();	
+					time_month_format = Text.builder(" M / ").color(TextColors.GOLD).build();	
+					time_Day_format = Text.builder(" D    ").color(TextColors.GOLD).build();	
+					time_Hour_format = Text.builder(" H : ").color(TextColors.GOLD).build();	
+					time_Minut_format = Text.builder(" m ").color(TextColors.GOLD).build();	
+					
+					time_year = Text.builder(targetNode.getEndTimeBanYear()+"").color(TextColors.AQUA).append(time_year_format).build();	
+					time_month = Text.builder(targetNode.getEndTimeBanMonth()+"").color(TextColors.AQUA).append(time_month_format).build();	
+					time_Day = Text.builder(targetNode.getEndTimeBanDay()+"").color(TextColors.AQUA).append(time_Day_format).build();	
+					time_Hour = Text.builder(targetNode.getEndTimeBanHour()+"").color(TextColors.AQUA).append(time_Hour_format).build();	
+					time_Minut = Text.builder(targetNode.getEndTimeBanMinute()+"").color(TextColors.AQUA).append(time_Minut_format).build();
 						
-						
-					time_Day_format = Text.builder(" D / ").color(TextColors.GOLD).build();	
-					time_Hour_format = Text.builder(" H / ").color(TextColors.GOLD).build();	
-					time_Minut_format = Text.builder(" M ").color(TextColors.GOLD).build();	
-						
-					text_time_Day = Text.builder(hashTime.get(TimeEnum.Day)+"").color(TextColors.AQUA).append(time_Day_format).build();	
-					text_time_Hour = Text.builder(hashTime.get(TimeEnum.Hour)+"").color(TextColors.AQUA).append(time_Hour_format).build();	
-					text_time_Minut = Text.builder(hashTime.get(TimeEnum.Minute)+"").color(TextColors.AQUA).append(time_Minut_format).build();	
-						
-					text_ban = Text.builder(ply.getName() + " [ " + ply.getUniqueId() + " ]").color(TextColors.DARK_RED).build();	
-						
-						
-						
+					ban = Text.builder(ply.getName() + " [ " + ply.getUniqueId() + " ]").color(TextColors.DARK_RED).build();	
+							
 					body = Text.builder("\n[ Raison ] ").color(TextColors.GOLD).append(text_raison).build();
 						
-					Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(text_ban).build();
-					Text second_head_footer = Text.builder(" ][ Temps restant : ").color(TextColors.GOLD).append(text_time_Day,text_time_Hour,text_time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
+					Text head_footer = Text.builder("\n[Banni par : ").color(TextColors.GOLD).append(ban).build();
+					Text second_head_footer = Text.builder(" ][ Date de débannissement : ").color(TextColors.GOLD).append(time_year,time_month,time_Day,time_Hour,time_Minut,Text.builder(" ]").color(TextColors.GOLD).build()).build();
 						
 					footer = Text.builder().append(head_footer,second_head_footer).build();
 						
