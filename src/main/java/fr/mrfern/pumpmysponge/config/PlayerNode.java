@@ -3,10 +3,14 @@ package fr.mrfern.pumpmysponge.config;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -450,6 +454,10 @@ public class PlayerNode implements ConfigurationNode{
 	public void setBeginTimeBanMonth(int month) {
 		cfgNode.getNode(name,"ban","time_begin","month").setValue(month);
 	}
+	
+	public void setBeginTimeMaxDayInMonth(int max_day) {
+		cfgNode.getNode(name,"ban","time_begin","month-max-day").setValue(max_day);
+	}
 
 	public void setBeginTimeBanDay(int day) {
 		cfgNode.getNode(name,"ban","time_begin","day").setValue(day);
@@ -468,6 +476,10 @@ public class PlayerNode implements ConfigurationNode{
 	
 	public int getBeginTimeBanMonth() {
 		return cfgNode.getNode(name,"ban","time_begin","month").getInt();
+	}
+	
+	public int getBeginTimeMaxDayInMonth() {
+		return cfgNode.getNode(name,"ban","time_begin","month-max-day").getInt();
 	}
 
 	public int getBeginTimeBanDay() {
@@ -513,6 +525,7 @@ public class PlayerNode implements ConfigurationNode{
 		setBeginTimeBanYear(0);
 		setBeginTimeBanMonth(0);
 		setBeginTimeBanDay(0);
+		setBeginTimeMaxDayInMonth(0);
 		setBeginTimeBanHour(0);
 		setBeginTimeBanMinute(0);
 		
@@ -568,32 +581,57 @@ public class PlayerNode implements ConfigurationNode{
 	
 	}
 	
-	public int getEndTimeYear() {
-		return 0;
+	public void calculEndTime() {
 		
-	}
-	
-	public int getEndTimeMonth() {
-		return 0;
+		int begin_year = getBeginTimeBanYear() ,begin_month = getBeginTimeBanMonth() ,begin_day = getBeginTimeBanDay() ,
+		begin_hour = getBeginTimeBanHour() ,begin_minute = getBeginTimeBanMinute();
 		
-	}
-	
-	public int getEndTimeDay() {
-		return 0;
+		int max_day_in_month = getBeginTimeMaxDayInMonth();
 		
-	}
-	
-	public int getEndTimeHour() {
-		return 0;
+		int day = getPlayerBanTimeDay(),hour = getPlayerBanTimeHour(),minute = getPlayerBanTimeMinut();
 		
-	}
-	
-	public int getEndTimeMinute() {
-		return 0;
+		int end_minute = 0,end_hour = 0,end_day = 0,end_month = 0,end_year = 0;
 		
-	}
+		// minut
+		end_minute =  begin_minute + minute;		
+
+		if(end_minute >= 60) {
+			end_hour = (end_minute - (end_minute % 60)) / 60;
+			end_minute = end_minute % 60;			
+		}
+		
+		//hour
+		end_hour = end_hour + begin_hour + hour;
+				
+		if(end_hour > 24) {
+			end_day = (end_hour - (end_hour % 24)) / 24;
+			end_hour = end_day % 60;
+		}
+		
+		// jour
+		end_day = end_day + begin_day + day;
+
+		if(end_day > max_day_in_month) {
+			end_month = (end_day - (end_day % max_day_in_month)) / max_day_in_month;
+			end_day = end_day % max_day_in_month;
+		}
+		
+		// mois
+		end_month = end_month + begin_month;
+				
+		if(end_month > 12) {
+			end_year = (end_month - (end_month % 12)) / 12;
+			end_month = end_month % 12;	
+		}
+		
+		end_year = end_year + begin_year;	
+		
+		setEndTimeBanYear(end_year);
+		setEndTimeBanMonth(end_month);
+		setEndTimeBanDay(end_day);
+		setEndTimeBanHour(end_hour);
+		setEndTimeBanMinute(end_minute);
 	
-	
-	
+	}	
 	
 }
