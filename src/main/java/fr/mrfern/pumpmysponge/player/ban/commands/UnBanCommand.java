@@ -21,15 +21,10 @@ public class UnBanCommand implements CommandExecutor {
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		
-if(src instanceof Player) {
+		if(src instanceof Player) {
 		    
 			Player ply = (Player) src;
-			Player target;
-			
-			Integer day = 0, hour = 0,minute = 0;
-			String raison;
-			
-			HashMap<TimeEnum, Integer> hashTime = new HashMap<>();
+			Player target;			
 			
 			if(args.<Player>getOne("player").isPresent()) {
 				target = args.<Player>getOne("player").get();
