@@ -267,11 +267,11 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public int getPlayerBanTimeHour() {
-		return cfgNode.getNode(name,"ban","time","day").getInt();
+		return cfgNode.getNode(name,"ban","time","hour").getInt();
 	}
 	
 	public int getPlayerBanTimeMinut() {
-		return cfgNode.getNode(name,"ban","time","day").getInt();
+		return cfgNode.getNode(name,"ban","time","minut").getInt();
 	}	
 	
 	public UUID getBanAuthorUUID() {
@@ -371,11 +371,11 @@ public class PlayerNode implements ConfigurationNode{
 	}
 	
 	public void setPlayerBanTimeHour(int hour) {
-		cfgNode.getNode(name,"ban","time","day").setValue(hour);
+		cfgNode.getNode(name,"ban","time","hour").setValue(hour);
 	}
 	
 	public void setPlayerBanTimeMinut(int minut) {
-		cfgNode.getNode(name,"ban","time","day").setValue(minut);
+		cfgNode.getNode(name,"ban","time","minute").setValue(minut);
 	}	
 	
 	public void setPlayerBanAuthorUUID(UUID uuid) {
@@ -582,16 +582,21 @@ public class PlayerNode implements ConfigurationNode{
 	public void calculEndTime() {
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(getBeginTimeBanYear(),getBeginTimeBanMonth(),getBeginTimeBanDay(),getBeginTimeBanHour(),getBeginTimeBanMinute());
+		
+		cal.set(Calendar.YEAR,getBeginTimeBanYear());
+		cal.set(Calendar.MONTH,getBeginTimeBanMonth());
+		cal.set(Calendar.DATE,getBeginTimeBanDay());
+		cal.set(Calendar.HOUR_OF_DAY,getBeginTimeBanHour());
+		cal.set(Calendar.MINUTE,getBeginTimeBanMinute());
 		
 		cal.add(Calendar.MINUTE, getPlayerBanTimeMinut());		
-		cal.add(Calendar.HOUR, getPlayerBanTimeHour());
-		cal.add(Calendar.DATE, getPlayerBanTimeDay());
+		cal.add(Calendar.HOUR_OF_DAY, getPlayerBanTimeHour());
+		cal.add(Calendar.DAY_OF_MONTH, getPlayerBanTimeDay());
 		
 		setEndTimeBanYear(cal.get(Calendar.YEAR));
 		setEndTimeBanMonth(cal.get(Calendar.MONTH));
 		setEndTimeBanDay(cal.get(Calendar.DAY_OF_MONTH));
-		setEndTimeBanHour(cal.get(Calendar.HOUR));
+		setEndTimeBanHour(cal.get(Calendar.HOUR_OF_DAY));
 		setEndTimeBanMinute(cal.get(Calendar.MINUTE));
 	
 	}	
