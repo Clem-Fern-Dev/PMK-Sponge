@@ -117,13 +117,13 @@ public class TBanCommand implements CommandExecutor,IPermissions {
 					targetNode.setBeginTimeBanHour(Integer.parseInt(formater_hour.format(now)));
 					targetNode.setBeginTimeBanMinute(Integer.parseInt(formater_minute.format(now)));
 					
-					// ajout date de fin bannissement A FAIRE
-					targetNode.calculEndTime();
-					
 					// temps de bannissement
 					targetNode.setPlayerBanTimeDay(hashTime.get(TimeEnum.Day));
 					targetNode.setPlayerBanTimeHour(hashTime.get(TimeEnum.Hour));
 					targetNode.setPlayerBanTimeMinut(hashTime.get(TimeEnum.Minute));
+					
+					// ajout date de fin bannissement
+					targetNode.calculEndTime();
 											
 					// info du bannisseur
 					targetNode.setPlayerBanAuthorName(ply.getName());
