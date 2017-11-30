@@ -546,7 +546,6 @@ public class PlayerNode implements ConfigurationNode{
 		setPlayerBanAuthorName("none");
 		setPlayerBanAuthorUUIDString("none");
 		
-		save();
 	}
 	
 	public String buildHistoryLineBan() {
@@ -576,61 +575,24 @@ public class PlayerNode implements ConfigurationNode{
     	
     	clearBan();
     	
-    	save();
 		//loaderRootNode.getNode(name,"last-ban-list").setValue(Arrays.asList("|.|UUID-author-of-ban=none|.|name-of-athor=none|.|date_begin=YY:MM:DD:HH:mm|.|date_end=YY:MM:DD:HH:mm|.|time=YY:MM:DD:HH:mm|.|player-name=none|.|raison=none|.|"));
 	
 	}
 	
 	public void calculEndTime() {
 		
-		int begin_year = getBeginTimeBanYear() ,begin_month = getBeginTimeBanMonth() ,begin_day = getBeginTimeBanDay() ,
-		begin_hour = getBeginTimeBanHour() ,begin_minute = getBeginTimeBanMinute();
+		Calendar cal = Calendar.getInstance();
+		cal.set(getBeginTimeBanYear(),getBeginTimeBanMonth(),getBeginTimeBanDay(),getBeginTimeBanHour(),getBeginTimeBanMinute());
 		
-		int max_day_in_month = getBeginTimeMaxDayInMonth();
+		cal.add(Calendar.MINUTE, getPlayerBanTimeMinut());		
+		cal.add(Calendar.HOUR, getPlayerBanTimeHour());
+		cal.add(Calendar.DATE, getPlayerBanTimeDay());
 		
-		int day = getPlayerBanTimeDay(),hour = getPlayerBanTimeHour(),minute = getPlayerBanTimeMinut();
-		
-		int end_minute = 0,end_hour = 0,end_day = 0,end_month = 0,end_year = 0;
-		
-		// minut
-		end_minute =  begin_minute + minute;		
-
-		if(end_minute >= 60) {
-			end_hour = (end_minute - (end_minute % 60)) / 60;
-			end_minute = end_minute % 60;			
-		}
-		
-		//hour
-		end_hour = end_hour + begin_hour + hour;
-				
-		if(end_hour > 24) {
-			end_day = (end_hour - (end_hour % 24)) / 24;
-			end_hour = end_day % 60;
-		}
-		
-		// jour
-		end_day = end_day + begin_day + day;
-
-		if(end_day > max_day_in_month) {
-			end_month = (end_day - (end_day % max_day_in_month)) / max_day_in_month;
-			end_day = end_day % max_day_in_month;
-		}
-		
-		// mois
-		end_month = end_month + begin_month;
-				
-		if(end_month > 12) {
-			end_year = (end_month - (end_month % 12)) / 12;
-			end_month = end_month % 12;	
-		}
-		
-		end_year = end_year + begin_year;	
-		
-		setEndTimeBanYear(end_year);
-		setEndTimeBanMonth(end_month);
-		setEndTimeBanDay(end_day);
-		setEndTimeBanHour(end_hour);
-		setEndTimeBanMinute(end_minute);
+		setEndTimeBanYear(cal.get(Calendar.YEAR));
+		setEndTimeBanMonth(cal.get(Calendar.MONTH));
+		setEndTimeBanDay(cal.get(Calendar.DAY_OF_MONTH));
+		setEndTimeBanHour(cal.get(Calendar.HOUR));
+		setEndTimeBanMinute(cal.get(Calendar.MINUTE));
 	
 	}	
 	
