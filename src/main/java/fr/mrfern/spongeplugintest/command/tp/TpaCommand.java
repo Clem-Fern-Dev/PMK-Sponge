@@ -14,12 +14,15 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 public class TpaCommand implements CommandExecutor {
-
+	
+	@SuppressWarnings("unused")
+	private static Boolean bool;
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 		if(src instanceof Player) {
 			Player sender = (Player) src;
-			Player target = (Player) args.getOne("player").get();
+			Player target = (Player) args.<Player>getOne("target").get();
+			// recuperation de la cible
 				
 			HashMap<UUID,TeleportData> hashmap = TpaCommandManager.getTpHM();
 			
@@ -29,19 +32,24 @@ public class TpaCommand implements CommandExecutor {
 				
 				if((System.currentTimeMillis()-data.getTimestamp()) >= 90000 ) {
 					iter.remove(); // C'est censé remove les request périmées de la hashmap
-					break;
 				}
 				else if(data.getSender().equals(sender.getUniqueId())) {
-					sender.sendMessage(Text.of("Votre requête de téléportation à déjà été envoyée"));
+					iter.remove();
+					sender.sendMessage(Text.of("Votre requête de téléportation à été envoyée"));
+					bool = true;
 					break;
 				}
 				else {
-					//ici je veux faire ce qui est juste en dessous mais j'y ai pas acces donc je sais pas comment faire
+					sender.sendMessage(Text.of("Votre requête de téléportation à été envoyée"));
+					bool = true;
+					break;
 				}
 			}
-			
-			hashmap.put(target.getUniqueId(), new TeleportData(sender.getUniqueId(), System.currentTimeMillis()));
-			
+			if(bool = true) {
+				hashmap.put(target.getUniqueId(), new TeleportData(sender.getUniqueId(), System.currentTimeMillis()));
+			}
+			TpaCommandManager.setTpHM(hashmap);
+			target.sendMessage(Text.of(sender.getName()+" vous a envoyé une demande de teleportation \n /tpaccept pour accepter"));
 			
 		}
 		else {

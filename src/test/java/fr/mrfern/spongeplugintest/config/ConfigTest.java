@@ -1,6 +1,9 @@
 package fr.mrfern.spongeplugintest.config;
 
 import org.junit.Test;
+
+import fr.mrfern.pumpmysponge.config.Config;
+
 import static org.junit.Assert.*;
 
 public class ConfigTest{
