@@ -86,6 +86,9 @@ public class Config implements IConfig{
 		
 		loaderRootNode.getNode(pluginName,"config","extension-list").setValue(Arrays.asList(""));
 		
+		loaderRootNode.getNode(pluginName,"http-server","enable").setValue(true);
+		loaderRootNode.getNode(pluginName,"http-server","port").setValue(8989);
+		
 		loaderRootNode.getNode(pluginName,"google-authentificator","enable").setValue(false);
 		loaderRootNode.getNode(pluginName,"google-authentificator","force-op-user").setValue(false);
 		loaderRootNode.getNode(pluginName,"google-authentificator", "user-UUID-list").setValue(Arrays.asList(""));
