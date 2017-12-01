@@ -1,5 +1,8 @@
 package fr.mrfern.pumpmysponge;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -12,6 +15,7 @@ import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
+import com.sun.net.httpserver.HttpServer;
 
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
@@ -42,7 +46,7 @@ public class Main {
 	}
 	
 	@Listener
-	public void onPreInit(GamePreInitializationEvent event) {
+	public void onPreInit(GamePreInitializationEvent event) throws IOException {
 		
 		logger.info("Plugin preInit " + defaultpath);
 		
@@ -51,6 +55,17 @@ public class Main {
 		PlayerConfig.getInstance().setup();
 		//ChunkConfig.getInstance().setup();
 		
+		
+		/*HttpConfigServer.builder(8989)
+						.AddMain(this)
+						.addRoot(new RootHandler());*/
+		
+		int port = 9000;
+		HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+		System.out.println("server started at " + port);
+		server.createContext("/", new RootHandler());
+		server.setExecutor(null);
+		server.start();
     
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
