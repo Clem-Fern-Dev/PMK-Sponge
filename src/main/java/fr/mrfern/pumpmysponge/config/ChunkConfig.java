@@ -12,6 +12,7 @@ import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
+@Deprecated
 public class ChunkConfig implements IConfig{
 
 	protected String name = "chunk";

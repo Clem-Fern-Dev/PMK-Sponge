@@ -21,6 +21,7 @@ import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 
+@Deprecated
 public class ChunkNode implements ConfigurationNode {
 	
 	private ConfigurationNode cfgNode;
