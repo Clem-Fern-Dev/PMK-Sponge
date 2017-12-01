@@ -172,5 +172,32 @@ public class Config implements IConfig{
 		// Récuperation de la liste des utilisateur utilisant la double auth
 		return loaderRootNode.getNode(pluginName,gAuthNode,"user-UUID-list").getChildrenList();
 	}
+	
+	// http-server
+	
+	public void setEnableHttpServer(boolean b) {
+		loaderRootNode.getNode(pluginName,"http-server","enable").setValue(b);
+	}
+	
+	public boolean getEnableHttpServer() {
+		return loaderRootNode.getNode(pluginName,"http-server","enable").getBoolean();
+	}
+	
+	public void setPortHttpServer(int port) {
+		loaderRootNode.getNode(pluginName,"http-server","port").setValue(port);
+	}
+	
+	public int getPortHttpServer() {
+		return loaderRootNode.getNode(pluginName,"http-server","port").getInt();
+	}
+	
+	public void save(){
+		try {
+			cfgLoader.save(loaderRootNode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 		
 }
