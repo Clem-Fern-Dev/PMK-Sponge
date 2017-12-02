@@ -40,8 +40,8 @@ public class TpacceptCommand implements CommandExecutor {
 				
 				if(entry.getKey().equals(uuid)) {
 					Optional<Player> target = Sponge.getServer().getPlayer(data.getSender());
-					Location<World> tppos = target.get().getLocation();
-					sender.setLocation(tppos);
+					Location<World> tppos = sender.getLocation();
+					target.get().setLocation(tppos);
 					iter.remove();
 					tp = true;
 					break;
