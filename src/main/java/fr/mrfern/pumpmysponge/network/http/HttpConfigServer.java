@@ -1,8 +1,10 @@
-package fr.mrfern.pumpmysponge.network;
+package fr.mrfern.pumpmysponge.network.http;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executor;
 
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import fr.mrfern.pumpmysponge.Main;
@@ -20,7 +22,7 @@ public class HttpConfigServer {
 		return httpConfigServer;
 	}
 	
-	public HttpConfigServer builder() {
+	static public HttpConfigServer builder() {
 		
 		boolean enable = Config.getInstance().getEnableHttpServer();
 		
@@ -32,6 +34,7 @@ public class HttpConfigServer {
 			
 			try {
 				httpS = HttpServer.create(new InetSocketAddress(Config.getInstance().getPortHttpServer()), 0);
+				main.getLogger().warn(" Le serveur HTTP a démaré avec succès");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -42,15 +45,15 @@ public class HttpConfigServer {
 		return httpConfigServer;
 	}
 	
-	public HttpConfigServer builder(int port) {
+	static public HttpConfigServer builder(int port) {
 		
 		boolean enable = Config.getInstance().getEnableHttpServer();
 		
-		if(!enable) {
+		/*if(!enable) {
 			
 			main.getLogger().warn(" Le serveur HTTP n'a pas démaré , il n'a pas été activé dans config.json");
 			
-		}else {
+		}else {*/
 			
 			Config.getInstance().setPortHttpServer(port);
 			Config.getInstance().save();
@@ -61,15 +64,15 @@ public class HttpConfigServer {
 				e.printStackTrace();
 			}
 			
-		}
+		//}
 		
 		
 		return httpConfigServer;
 	}
 	
-	public HttpConfigServer addListener() {
+	public HttpConfigServer addRoot(HttpHandler classHandler) {
 		
-		
+		httpS.createContext("/", classHandler);
 		
 		return httpConfigServer;
 	}
@@ -88,5 +91,20 @@ public class HttpConfigServer {
 
 	public static HttpServer getHttpS() {
 		return httpS;
+	}
+
+	public HttpConfigServer addContext(String url,HttpHandler echoHandler) {
+		
+		httpS.createContext(url, echoHandler);		
+		return httpConfigServer;
+	}
+	
+	public void start() {
+		httpS.start();
+	}
+
+	public HttpConfigServer setExecutor(Executor object) {
+		httpS.setExecutor(object);	
+		return httpConfigServer;
 	}
 }
