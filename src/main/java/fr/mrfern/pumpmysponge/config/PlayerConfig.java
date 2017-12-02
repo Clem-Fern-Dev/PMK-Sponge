@@ -170,8 +170,18 @@ public class PlayerConfig implements IConfig{
 		return null;
 	}
 	
+	public PlayerNode getPlayerConfigNode(File file) {			
+		ConfigurationLoader<CommentedConfigurationNode> loader = builderConfigLoader(file);		// build file loader
+			
+		PlayerNode plyNode = new PlayerNode();	//load file / return loader
+		plyNode.setCfgNode(loader);
+		return plyNode;
+	}
+	
+	
 	public boolean playerConfigExist(UUID uuid) {
-		File playerFile = new File(playerPath + uuid.toString() + extensionFile);	// Instancie new file
+		String uid = uuid.toString();	
+		File playerFile = new File(playerPath + uid + extensionFile);	// Instancie new file
 		if(playerFile.exists()){	// check si file exist
 			return true;
 		}
