@@ -58,7 +58,7 @@ public class EchoGetPlyStatsHandler implements HttpHandler {
         
     		case "UUID":
     	
-    			Object plyNode = null;
+    			Object plyNode = PlayerConfig.getInstance().getPlayerConfigNode(UUID.fromString(value));
     		
     			if(plyNode == null) {
     			
@@ -87,20 +87,8 @@ public class EchoGetPlyStatsHandler implements HttpHandler {
     			os.close();
     	
     			break;
-    	
-    		default:
-    		
-    			// send response
-    			response = "204 (No Content) \n";
-    			he.sendResponseHeaders(204, 0);
-    			os = he.getResponseBody();
-    			os.write(response.toString().getBytes());
-    			os.close();
-    		break;
-    
-    	
-    
-    }
+    			
+        }
 
         
     }
