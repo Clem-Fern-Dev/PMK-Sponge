@@ -9,66 +9,47 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+
+import fr.mrfern.pumpmysponge.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.config.PlayerNode;
 
 public class EchoGetPlyStatsHandler implements HttpHandler {
 
 	@Override
     public void handle(HttpExchange he) throws IOException {
-            // parse request
-    		Map<String, Object> parameters = new HashMap<String, Object>();
-            URI requestedUri = he.getRequestURI();
-            String query = requestedUri.getRawQuery();
-            parseQuery(query, parameters);
-
-            // send response
-            String response = "";
-            for (String key : parameters.keySet())
-                     response += key + " = " + parameters.get(key) + "\n";
-            he.sendResponseHeaders(200, response.length());
-            OutputStream os = he.getResponseBody();
-            os.write(response.toString().getBytes());
-            os.close();
-    }
-
-    private void parseQuery(String query, Map<String, Object> parameters) throws UnsupportedEncodingException {
 		
-		if (query != null) {
+		// parse request
+		
+		String key = new String("");
+		String value = new String("");
+		
+        URI requestedUri = he.getRequestURI();
+        String query = requestedUri.getRawQuery();
+        
+        if (query != null) {
             String pairs[] = query.split("[&]");
-            for (String pair : pairs) {
-                     String param[] = pair.split("[=]");
-                     String key = null;
-                     String value = null;
-                     if (param.length > 0) {
-                     key = URLDecoder.decode(param[0], 
-                     	System.getProperty("file.encoding"));
-                     }
-
-                     if (param.length > 1) {
-                              value = URLDecoder.decode(param[1], 
-                              System.getProperty("file.encoding"));
-                     }
-
-                     if (parameters.containsKey(key)) {
-                              Object obj = parameters.get(key);
-                              if (obj instanceof List<?>) {
-                                       @SuppressWarnings("unchecked")
-									List<String> values = (List<String>) obj;
-                                       values.add(value);
-
-                              } else if (obj instanceof String) {
-                                       List<String> values = new ArrayList<String>();
-                                       values.add((String) obj);
-                                       values.add(value);
-                                       parameters.put(key, values);
-                              }
-                     } else {
-                              parameters.put(key, value);
-                     }
+            
+            // récupères seulement le premier 
+            String pair = pairs[0];
+            
+            String param[] = pair.split("[=]");
+            
+                     
+            if (param.length > 0) {
+            	key = URLDecoder.decode(param[0],System.getProperty("file.encoding"));
             }
+
+            if (param.length > 1) {
+                value = URLDecoder.decode(param[1],System.getProperty("file.encoding"));
+            }
+            
 		}
-	}
+
+        
+    }
 
 }
