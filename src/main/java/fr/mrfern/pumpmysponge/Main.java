@@ -20,6 +20,9 @@ import com.sun.net.httpserver.HttpServer;
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.network.http.EchoGetHandler;
+import fr.mrfern.pumpmysponge.network.http.HttpConfigServer;
+import fr.mrfern.pumpmysponge.network.http.RootHandler;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
 import fr.mrfern.pumpmysponge.player.ban.commands.PlayerBanCommandManager;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
@@ -56,16 +59,12 @@ public class Main {
 		//ChunkConfig.getInstance().setup();
 		
 		
-		/*HttpConfigServer.builder(8989)
+		HttpConfigServer.builder(8989)
 						.AddMain(this)
-						.addRoot(new RootHandler());*/
-		
-		int port = 9000;
-		HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-		System.out.println("server started at " + port);
-		server.createContext("/", new RootHandler());
-		server.setExecutor(null);
-		server.start();
+						.addRoot(new RootHandler())
+						.addContext("/playerstats" , new EchoGetHandler())
+						.setExecutor(null)
+						.start();
     
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
