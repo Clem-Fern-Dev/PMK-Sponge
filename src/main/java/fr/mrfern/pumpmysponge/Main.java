@@ -68,17 +68,6 @@ public class Main {
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
 		 * sont disponibles.
 		 */		
-		
-		// Création du répertoire de config de base
-		
-		
-		// Création du répertoire de config de base
-		/*File config = new File(path + "config.yml");
-		if(!config.exists()) {
-			config.mkdirs();
-			logger.info("Création de " + path );
-		}
-		*/	
 	}
 	
 	@Listener
