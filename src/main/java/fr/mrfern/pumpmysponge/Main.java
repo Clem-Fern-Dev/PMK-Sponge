@@ -1,7 +1,6 @@
 package fr.mrfern.pumpmysponge;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
@@ -15,12 +14,11 @@ import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
-import com.sun.net.httpserver.HttpServer;
 
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
-import fr.mrfern.pumpmysponge.network.http.EchoGetHandler;
+import fr.mrfern.pumpmysponge.network.http.EchoGetPlyStatsHandler;
 import fr.mrfern.pumpmysponge.network.http.HttpConfigServer;
 import fr.mrfern.pumpmysponge.network.http.RootHandler;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
@@ -62,7 +60,7 @@ public class Main {
 		HttpConfigServer.builder(8989)
 						.AddMain(this)
 						.addRoot(new RootHandler())
-						.addContext("/playerstats" , new EchoGetHandler())
+						.addContext("/playerstats" , new EchoGetPlyStatsHandler())
 						.setExecutor(null)
 						.start();
     
