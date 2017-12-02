@@ -1,5 +1,7 @@
 package fr.mrfern.pumpmysponge.network.http;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -52,55 +54,78 @@ public class EchoGetPlyStatsHandler implements HttpHandler {
         String response = "";
         OutputStream os;
         
-        switch(key) {
+        switch(key.toString()) {
         
-        	case "UUID":
-        	
-        		PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(UUID.fromString(value));
+    		case "UUID":
+    	
+    			Object plyNode = null;
+    		
+    			if(plyNode == null) {
+    			
+    				response = "<h1> UUID inconnu, ou joueur inexistant  !</h1>";            		
         		
-        		if(plyNode == null) {
-        			
-            		response = "<h3> UUID inconnu, ou joueur inexistant  !</h3>";            		
-            		
-        		}else {
-        			
-            		response = key + " = " + value + "\n";
-            		
-        		}
+    			}else {
+    			
+    				response = "ok";        
         		
-        		he.sendResponseHeaders(200, response.length());
-        		os = he.getResponseBody();
-        		os.write(response.toString().getBytes());
-        		os.close();
+    			}
+    		
+    			he.sendResponseHeaders(200, response.length());
+    			os = he.getResponseBody();
+    			os.write(response.getBytes());
+    			os.close();
 
-        		break;
-        	
-        	case "name":
-        	
-        		// send response
-        		response = key + " = " + value + "\n";
-        		he.sendResponseHeaders(200, response.length());
-        		os = he.getResponseBody();
-        		os.write(response.toString().getBytes());
-        		os.close();
-        	
-        		break;
-        	
-        	default:
-        		
-        		// send response
-        		response = "204 (No Content) \n";
-        		he.sendResponseHeaders(204, 0);
-        		os = he.getResponseBody();
-        		os.write(response.toString().getBytes());
-        		os.close();
-        		break;
-        
-        	
-        
-        }
+    			break;
+    	
+    		case "name":
+    	
+    			// send response
+    			response = key + " = " + value + "\n";
+    			he.sendResponseHeaders(200, response.length());
+    			os = he.getResponseBody();
+    			os.write(response.toString().getBytes());
+    			os.close();
+    	
+    			break;
+    	
+    		default:
+    		
+    			// send response
+    			response = "204 (No Content) \n";
+    			he.sendResponseHeaders(204, 0);
+    			os = he.getResponseBody();
+    			os.write(response.toString().getBytes());
+    			os.close();
+    		break;
+    
+    	
+    
+    }
 
         
     }
+	
+	public String parseFile(FileReader reader) {
+		
+		String parsed = "";
+	    BufferedReader br = null;
+	    try {
+	        String sCurrentLine;
+	        br = new BufferedReader(reader);
+	        while ((sCurrentLine = br.readLine()) != null) {
+	            parsed += sCurrentLine;
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (br != null) br.close();
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+	    return parsed;
+		
+	}
 
 }
