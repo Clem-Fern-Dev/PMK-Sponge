@@ -25,6 +25,9 @@ public class TpaCommand implements CommandExecutor {
 			// recuperation de la cible
 				
 			HashMap<UUID,TeleportData> hashmap = TpaCommandManager.getTpHM();
+			if(sender.equals(target)) {
+				sender.sendMessage(Text.of("Tu ne peux pas te téléporter à toi même"));
+			}
 			
 			for(Iterator<Entry<UUID, TeleportData>> iter = hashmap.entrySet().iterator(); iter.hasNext(); ) {
 				Entry<UUID, TeleportData> entry = iter.next();
