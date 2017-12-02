@@ -47,7 +47,58 @@ public class EchoGetPlyStatsHandler implements HttpHandler {
                 value = URLDecoder.decode(param[1],System.getProperty("file.encoding"));
             }
             
-		}
+        }
+        
+        String response = "";
+        OutputStream os;
+        
+        switch(key) {
+        
+        	case "UUID":
+        	
+        		PlayerNode plyNode = PlayerConfig.getInstance().getPlayerConfigNode(UUID.fromString(value));
+        		
+        		if(plyNode == null) {
+        			
+            		response = "<h3> UUID inconnu, ou joueur inexistant  !</h3>";            		
+            		
+        		}else {
+        			
+            		response = key + " = " + value + "\n";
+            		
+        		}
+        		
+        		he.sendResponseHeaders(200, response.length());
+        		os = he.getResponseBody();
+        		os.write(response.toString().getBytes());
+        		os.close();
+
+        		break;
+        	
+        	case "name":
+        	
+        		// send response
+        		response = key + " = " + value + "\n";
+        		he.sendResponseHeaders(200, response.length());
+        		os = he.getResponseBody();
+        		os.write(response.toString().getBytes());
+        		os.close();
+        	
+        		break;
+        	
+        	default:
+        		
+        		// send response
+        		response = "204 (No Content) \n";
+        		he.sendResponseHeaders(204, 0);
+        		os = he.getResponseBody();
+        		os.write(response.toString().getBytes());
+        		os.close();
+        		break;
+        
+        	
+        
+        }
 
         
     }
