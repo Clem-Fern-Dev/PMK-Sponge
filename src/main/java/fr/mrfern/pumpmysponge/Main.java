@@ -1,6 +1,9 @@
 package fr.mrfern.pumpmysponge;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
@@ -24,6 +27,8 @@ import fr.mrfern.pumpmysponge.network.http.RootHandler;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
 import fr.mrfern.pumpmysponge.player.ban.commands.PlayerBanCommandManager;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
+import me.lucko.luckperms.api.Group;
+import me.lucko.luckperms.api.LuckPermsApi;
 
 
 
@@ -36,6 +41,17 @@ public class Main {
 	protected static String defaultpath = "mods/plugins/"+ pluginName +"/";
 	protected static String playerpath = "mods/plugins/"+ pluginName +"/player";
 	protected static String chunkpath = "mods/plugins/"+ pluginName +"/chunk";
+	
+	protected static LuckPermsApi api;
+	protected static Set<Group> groupList;
+	
+	public static LuckPermsApi getPermsAPI() {
+		return api;
+	}
+	
+	public static Set<Group> getGroupList(){
+		return groupList;
+	}
 	
 	public static String getPluginName() {		return pluginName;	}
 	
@@ -87,6 +103,17 @@ public class Main {
 	public void onPostInit(GamePostInitializationEvent event) {
 		
 		logger.info("Plugin Post Init");
+		
+		Optional<LuckPermsApi> provider = Sponge.getServiceManager().provide(LuckPermsApi.class);
+		if (provider.isPresent()) {
+		    api = provider.get();
+		    logger.info(" LuckPermsApi.class init OK ! ");
+		    
+		    groupList = api.getGroups();
+		    
+		}else {
+			logger.info(" LuckPermsApi.class init NOT OK ! ");
+		}
 		
 		/* L’événement GamePostInitializationEvent est levé. Par cet état, les communications inter-plugin devraient être prêtes à se produire. 
 		 * Les plugins fournissant une API devraient être prêts à accepter des requêtes de base.
