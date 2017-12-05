@@ -9,9 +9,12 @@ import java.net.URI;
 import java.net.URLDecoder;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.profile.GameProfile;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -89,32 +92,31 @@ public class EchoGetPlyStatsHandler implements HttpHandler {
     		case "name":
     			
     			System.out.println("optionnal player");
-    			Optional<Player> ply = Sponge.getServer().getPlayer(value);
-    			
-    			System.out.println("check ply present");
-    			if(!ply.isPresent()) {
-    				System.out.println("optionnal player non present");
-    				response = "<h1> UUID inconnu, ou joueur inexistant  !</h1>";
-    			}else {
-    				System.out.println("optionnal player present");
-    				UUID uuid = ply.get().getUniqueId();
+    			CompletableFuture<GameProfile> ply = Sponge.getServer().getGameProfileManager().get(value);
+    			UUID uuid;
+			
+    			try {
+    				uuid = ply.get().getUniqueId();
+				
     				System.out.println("optionnal player get UUID");
     				File plyNameFile = PlayerConfig.getInstance().getPlayerConfigFile(uuid);
-    				System.out.println("optionnal player non present");
-    	    		
-        			if(plyNameFile != null) {
-        				
-        				response = parseFile(new FileReader(plyNameFile));
-            		
-        			}else {
-        				response = "<h1> UUID inconnu, ou joueur inexistant  !</h1>";        
-            		
-        			}
-    				
+    				System.out.println("optionnal player récupération de la file");
+	    		
+    				System.out.println("check null or not");
+    				if(plyNameFile != null) {
+    					System.out.println("not null");
+    					response = parseFile(new FileReader(plyNameFile));
+        		
+    				}else {
+    					System.out.println("null");
+    					response = "<h1> nom inconnu, ou joueur inexistant  !</h1>";        
+        		
+    				}
+				
+    			} catch (InterruptedException | ExecutionException e) {
+    				response = "<h1> nom inconnu, ou joueur inexistant  !</h1>";
     			}
-    			
-    			
-    		
+    				
     			he.sendResponseHeaders(200, response.length());
     			os = he.getResponseBody();
     			os.write(response.toString().getBytes());
