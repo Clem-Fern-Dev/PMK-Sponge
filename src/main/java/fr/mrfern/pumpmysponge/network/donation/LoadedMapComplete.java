@@ -1,6 +1,8 @@
 package fr.mrfern.pumpmysponge.network.donation;
 
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.entity.VelocityData;
@@ -16,6 +18,9 @@ import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.scheduler.SpongeExecutorService;
+import org.spongepowered.api.scheduler.Task;
+import org.spongepowered.api.scheduler.Task.Builder;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.util.blockray.BlockRay;
@@ -61,27 +66,23 @@ public class LoadedMapComplete {
 					World world = optionnalWorld.get();
 					
 					// spawn particles
+					
+					
+					
 					//premier pilier
 					
-					Vector3d vec1 = new Vector3d().add(-530.52, 28.5 , 1365.492).add(-533.52, 29.5 , 1368.492);
+
 					
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1365.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.CLOUD).option(ParticleOptions.VELOCITY, vec1).build(), new Vector3d(-530.52, 28.5 , 1365.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1379.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1365.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1379.492), 30);
-					
-					//faiseau entre un est deux
-					
-					//deuxième pilier
-					
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1376.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1368.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1376.492), 30);
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1368.492), 30);
-					
-					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.CLOUD).quantity(30).option(ParticleOptions.VELOCITY, new Vector3d(1,1,1)).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIRE_SMOKE).option(ParticleOptions.QUANTITY, 50).build(), new Vector3d(-537, 32 , 1372), 30);
+					/*world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
 					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.LARGE_SMOKE).quantity(30).build(), new Vector3d(-537, 32 , 1372), 30);*/
+					
 				}
 				
 			}
@@ -99,24 +100,67 @@ public class LoadedMapComplete {
 			
 			World world = optionnalWorld.get();
 			
-			//BlockRay<World> blockRayStartPoint_1 = BlockRay.from(new Location<World>(world, 0,0,0)).direction(new Vector3d()).build();
+			SpongeExecutorService minecraftExecutor = Sponge.getScheduler().createSyncExecutor(main);
 			
-			//BlockRay<World> blockRay = BlockRay.from(Sponge.getServer().getPlayer("test").get())
-				   // .stopFilter(BlockRay.continueAfterFilter(BlockRay.onlyAirFilter(), 1)).build();
+			Sponge.getGame().getScheduler().createAsyncExecutor(main).schedule(new Runnable() {
+				
+				@Override
+				public void run() {
+					System.out.println("schedule run");
+					Vector3d vec1 = new Vector3d().add(-537.5-(-539.5), 29.5-31 , 1372.5-1374.5);
+					Vector3d vec2 = new Vector3d().add(-537.5-(-539.5), 29.5-31 , 1372.5-1370.5);
+					Vector3d vec3 = new Vector3d().add(-537.5-(-535.5), 29.5-31 , 1372.5-1374.5);
+					Vector3d vec4 = new Vector3d().add(-537.5-(-535.5), 29.5-31 , 1372.5-1370.5);
+					
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIRE_SMOKE).quantity(50).option(ParticleOptions.VELOCITY, vec1).build(), new Vector3d(-539.5, 31 , 1374.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIRE_SMOKE).quantity(50).option(ParticleOptions.VELOCITY, vec2).build(), new Vector3d(-539.5, 31 , 1370.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIRE_SMOKE).quantity(50).option(ParticleOptions.VELOCITY, vec3).build(), new Vector3d(-535.5, 31 , 1374.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIRE_SMOKE).quantity(50).option(ParticleOptions.VELOCITY, vec4).build(), new Vector3d(-535.5, 31 , 1370.492), 30);		
+					
+				}
+			}, 100, TimeUnit.MILLISECONDS);
 			
-			/*Task.Builder taskBuilder = Task.builder();
+			/*//minecraftExecutor.schedule(, 100, TimeUnit.MILLISECONDS);
 			
-			GameRegistry gameRegistry = Sponge.getRegistry();
+			minecraftExecutor.schedule(new Runnable() {
+				
+				@Override
+				public void run() {
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1365.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1379.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1365.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1379.492), 30);				
+					//deuxième pilier
+					
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1376.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1368.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1376.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1368.492), 30);		
+					
+				}
+			}, 1200, TimeUnit.MILLISECONDS);
 			
-			 taskBuilder.execute(
-				    () -> {
-				    	world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.FIREWORKS_SPARK).velocity(new Vector3d(1, 1, 1)).build(), 
-								new Vector3d(-534.52, 27.4 , 1365.492));
-				    	main.getLogger().info("Particle");
-				    }
-				).async().interval(500, TimeUnit.MILLISECONDS);*/
+			/*
 			
+			Builder taskPilone = Task.builder();
+			taskPilone.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1365.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-530.52, 28.5 , 1379.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1365.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-544.52, 28.5 , 1379.492), 30);				
+					//deuxième pilier
+					
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1376.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-541.52, 29.5 , 1368.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1376.492), 30);
+					world.spawnParticles(ParticleEffect.builder().type(ParticleTypes.ANGRY_VILLAGER).build(), new Vector3d(-533.52, 29.5 , 1368.492), 30);					
+				}
+			}).async().delay(1, TimeUnit.MILLISECONDS).interval(1200, TimeUnit.MILLISECONDS).name("task2").submit(main);
 			
+			*/
 			//BlockRay<World> blockRayStartPoint_2 = BlockRay.from(new Location<World>(world, 0,0,0)).direction(new Vector3d()).distanceLimit(2).build();
 			
 			

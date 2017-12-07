@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Platform;
@@ -17,6 +18,7 @@ import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.scheduler.SpongeExecutorService;
 
 import com.google.inject.Inject;
 
@@ -47,6 +49,11 @@ public class Main {
 	
 	protected static LuckPermsApi api;
 	protected static Set<Group> groupList;
+	protected static SpongeExecutorService minecraftExecutor;
+	
+	public static SpongeExecutorService getExecutorService() {
+		return minecraftExecutor;
+	}
 	
 	public static LuckPermsApi getPermsAPI() {
 		return api;
@@ -140,6 +147,7 @@ public class Main {
 	public void onInitComplete(GameLoadCompleteEvent event) {
 		
 		logger.info("Plugin Load complete");
+		
 		
 		//L’événement GameLoadCompleteEvent est levé. Par cet état, toutes les initialisations des plugins devraient être terminées.
 		
