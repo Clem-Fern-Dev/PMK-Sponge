@@ -82,38 +82,45 @@ public class PlayerInventoryListener {
 		if(itemOptionnal.isPresent()) {
 			ItemStack item = itemOptionnal.get();
 			
-			String itemName = item.get(Keys.DISPLAY_NAME).get().toPlain();
-			Text textNavItem_1 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build();
-			Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
-			Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
-			
-			Text textEnTete;
-			Text textConnect;
-			
-			if(itemName.equals(textNavItem_1.toPlain())) {
+			if(item.get(Keys.DISPLAY_NAME).isPresent()) {
 				
-				textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
-		    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
-				
-				player.sendMessage(Text.of("Connexion ragnamod #1"));
-				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
-				
-			}else if(itemName.equals(textNavItem_2.toPlain())) {
-				
-				textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
-				textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
-				
-				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
-				
-		        
+				String itemName = item.get(Keys.DISPLAY_NAME).get().toPlain();
 				
 				
-				player.sendMessage(Text.of("Connexion ragnamod #2"));
-				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna2"));
-			}else if(itemName.equals(textNavItem.toPlain())) {
-				player.sendMessage(Text.of("Connexion lobby 2"));
-				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));				
+				Text textNavItem_1 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build();
+				Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
+				Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
+				
+				Text textEnTete;
+				Text textConnect;
+				
+				if(itemName.equals(textNavItem_1.toPlain())) {
+					
+					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
+			    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+					
+					player.sendMessage(Text.of("Connexion ragnamod #1"));
+					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
+					
+				}else if(itemName.equals(textNavItem_2.toPlain())) {
+					
+					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
+					textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+					
+					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
+					
+			        
+					
+					
+					player.sendMessage(Text.of("Connexion ragnamod #2"));
+					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna2"));
+				}else if(itemName.equals(textNavItem.toPlain())) {
+					player.sendMessage(Text.of("Connexion lobby 2"));
+					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));				
+				}
+				
 			}
+			
 		}
 	}
 	
