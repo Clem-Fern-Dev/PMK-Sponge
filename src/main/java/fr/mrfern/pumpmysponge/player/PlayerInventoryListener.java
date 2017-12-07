@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.type.HandType;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
@@ -13,7 +12,6 @@ import org.spongepowered.api.event.entity.living.humanoid.HandInteractEvent;
 import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.filter.type.Exclude;
-import org.spongepowered.api.event.filter.type.Include;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.item.ItemTypes;
@@ -22,13 +20,13 @@ import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.pumpmysponge.Main;
 
 public class PlayerInventoryListener {
 
+	@SuppressWarnings("unused")
 	private Main main;
 
 	public PlayerInventoryListener(Main mainManager) {
@@ -91,6 +89,7 @@ public class PlayerInventoryListener {
 				Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
 				Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
 				
+				@SuppressWarnings("unused")
 				Text textEnTete;
 				Text textConnect;
 				
@@ -99,7 +98,7 @@ public class PlayerInventoryListener {
 					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
 			    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
 					
-					player.sendMessage(Text.of("Connexion ragnamod #1"));
+					player.sendMessage(textEnTete);
 					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
 					
 				}else if(itemName.equals(textNavItem_2.toPlain())) {
@@ -107,6 +106,7 @@ public class PlayerInventoryListener {
 					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
 					textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
 					
+					player.sendMessage(textEnTete);
 					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
 					
 			        
