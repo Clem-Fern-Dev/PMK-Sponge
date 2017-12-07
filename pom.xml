@@ -12,6 +12,12 @@
   </properties>
   
   <repositories>
+  
+  	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+  
     <repository>
         <id>sponge</id>
         <url>https://repo.spongepowered.org/maven</url>
@@ -19,6 +25,7 @@
   </repositories>
 
   <dependencies>
+  
   	<dependency>
   		<groupId>org.spongepowered</groupId>
   		<artifactId>spongeapi</artifactId>
