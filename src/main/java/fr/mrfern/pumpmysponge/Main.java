@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
+import org.spongepowered.api.Platform;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.event.Listener;
@@ -14,6 +15,7 @@ import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
 import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
+import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
 import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
@@ -21,6 +23,7 @@ import com.google.inject.Inject;
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.network.donation.DonationMob;
 import fr.mrfern.pumpmysponge.network.http.EchoGetPlyStatsHandler;
 import fr.mrfern.pumpmysponge.network.http.HttpConfigServer;
 import fr.mrfern.pumpmysponge.network.http.RootHandler;
@@ -57,6 +60,12 @@ public class Main {
 	
 	@Inject
 	private Logger logger;
+
+	private static RawDataChannel bungeeChannel;
+	
+	public static RawDataChannel getBungeeChannel() {
+		return bungeeChannel;
+	}
 	
 	public Logger getLogger() {
 		return this.logger;
@@ -104,6 +113,10 @@ public class Main {
 		
 		logger.info("Plugin Post Init");
 		
+		bungeeChannel = Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord");
+		
+		logger.info("BungeeChannel Init OK !");		
+		
 		Optional<LuckPermsApi> provider = Sponge.getServiceManager().provide(LuckPermsApi.class);
 		if (provider.isPresent()) {
 		    api = provider.get();
@@ -114,6 +127,8 @@ public class Main {
 		}else {
 			logger.info(" LuckPermsApi.class init NOT OK ! ");
 		}
+		
+		DonationMob.listener(this).setup();
 		
 		/* L’événement GamePostInitializationEvent est levé. Par cet état, les communications inter-plugin devraient être prêtes à se produire. 
 		 * Les plugins fournissant une API devraient être prêts à accepter des requêtes de base.

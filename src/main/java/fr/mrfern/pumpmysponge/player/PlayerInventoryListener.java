@@ -1,21 +1,29 @@
 package fr.mrfern.pumpmysponge.player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
-import org.spongepowered.api.data.key.Key;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.type.HandType;
+import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.entity.living.humanoid.HandInteractEvent;
 import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEvent;
 import org.spongepowered.api.event.filter.cause.First;
-import org.spongepowered.api.event.item.inventory.ChangeInventoryEvent;
-import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.event.filter.type.Exclude;
+import org.spongepowered.api.event.filter.type.Include;
+import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.entity.Hotbar;
+import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.util.Color;
+import org.spongepowered.api.text.format.TextColor;
+import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.pumpmysponge.Main;
 
@@ -28,28 +36,88 @@ public class PlayerInventoryListener {
 	}
 	
 	@Listener
-	public void onInventoryEvent(ChangeInventoryEvent e, @First Player player) {
-		e.setCancelled(true);
+	@Exclude(ClickInventoryEvent.NumberPress.class)
+	public void onInventoryEvent(ClickInventoryEvent e, @First Player player) {
+		if(player.hasPermission("group.build") & !player.gameMode().get().equals(GameModes.SURVIVAL)) {
+			return;
+		}else {
+			e.setCancelled(true);
+		}
 	}
 	
 	@Listener
+	public void onInventoryGive(ClientConnectionEvent.Join e, @First Player player) {
+		Inventory inv = player.getInventory();
+		playerGiveNavItem(player,inv);
+	}
+
+	@Listener
 	public void onInventoryGive(RespawnPlayerEvent e,@First Player player) {
 		Inventory inv = player.getInventory();
+		playerGiveNavItem(player,inv);		
+	}
+	
+	private void playerGiveNavItem(Player player, Inventory inv) {
 		
 		inv.clear();
 		
-		ItemStack navItem = ItemStack.builder().itemType(ItemTypes.COMPASS).build();
-		navItem.offer(Keys.COLOR,Color.BLUE);
-		List<Text> itemLore = new ArrayList<>();
+		ItemStack navItemServeur_1 = ItemStack.builder().itemType(ItemTypes.CARROT).build();
+		ItemStack navItemServeur = ItemStack.builder().itemType(ItemTypes.ANVIL).build();	
+		ItemStack navItemServeur_2 = ItemStack.builder().itemType(ItemTypes.APPLE).build();	
 		
-		itemLore.add(Text.of("item_lore test"));
+		navItemServeur_1.offer(Keys.DISPLAY_NAME,Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build());	
 		
-		navItem.offer(Keys.ITEM_LORE,itemLore);
+		navItemServeur.offer(Keys.DISPLAY_NAME,Text.builder("ParticlesSpawn").color(TextColors.LIGHT_PURPLE).build());
 		
-		inv.set(navItem);
+		navItemServeur_2.offer(Keys.DISPLAY_NAME,Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build());	
 		
+		inv.query(Hotbar.class).query(new SlotIndex(3)).set(navItemServeur_1);
+		inv.query(Hotbar.class).query(new SlotIndex(4)).set(navItemServeur);
+		inv.query(Hotbar.class).query(new SlotIndex(5)).set(navItemServeur_2);
 	}
-
+	
+	@Listener
+	public void OnItemNavInteract(HandInteractEvent event, @First Player player) {
+		Optional<ItemStack> itemOptionnal = player.getItemInHand(HandTypes.MAIN_HAND);
+		if(itemOptionnal.isPresent()) {
+			ItemStack item = itemOptionnal.get();
+			
+			String itemName = item.get(Keys.DISPLAY_NAME).get().toPlain();
+			Text textNavItem_1 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build();
+			Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
+			Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
+			
+			Text textEnTete;
+			Text textConnect;
+			
+			if(itemName.equals(textNavItem_1.toPlain())) {
+				
+				textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
+		    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+				
+				player.sendMessage(Text.of("Connexion ragnamod #1"));
+				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
+				
+			}else if(itemName.equals(textNavItem_2.toPlain())) {
+				
+				textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
+				textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+				
+				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
+				
+		        
+				
+				
+				player.sendMessage(Text.of("Connexion ragnamod #2"));
+				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna2"));
+			}else if(itemName.equals(textNavItem.toPlain())) {
+				player.sendMessage(Text.of("Connexion lobby 2"));
+				Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));				
+			}
+		}
+	}
+	
+	
 	
 	
 }
