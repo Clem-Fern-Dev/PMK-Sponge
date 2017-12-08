@@ -4,6 +4,7 @@ import org.spongepowered.api.Sponge;
 
 import fr.mrfern.pumpmysponge.Main;
 import fr.mrfern.pumpmysponge.player.ban.PlayerBanListener;
+import fr.mrfern.pumpmysponge.player.chat.PlayerChatListener;
 
 public class PlayerListenerManager {
 

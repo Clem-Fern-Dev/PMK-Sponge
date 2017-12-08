@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.player;
+package fr.mrfern.pumpmysponge.player.chat;
 
 import java.util.Optional;
 import org.slf4j.Logger;
