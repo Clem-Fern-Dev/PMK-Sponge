@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.config;
+package fr.mrfern.pumpmysponge.player.config;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

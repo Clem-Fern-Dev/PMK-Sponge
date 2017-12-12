@@ -15,8 +15,8 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 import fr.mrfern.pumpmysponge.Main;
-import fr.mrfern.pumpmysponge.config.PlayerConfig;
-import fr.mrfern.pumpmysponge.config.PlayerNode;
+import fr.mrfern.pumpmysponge.player.config.PlayerConfig;
+import fr.mrfern.pumpmysponge.player.config.PlayerNode;
 
 
 public class PlayerConfigListener {

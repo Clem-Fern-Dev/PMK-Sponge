@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.config;
+package fr.mrfern.pumpmysponge.player.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.apache.commons.io.FileUtils;
 
 import fr.mrfern.pumpmysponge.Main;
+import fr.mrfern.pumpmysponge.config.IConfig;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
