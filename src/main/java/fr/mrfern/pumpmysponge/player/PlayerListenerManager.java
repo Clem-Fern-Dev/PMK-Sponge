@@ -20,7 +20,6 @@ public class PlayerListenerManager {
 			Sponge.getEventManager().registerListeners(mainManager, new PlayerBanListener(mainManager.getLogger()));
 			Sponge.getEventManager().registerListeners(mainManager, new PlayerConfigListener(mainManager.getLogger()));
 			Sponge.getEventManager().registerListeners(mainManager, new PlayerChatListener(mainManager));
-			Sponge.getEventManager().registerListeners(mainManager, new PlayerInventoryListener(mainManager));
 		}
 	
 }
