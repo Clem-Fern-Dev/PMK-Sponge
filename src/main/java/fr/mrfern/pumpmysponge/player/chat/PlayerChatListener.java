@@ -33,21 +33,40 @@ public class PlayerChatListener {
 		String message;
 		
 		Optional<User> user = api.getUserSafe(player.getUniqueId());
-		
-		if(user.isPresent()) {
-			
-			message = "";
-			
-			for (Group group : Main.getGroupList()) {				
-				if(player.hasPermission("group." + group.getName())) {
-					message += " " + group.getCachedData().getMetaData(makeContexts(user.get(), api)).getPrefix();
-				}				
+		if(MuteCommandManager.isMute(player.getUniqueId())) {
+			event.setCancelled(true);
+			if(MuteCommandManager.getHoursRemaining(player.getUniqueId())>0) {
+				String sendmessage = new String("Vous êtes mute pendant " + MuteCommandManager.getHoursRemaining(player.getUniqueId()) + "h " + MuteCommandManager.getMinutesRemaining(player.getUniqueId())+"minutes");
+				player.sendMessage(Text.of(sendmessage));
+			}
+			else {
+				String sendmessage = new String("Vous êtes mute pendant " + MuteCommandManager.getMinutesRemaining(player.getUniqueId())+ "minutes");
+				player.sendMessage(Text.of(sendmessage));
+			}
+		}
+		else if(!MuteCommandManager.isMute(player.getUniqueId())) {
+			if(user.isPresent()) {
+				
+				message = "";
+				
+				for (Group group : Main.getGroupList()) {				
+					if(player.hasPermission("group." + group.getName())) {
+						message += " " + group.getCachedData().getMetaData(makeContexts(user.get(), api)).getPrefix();
+					}				
+				}
+				
+				message += user.get().getPrimaryGroup() + "  " + player.getName() + " ";
+				event.setMessage(Text.builder().append(Text.of(message),event.getRawMessage().toBuilder().build()));
+				
 			}
 			
 			message += "  " + player.getName() + " ";
 			event.setMessage(Text.builder().append(Text.of(message),event.getRawMessage().toBuilder().build()));
 			
 		}	
+		}
+		}
+		}
 	}
 	
 	private Contexts makeContexts(User user,LuckPermsApi api) {
