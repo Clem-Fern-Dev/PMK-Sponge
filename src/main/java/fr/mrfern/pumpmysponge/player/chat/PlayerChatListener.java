@@ -44,7 +44,7 @@ public class PlayerChatListener {
 				}				
 			}
 			
-			message += user.get().getPrimaryGroup() + "  " + player.getName() + " ";
+			message += "  " + player.getName() + " ";
 			event.setMessage(Text.builder().append(Text.of(message),event.getRawMessage().toBuilder().build()));
 			
 		}	
