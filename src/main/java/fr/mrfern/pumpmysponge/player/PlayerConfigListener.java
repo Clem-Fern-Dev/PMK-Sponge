@@ -28,7 +28,7 @@ public class PlayerConfigListener {
 		this.logger = logger;
 	}
 	
-	@Listener
+	//@Listener
 	public void OnClientJoin(ClientConnectionEvent.Join e) throws Exception {
 		
 		e.setMessageCancelled(true);
