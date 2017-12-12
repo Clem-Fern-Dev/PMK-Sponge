@@ -9,6 +9,7 @@ import org.spongepowered.api.event.message.MessageChannelEvent;
 import org.spongepowered.api.text.Text;
 
 import fr.mrfern.pumpmysponge.Main;
+import fr.mrfern.pumpmysponge.command.mute.MuteCommandManager;
 import me.lucko.luckperms.api.Contexts;
 import me.lucko.luckperms.api.Group;
 import me.lucko.luckperms.api.LuckPermsApi;
@@ -59,13 +60,6 @@ public class PlayerChatListener {
 				event.setMessage(Text.builder().append(Text.of(message),event.getRawMessage().toBuilder().build()));
 				
 			}
-			
-			message += "  " + player.getName() + " ";
-			event.setMessage(Text.builder().append(Text.of(message),event.getRawMessage().toBuilder().build()));
-			
-		}	
-		}
-		}
 		}
 	}
 	
@@ -77,5 +71,4 @@ public class PlayerChatListener {
         return contexts;
     }
 	
-
 }
