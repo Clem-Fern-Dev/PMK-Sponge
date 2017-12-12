@@ -3,7 +3,6 @@ package fr.mrfern.pumpmysponge.player;
 import org.spongepowered.api.Sponge;
 
 import fr.mrfern.pumpmysponge.Main;
-import fr.mrfern.pumpmysponge.player.ban.PlayerBanListener;
 import fr.mrfern.pumpmysponge.player.chat.PlayerChatListener;
 
 public class PlayerListenerManager {
@@ -17,8 +16,6 @@ public class PlayerListenerManager {
 		}
 		 
 		public void setup() {
-			Sponge.getEventManager().registerListeners(mainManager, new PlayerBanListener(mainManager.getLogger()));
-			Sponge.getEventManager().registerListeners(mainManager, new PlayerConfigListener(mainManager.getLogger()));
 			Sponge.getEventManager().registerListeners(mainManager, new PlayerChatListener(mainManager));
 			Sponge.getEventManager().registerListeners(mainManager, new PlayerInventoryListener(mainManager));
 		}
