@@ -21,10 +21,6 @@ import com.google.inject.Inject;
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.config.PlayerConfig;
-import fr.mrfern.pumpmysponge.network.donation.DonationMob;
-import fr.mrfern.pumpmysponge.network.http.EchoGetPlyStatsHandler;
-import fr.mrfern.pumpmysponge.network.http.HttpConfigServer;
-import fr.mrfern.pumpmysponge.network.http.RootHandler;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
 import fr.mrfern.pumpmysponge.player.ban.commands.PlayerBanCommandManager;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
@@ -83,14 +79,6 @@ public class Main {
 		Config.getInstance().setup();
 		PlayerConfig.getInstance().setup();
 		//ChunkConfig.getInstance().setup();
-		
-		
-		HttpConfigServer.builder(8989)
-						.AddMain(this)
-						.addRoot(new RootHandler())
-						.addContext("/playerstats" , new EchoGetPlyStatsHandler())
-						.setExecutor(null)
-						.start();
     
 		/*L’événement GamePreInitializationEvent est levé. Durant cet état, le plugin se prépare à l’initialisation. 
 		 * Les accès à l’instance du logger par défaut et aux informations concernant les localisations de fichiers de configurations préférées 
@@ -131,7 +119,6 @@ public class Main {
 			logger.info(" LuckPermsApi.class init NOT OK ! ");
 		}
 		
-		DonationMob.listener(this).setup();
 		
 		/* L’événement GamePostInitializationEvent est levé. Par cet état, les communications inter-plugin devraient être prêtes à se produire. 
 		 * Les plugins fournissant une API devraient être prêts à accepter des requêtes de base.
