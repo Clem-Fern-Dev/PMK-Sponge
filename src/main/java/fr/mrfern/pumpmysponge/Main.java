@@ -18,13 +18,13 @@ import org.spongepowered.api.scheduler.SpongeExecutorService;
 
 import com.google.inject.Inject;
 
+import fr.mrfern.pimpmysponge.command.tp.TpaCommandManager;
 import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.network.donation.DonationMob;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
 import fr.mrfern.pumpmysponge.player.build.BuildManager;
 import fr.mrfern.pumpmysponge.player.config.PlayerConfig;
-import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 import me.lucko.luckperms.api.Group;
 import me.lucko.luckperms.api.LuckPermsApi;
 

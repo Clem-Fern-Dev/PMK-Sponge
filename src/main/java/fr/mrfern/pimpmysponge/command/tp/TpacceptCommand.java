@@ -1,4 +1,4 @@
-package fr.mrfern.spongeplugintest.command.tp;
+package fr.mrfern.pimpmysponge.command.tp;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,6 +14,7 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
@@ -44,11 +45,19 @@ public class TpacceptCommand implements CommandExecutor {
 					target.get().setLocation(tppos);
 					iter.remove();
 					tp = true;
+					Text message = Text.builder("Téléportation acceptée")
+										.color(TextColors.AQUA)
+										.build();
+					sender.sendMessage(message);
+					
 					break;
 				}
 			}
 			if(tp = false) {
-				sender.sendMessage(Text.of("Vous n'avez pas reçu de requête de téléportation ou cette dernière à expiré"));
+				Text message = Text.builder("Vous n'avez pas reçu de requête de téléportation ou cette dernière à expiré")
+									.color(TextColors.RED)
+									.build();
+				sender.sendMessage(message);
 			}
 			TpaCommandManager.setTpHM(hm);
 		}
