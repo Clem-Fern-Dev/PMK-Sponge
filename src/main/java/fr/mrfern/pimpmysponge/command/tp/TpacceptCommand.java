@@ -1,4 +1,4 @@
-package fr.mrfern.spongeplugintest.command.tp;
+package fr.mrfern.pimpmysponge.command.tp;
 
 import java.util.HashMap;
 import java.util.Iterator;
