@@ -10,6 +10,7 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 
 public class MuteCommand implements CommandExecutor {
 
@@ -24,10 +25,14 @@ public class MuteCommand implements CommandExecutor {
 		long unmuteTimestamp = System.currentTimeMillis()+(hour*60+minute)*60000;
 		MuteData data = new MuteData(unmuteTimestamp, raison);
 		
-		String targetMessage = new String("Vous avez été mute "+hour+"h "+minute+"min");
-		target.sendMessage(Text.of(targetMessage));
-		String srcMessage = new String(target.getName()+" à été mute");
-		src.sendMessage(Text.of(srcMessage));
+		Text targetMessage = Text.builder("Vous avez été mute "+hour+"h "+minute+"min pour : "+raison)
+								 .color(TextColors.RED)
+								 .build();
+		target.sendMessage(targetMessage);
+		Text srcMessage = Text.builder(target.getName()+" à été mute")
+							  .color(TextColors.RED)
+							  .build();
+		src.sendMessage(srcMessage);
 		
 		hashmap.put(target.getUniqueId(), data);
 		MuteCommandManager.setMuteHM(hashmap);

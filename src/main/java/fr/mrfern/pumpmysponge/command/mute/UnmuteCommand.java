@@ -10,6 +10,7 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 
 public class UnmuteCommand implements CommandExecutor {
 
@@ -19,8 +20,8 @@ public class UnmuteCommand implements CommandExecutor {
 		HashMap<UUID, MuteData> hashmap = MuteCommandManager.getMuteHM();
 		
 		hashmap.remove(target.getUniqueId());
-		target.sendMessage(Text.of("Vous avez été démute"));
-		String okmessage = new String(target.getName()+" à été démute");
+		target.sendMessage(Text.builder("Vous avez été démute").color(TextColors.RED).build());
+		Text okmessage = Text.builder(target.getName()+" à été démute").color(TextColors.RED).build();
 		src.sendMessage(Text.of(okmessage));
 		MuteCommandManager.setMuteHM(hashmap);
 		

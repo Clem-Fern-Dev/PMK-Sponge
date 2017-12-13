@@ -12,6 +12,7 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 
 public class TpaCommand implements CommandExecutor {
 	
@@ -26,7 +27,8 @@ public class TpaCommand implements CommandExecutor {
 				
 			HashMap<UUID,TeleportData> hashmap = TpaCommandManager.getTpHM();
 			if(sender.equals(target)) {
-				sender.sendMessage(Text.of("Tu ne peux pas te téléporter à toi même"));
+				Text message = Text.builder("Tu ne peux pas te téléporter à toi même").color(TextColors.RED).build();
+				sender.sendMessage(message);
 			}
 			
 			for(Iterator<Entry<UUID, TeleportData>> iter = hashmap.entrySet().iterator(); iter.hasNext(); ) {
@@ -38,12 +40,14 @@ public class TpaCommand implements CommandExecutor {
 				}
 				else if(data.getSender().equals(sender.getUniqueId())) {
 					iter.remove();
-					sender.sendMessage(Text.of("Votre requête de téléportation à été envoyée"));
+					Text message = Text.builder("Votre reqûete de téléportation à été envoyée").color(TextColors.AQUA).build();
+					sender.sendMessage(message);
 					bool = true;
 					break;
 				}
 				else {
-					sender.sendMessage(Text.of("Votre requête de téléportation à été envoyée"));
+					Text message = Text.builder("Votre reqûete de téléportation à été envoyée").color(TextColors.AQUA).build();
+					sender.sendMessage(message);
 					bool = true;
 					break;
 				}
@@ -52,7 +56,8 @@ public class TpaCommand implements CommandExecutor {
 				hashmap.put(target.getUniqueId(), new TeleportData(sender.getUniqueId(), System.currentTimeMillis()));
 			}
 			TpaCommandManager.setTpHM(hashmap);
-			target.sendMessage(Text.of(sender.getName()+" vous a envoyé une demande de teleportation \n /tpaccept pour accepter"));
+			Text message = Text.builder(sender.getName()+" vous a envoyé une demande de téléportation. \n /tpaccept pour accepter").color(TextColors.AQUA).build();
+			target.sendMessage(message);
 			
 		}
 		else {
