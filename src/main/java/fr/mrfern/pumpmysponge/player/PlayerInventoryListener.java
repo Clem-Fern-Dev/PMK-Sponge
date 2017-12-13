@@ -89,7 +89,6 @@ public class PlayerInventoryListener {
 				Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
 				Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
 				
-				@SuppressWarnings("unused")
 				Text textEnTete;
 				Text textConnect;
 				
