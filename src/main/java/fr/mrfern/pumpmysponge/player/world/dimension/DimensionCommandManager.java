@@ -29,7 +29,7 @@ public class DimensionCommandManager {
 		CommandSpec commandDeleteDimGroupSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .permission("pumpmysponge.command.delete")
-			    .executor(new CreateDimGroupCommand())
+			    .executor(new DeleteDimGroupCommand())
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandDeleteDimGroupSpec, "party-d", "party-delete");
@@ -37,7 +37,7 @@ public class DimensionCommandManager {
 		CommandSpec commandAddDimGroupSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .permission("pumpmysponge.command.add")
-			    .executor(new CreateDimGroupCommand())
+			    .executor(new AddDimGroupCommand())
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandAddDimGroupSpec, "party-a", "party-add");
@@ -45,7 +45,7 @@ public class DimensionCommandManager {
 		CommandSpec commandQueueDimGroupSpec = CommandSpec.builder()
 			    .description(Text.of("Commande de bannissement avec durée"))
 			    .permission("pumpmysponge.command.inqueu")
-			    .executor(new CreateDimGroupCommand())
+			    .executor(new QueueDimGroupCommand())
 			    .build();
 		
 		Sponge.getCommandManager().register(mainManager, commandQueueDimGroupSpec, "party-q", "party-queue");
