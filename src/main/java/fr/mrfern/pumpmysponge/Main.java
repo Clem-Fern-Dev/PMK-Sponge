@@ -22,6 +22,7 @@ import fr.mrfern.pumpmysponge.command.BasicCommandManager;
 import fr.mrfern.pumpmysponge.config.Config;
 import fr.mrfern.pumpmysponge.network.donation.DonationMob;
 import fr.mrfern.pumpmysponge.player.PlayerListenerManager;
+import fr.mrfern.pumpmysponge.player.build.BuildManager;
 import fr.mrfern.pumpmysponge.player.config.PlayerConfig;
 import fr.mrfern.spongeplugintest.command.tp.TpaCommandManager;
 import me.lucko.luckperms.api.Group;
@@ -95,6 +96,7 @@ public class Main {
 		
 		//ChunkListenerManager.listener(this).setup();
 		PlayerListenerManager.listener(this).setup();
+		BuildManager.listener(this).setup();
 		
 	}
 	
