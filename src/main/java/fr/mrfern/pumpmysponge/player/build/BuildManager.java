@@ -11,7 +11,7 @@ public class BuildManager {
 	private static BuildManager instance = new BuildManager();
 	private static Main mainManager;
 	
-	private HashMap<Player, BuildData> hashBuild = new HashMap<Player, BuildData>();
+	private static HashMap<Player, BuildData> hashBuild = new HashMap<Player, BuildData>();
 
 		public static BuildManager listener(Main main) {
 			mainManager = main;
@@ -22,11 +22,11 @@ public class BuildManager {
 			Sponge.getEventManager().registerListeners(mainManager, new BuildListener(mainManager.getLogger()));
 		}
 
-		public HashMap<Player, BuildData> getHashBuild() {
+	static public HashMap<Player, BuildData> getHashBuild() {
 			return hashBuild;
-		}
+	}
 
-		public void setHashBuild(HashMap<Player, BuildData> hashBuild) {
-			this.hashBuild = hashBuild;
-		}
+	static public void setHashBuild(HashMap<Player, BuildData> hashBuild) {
+			BuildManager.hashBuild = hashBuild;
+	}
 }
