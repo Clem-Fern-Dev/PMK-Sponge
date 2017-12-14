@@ -1,15 +1,26 @@
 package fr.mrfern.pumpmysponge.player.world.dimension;
 
+
+import java.util.HashMap;
+import java.util.List;
+
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 import fr.mrfern.pumpmysponge.Main;
+import fr.mrfern.pumpmysponge.player.world.dimension.commands.AddDimGroupCommand;
 import fr.mrfern.pumpmysponge.player.world.dimension.commands.CreateDimGroupCommand;
+import fr.mrfern.pumpmysponge.player.world.dimension.commands.DeleteDimGroupCommand;
+import fr.mrfern.pumpmysponge.player.world.dimension.commands.QueueDimGroupCommand;
 
 public class DimensionCommandManager {
+	
 	private static DimensionCommandManager instance = new DimensionCommandManager();
 	private static Main mainManager;
+	
+	private static HashMap<List<Player>,QueueDimData> hashQueue = new HashMap<>();
 
 	public static DimensionCommandManager commands(Main main) {
 		mainManager = main;
@@ -60,5 +71,13 @@ public class DimensionCommandManager {
 		
 		Sponge.getCommandManager().register(mainManager, commandUnBanSpec, "unban");*/
 		
+	}
+
+	public static HashMap<List<Player>,QueueDimData> getHashQueue() {
+		return hashQueue;
+	}
+
+	public static void setHashQueue(HashMap<List<Player>,QueueDimData> hashQueue) {
+		DimensionCommandManager.hashQueue = hashQueue;
 	}
 }
