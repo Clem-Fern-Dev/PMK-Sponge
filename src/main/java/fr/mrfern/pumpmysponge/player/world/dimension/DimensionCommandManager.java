@@ -80,4 +80,8 @@ public class DimensionCommandManager {
 	public static void setHashQueue(HashMap<List<Player>,QueueDimData> hashQueue) {
 		DimensionCommandManager.hashQueue = hashQueue;
 	}
+	
+	public static boolean getPlayerDimData(Player ply) {
+		return false;
+	}
 }
