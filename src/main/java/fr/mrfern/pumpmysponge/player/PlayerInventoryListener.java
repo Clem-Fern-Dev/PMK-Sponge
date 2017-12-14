@@ -131,7 +131,7 @@ public class PlayerInventoryListener {
 					
 				}else if(itemName.equals(textNavItem.toPlain())) {
 					if(player.hasPermission("group.dev")) {
-						Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));	
+						Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("testserverdev"));	
 					}else {
 						
 						
