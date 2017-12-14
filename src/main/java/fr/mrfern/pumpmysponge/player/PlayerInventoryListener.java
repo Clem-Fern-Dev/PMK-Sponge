@@ -65,12 +65,14 @@ public class PlayerInventoryListener {
 		
 		navItemServeur_1.offer(Keys.DISPLAY_NAME,Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build());	
 		
-		navItemServeur.offer(Keys.DISPLAY_NAME,Text.builder("ParticlesSpawn").color(TextColors.LIGHT_PURPLE).build());
+		navItemServeur.offer(Keys.DISPLAY_NAME,Text.builder("Test_Server_Dev").color(TextColors.LIGHT_PURPLE).build());
 		
 		navItemServeur_2.offer(Keys.DISPLAY_NAME,Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build());	
 		
 		inv.query(Hotbar.class).query(new SlotIndex(3)).set(navItemServeur_1);
-		inv.query(Hotbar.class).query(new SlotIndex(4)).set(navItemServeur);
+		if(player.hasPermission("group.dev")) {
+			inv.query(Hotbar.class).query(new SlotIndex(4)).set(navItemServeur);
+		}
 		inv.query(Hotbar.class).query(new SlotIndex(5)).set(navItemServeur_2);
 	}
 	
@@ -87,35 +89,54 @@ public class PlayerInventoryListener {
 				
 				Text textNavItem_1 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#1").color(TextColors.GREEN).build()).build();
 				Text textNavItem_2 = Text.builder("PumpMyRagnaMod ").color(TextColors.LIGHT_PURPLE).append(Text.builder("#2").color(TextColors.AQUA).build()).build();			
-				Text textNavItem = Text.builder("Lobby 2").color(TextColors.LIGHT_PURPLE).build();
+				Text textNavItem = Text.builder("Test_Server_Dev").color(TextColors.LIGHT_PURPLE).build();
+				
+				Text refuseMessage = Text.builder("Refusé !").color(TextColors.RED).build();
 				
 				Text textEnTete;
 				Text textConnect;
 				
 				if(itemName.equals(textNavItem_1.toPlain())) {
-					
-					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
-			    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
-					
-					player.sendMessage(textEnTete);
-					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
-					
+					if(player.hasPermission("pumpmysponge.server.ragna1")) {
+						textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.YELLOW).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build()).build();
+				    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+				    	
+				    	player.sendMessage(textEnTete);
+						Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna1"));
+				    	
+					}else {
+						
+						textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.YELLOW).append(Text.builder("PumpMyRagnaMod#1").color(TextColors.AQUA).build(),refuseMessage).build();
+				    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+				    	player.sendMessage(textEnTete);
+				    	
+					}					
 				}else if(itemName.equals(textNavItem_2.toPlain())) {
 					
-					textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
-					textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+					if(player.hasPermission("pumpmysponge.server.ragna2")){
+						
+						textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.RED).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build()).build();
+						textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+						
+						player.sendMessage(textEnTete);
+						Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
+						
+					}else {
+						
+						textConnect = Text.builder("Requète de connection vers le serveur : ").color(TextColors.YELLOW).append(Text.builder("PumpMyRagnaMod#2").color(TextColors.AQUA).build(),refuseMessage).build();
+				    	textEnTete = Text.builder("[ PumpMyStaff ] ").color(TextColors.GOLD).append(textConnect).build();
+				    	player.sendMessage(textEnTete);
+				    	
+					}
 					
-					player.sendMessage(textEnTete);
-					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("PlayerCount").writeUTF("ragna2"));
-					
-			        
-					
-					
-					player.sendMessage(Text.of("Connexion ragnamod #2"));
-					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("ragna2"));
 				}else if(itemName.equals(textNavItem.toPlain())) {
-					player.sendMessage(Text.of("Connexion lobby 2"));
-					Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));				
+					if(player.hasPermission("group.dev")) {
+						Sponge.getChannelRegistrar().getOrCreateRaw(this, "BungeeCord").sendTo(player, buf -> buf.writeUTF("Connect").writeUTF("lobby2"));	
+					}else {
+						
+						
+						
+					}
 				}
 				
 			}
