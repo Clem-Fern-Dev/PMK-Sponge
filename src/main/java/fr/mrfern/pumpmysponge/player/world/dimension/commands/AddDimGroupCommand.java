@@ -1,4 +1,4 @@
-package fr.mrfern.pumpmysponge.player.world.dimension;
+package fr.mrfern.pumpmysponge.player.world.dimension.commands;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
