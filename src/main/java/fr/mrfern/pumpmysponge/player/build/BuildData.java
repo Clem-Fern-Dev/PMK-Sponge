@@ -2,22 +2,22 @@ package fr.mrfern.pumpmysponge.player.build;
 
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.Carrier;
+import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.type.CarriedInventory;
 
 public class BuildData {
 
-	private CarriedInventory<? extends Carrier> inventory;
+	private Inventory inventory;
 
 	public BuildData(Player targetEntity) {
-		this.setInventory(targetEntity.getInventory());
+		inventory = (targetEntity.getInventory());
 	}
 
-	public CarriedInventory<? extends Carrier> getInventory() {
+	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(CarriedInventory<? extends Carrier> inventory) {
+	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
-
 }

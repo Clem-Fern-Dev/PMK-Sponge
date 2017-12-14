@@ -8,6 +8,9 @@ import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.living.humanoid.ChangeGameModeEvent;
 import org.spongepowered.api.event.filter.cause.First;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.entity.Hotbar;
+import org.spongepowered.api.item.inventory.entity.PlayerInventory;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.w3c.dom.events.EventException;
@@ -142,6 +145,7 @@ public class BuildListener {
 			    	}else {	
 			    			
 			    		target.getInventory().clear();
+			    		target.getInventory().set(BuildManager.getHashBuild().get(target).getInventory().peek().get());
 			    		target.getInventory().intersect(BuildManager.getHashBuild().get(target).getInventory());
 			    		BuildManager.getHashBuild().remove(target);		    			
 			    		// Ajout de la permission
