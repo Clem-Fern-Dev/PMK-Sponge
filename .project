@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>pmk_social</name>
+=======
+	<name>spongeplugintest</name>
+>>>>>>> branch 'master' of https://github.com/Clem-Fern-Dev/PMK-Sponge.git
 	<comment></comment>
 	<projects>
 	</projects>

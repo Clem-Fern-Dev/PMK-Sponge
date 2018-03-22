@@ -1,0 +1,14 @@
+fernssentials: 
+  number: 0  
+  debugplus: true
+  
+  extensionconfig:
+    chunkform:    
+      state: false
+      directorypath: /instanciechunk
+    playerform:    
+      state: false
+      directorypath: /instancieplayer
+    groupform:    
+      state: false
+      directorypath: /group

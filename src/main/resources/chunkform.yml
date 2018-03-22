@@ -1,0 +1,78 @@
+chunk:
+
+  info:
+    chunkname: none
+    chunkX: none
+    chunkZ: none
+    owner: none
+    discoverBy: none
+    groupCanOverRidePerm:
+      - none      
+    co_owner_list:
+      - none
+    users:
+      - none
+    perm_invite:
+      - none
+    temp_invite:
+      - none
+    
+  perm:
+    co_owner:
+      block: true
+      vault: true
+      door: true
+      button: true
+      commandChunk:
+        unclaim: false
+        addco_owner: false
+        adduser: true
+        addinvite_prim: true
+        addinvite_temp: true
+      commandUser:
+        changeperm:
+            - users
+            - perm_invite
+            - temp_invite
+    users:    
+      block: true
+      vault: true
+      door: true
+      button: true
+      commandChunk:
+        unclaim: false
+        addco_owner: false
+        adduser: false
+        addinvite_prim: false
+        addinvite_temp: true
+      commandUser:
+        changeperm:
+            - none
+    perm_invite:    
+      block: false
+      vault: false
+      door: true
+      button: true
+      commandChunk:
+        unclaim: false
+        addco_owner: false
+        adduser: false
+        addinvite_prim: false
+        addinvite_temp: false
+      commandUser:
+        changeperm:
+            - none
+    temp_invite:    
+      block: false
+      vault: false
+      door: true
+      button: true
+      commandChunk:
+        unclaim: false
+        addco_owner: false
+        adduser: false
+        addinvite_prim: false
+        addinvite_temp: false
+      commandUser:
+        changeperm:
+            - none     

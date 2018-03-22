@@ -1,0 +1,16 @@
+player:
+  name: none
+  
+  config:
+    langage: none
+    normalJoinMessage: true
+    motDMsg: true
+    rulesMsg: true
+  
+  prim_group: none
+  sub_group:
+    - none
+  
+  friend_list:
+    - none
+  
